@@ -2,7 +2,7 @@
   "name": "react-fine-uploader",
   "version": "0.0.1",
   "license": "MIT",
-  "description": "Core module for Modern Uploader",
+  "description": "React UI components for using Fine Uploader in a React-based project.",
   "author": "Widen Enterprises, Inc.",
   "contributors": [
     {
