@@ -57,7 +57,7 @@
     "node": ">=5.0.0"
   },
   "scripts": {
-    "build-lib": "babel src --out-dir lib --ignore test/",
+    "build-lib": "babel src/wrappers --out-dir lib --ignore test/",
     "lint": "eslint src/. --ext .js,.jsx --cache",
     "test": "npm run lint && karma start config/karma.dev.conf"
   }

@@ -4,10 +4,10 @@ const path = require('path')
 
 module.exports = {
     entry: {
-        traditional: [path.resolve('src/traditional.jsx')]
+        'traditional-wrapper': [path.resolve('src/wrappers/traditional.js')]
     },
     output: {
-        filename: `dist/index.${isProduction ? 'min.js' : '.js'}`
+        filename: `dist/[name].${isProduction ? 'min.js' : '.js'}`
     },
     module: {
         loaders: [
