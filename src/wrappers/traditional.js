@@ -1,54 +1,67 @@
-// TODO import Object.assign helper for IE
-
+import objectAssign from 'object-assign'
 import qq from 'fine-uploader'
 
 import CallbackProxy from './callback-proxy'
+import { traditional as callbackNames } from './callback-names'
 
-// TODO
-const callbackNames = [
-    ''
-]
+const callbackProxies = new WeakMap()
 
 export default class FineUploaderTraditional {
     constructor({ options }) {
         const callbacks = options.callbacks
-        const callbackProxies = createCallbackProxies(callbackNames)
         const optionsSansCallbacks = Object.assign({}, options)
 
         delete optionsSansCallbacks.callbacks
 
-        registerOptionsCallbacks({ callbacks, callbacksKey: this })
+        callbackProxies.set(this, createCallbackProxies(callbackNames))
+        
+        registerOptionsCallbacks({ callbacks, callbackProxies: callbackProxies.get(this) })
 
         this.methods = createFineUploader({
-            callbackProxies,
+            callbackProxies: callbackProxies.get(this),
             options: optionsSansCallbacks 
         })
     }
 
-    off({ callback, name }) {
-        // TODO
+    off(name, callback) {
+        const proxy = callbackProxies.get(this)[name]
+        proxy.remove(callback)
     }
 
-    on({ callback, name }) {
-        // TODO
+    on(name, callback) {
+        const proxy = callbackProxies.get(this)[name]
+        proxy.add(callback)
     }
 }
 
 const createCallbackProxies = names => {
-    names.map(callbackName => new CallbackProxy(callbackName))
+    const proxyMap = {}
+    
+    names.forEach(callbackName => {
+        proxyMap[callbackName] = new CallbackProxy(callbackName)
+    })
+    
+    return proxyMap
 }
 
 const createFineUploader = ({ callbackProxies, options} ) => {
-    const optionsCopy = Object.assign({}, options)
-    optionsCopy.callbacks = callbackProxies.map(callbackProxy => {
+    const optionsCopy = objectAssign({}, options)
+
+    optionsCopy.callbacks = Object.keys(callbackProxies).map(callbackName => {
+        const proxy = callbackProxies[callbackName]
+        
         return {
-            [callbackProxy.name]: callbackProxy.proxyFunction
+            [callbackName]: proxy.proxyFunction
         }
     })
 
     return new qq.FineUploaderBasic(optionsCopy)
 }
 
-const registerOptionsCallbacks = ({ callbacks, callbacksKey }) => {
-    // TODO
+const registerOptionsCallbacks = ({ callbacks, callbackProxies }) => {
+    Object.keys(callbackProxies).forEach(callbackProxyName => {
+        const callbackProxy = callbackProxies[callbackProxyName]
+
+        callbackProxy.add(callbacks[callbackProxyName])
+    })
 }
