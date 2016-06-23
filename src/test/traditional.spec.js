@@ -37,7 +37,6 @@ describe('FineUploaderTraditional', () => {
             const wrapper = new FineUploaderTraditional({
                 options: {
                     autoUpload: false,
-                    debug: true,
                     callbacks: {
                         onSubmit: function(id, name) {
                             expect(id).toBe(0)
