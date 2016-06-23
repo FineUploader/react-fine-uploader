@@ -11,7 +11,7 @@ export default class CallbackProxy {
 
         privateData.set(this, {
             name,
-            proxyFunction: getProxyFunction({ classContext: this, name })
+            proxyFunction: getProxyFunction.call(this, { name })
         })
     }
 
@@ -35,19 +35,20 @@ export default class CallbackProxy {
     }
 }
 
-const getProxyFunction = ({ classContext, name }) => {
-    return function() {
+const getProxyFunction = function({ name }) {
+    const proxyClassContext = this
+    
+    return (...originalCallbackArguments) => {
         const isThenable = thenableCallbackNames.indexOf(name) >= 0
-        const originalCallbackArguments = arguments
-        const registeredCallbacks = callbacks.get(classContext)
+        const registeredCallbacks = callbacks.get(proxyClassContext)
         let callbackReturnValue
 
         if (isThenable) {
-            callbackReturnValue = executeThenableCallbacks(classContext, registeredCallbacks, originalCallbackArguments)
+            callbackReturnValue = executeThenableCallbacks({ registeredCallbacks, originalCallbackArguments })
         }
         else {
             registeredCallbacks.every(callback => {
-                const returnValue = callback.apply(classContext, originalCallbackArguments)
+                const returnValue = callback.apply(null, originalCallbackArguments)
 
                 callbackReturnValue = returnValue
 
@@ -59,25 +60,28 @@ const getProxyFunction = ({ classContext, name }) => {
     }
 }
 
-const executeThenableCallbacks = (callbackContext, callbacks, originalCallbackArguments) => {
-    if (callbacks.length) {
-        return executeThenableCallback(callbackContext, objectAssign([], callbacks).reverse(), originalCallbackArguments)
+const executeThenableCallbacks = ({ registeredCallbacks, originalCallbackArguments }) => {
+    if (registeredCallbacks.length) {
+        return executeThenableCallback({
+            registeredCallbacks: objectAssign([], registeredCallbacks).reverse(),
+            originalCallbackArguments
+        })
     }
 
     return Promise.resolve()
 }
 
-const executeThenableCallback = (callbackContext, callbacks, originalCallbackArguments) => {
+const executeThenableCallback = ({ registeredCallbacks, originalCallbackArguments} ) => {
     return new Promise((resolve, reject) => {
-        const callback = callbacks.pop()
+        const callback = registeredCallbacks.pop()
 
-        let returnValue = callback.apply(callbackContext, originalCallbackArguments)
+        let returnValue = callback.apply(null, originalCallbackArguments)
 
         if (returnValue && returnValue.then) {
             returnValue
                 .then(result => {
-                    if (callbacks.length) {
-                        executeThenableCallback(callbackContext, callbacks, originalCallbackArguments)
+                    if (registeredCallbacks.length) {
+                        executeThenableCallback({ registeredCallbacks, originalCallbackArguments })
                             .then(resolve, reject)
                     }
                     else {
@@ -92,8 +96,8 @@ const executeThenableCallback = (callbackContext, callbacks, originalCallbackArg
             reject()
         }
         else {
-            if (callbacks.length) {
-                executeThenableCallback(callbackContext, callbacks, originalCallbackArguments)
+            if (registeredCallbacks.length) {
+                executeThenableCallback({ registeredCallbacks, originalCallbackArguments })
                     .then(resolve, reject)
             }
             else {

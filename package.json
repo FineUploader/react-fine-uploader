@@ -47,10 +47,10 @@
     "karma-firefox-launcher": "latest",
     "karma-jasmine": "latest",
     "karma-sauce-launcher": "latest",
-    "karma-sinon": "latest",
     "karma-sourcemap-loader": "latest",
     "karma-spec-reporter": "latest",
     "karma-webpack": "latest",
+    "react": "latest",
     "style-loader": "latest",
     "webpack": "latest"
   },
