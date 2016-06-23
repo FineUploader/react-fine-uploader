@@ -9,6 +9,11 @@ module.exports = {
     output: {
         filename: `dist/[name].${isProduction ? 'min.js' : '.js'}`
     },
+    resolve: {
+        alias: {
+            src: path.resolve('src')
+        }  
+    },
     module: {
         loaders: [
             {

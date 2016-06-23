@@ -8,10 +8,11 @@ const callbackProxies = new WeakMap()
 
 export default class FineUploaderTraditional {
     constructor({ options }) {
-        const callbacks = options.callbacks
-        const optionsSansCallbacks = Object.assign({}, options)
+        const callbacks = options.callbacks || {}
 
+        const optionsSansCallbacks = Object.assign({}, options)
         delete optionsSansCallbacks.callbacks
+        this.options = optionsSansCallbacks
 
         callbackProxies.set(this, createCallbackProxies(callbackNames))
         
@@ -45,23 +46,21 @@ const createCallbackProxies = names => {
 }
 
 const createFineUploader = ({ callbackProxies, options} ) => {
-    const optionsCopy = objectAssign({}, options)
+    const optionsCopy = objectAssign({ callbacks: {} }, options)
 
-    optionsCopy.callbacks = Object.keys(callbackProxies).map(callbackName => {
+    Object.keys(callbackProxies).forEach(callbackName => {
         const proxy = callbackProxies[callbackName]
         
-        return {
-            [callbackName]: proxy.proxyFunction
-        }
+        optionsCopy.callbacks[callbackName] = proxy.proxyFunction
     })
-
+    
     return new qq.FineUploaderBasic(optionsCopy)
 }
 
 const registerOptionsCallbacks = ({ callbacks, callbackProxies }) => {
-    Object.keys(callbackProxies).forEach(callbackProxyName => {
-        const callbackProxy = callbackProxies[callbackProxyName]
+    Object.keys(callbacks).forEach(callbackName => {
+        const callbackProxy = callbackProxies[callbackName]
 
-        callbackProxy.add(callbacks[callbackProxyName])
+        callbackProxy.add(callbacks[callbackName])
     })
 }

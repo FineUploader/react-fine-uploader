@@ -1,3 +1,5 @@
+import objectAssign from 'object-assign'
+
 import { thenable as thenableCallbackNames } from './callback-names'
 
 const privateData = new WeakMap()
@@ -14,10 +16,7 @@ export default class CallbackProxy {
     }
 
     add(callback) {
-        const index = callbacks.get(this).indexOf(callback)
-        if (index >= 0) {
-            callbacks.get(this).splice(index, 1)
-        }
+        callbacks.get(this).push(callback)
     }
     
     get name() {
@@ -29,7 +28,10 @@ export default class CallbackProxy {
     }
 
     remove(callback) {
-        callbacks.get(this).push(callback)
+        const index = callbacks.get(this).indexOf(callback)
+        if (index >= 0) {
+            callbacks.get(this).splice(index, 1)
+        }
     }
 }
 
@@ -41,20 +43,7 @@ const getProxyFunction = ({ classContext, name }) => {
         let callbackReturnValue
 
         if (isThenable) {
-            callbackReturnValue = Promise.all(
-                registeredCallbacks.map(callback => {
-                    const returnValue = callback.apply(classContext, originalCallbackArguments)
-
-                    if (returnValue && returnValue.then) {
-                        return returnValue
-                    }
-                    else if (returnValue === false) {
-                        return Promise.reject()
-                    }
-
-                    return Promise.resolve()
-                })
-            ).then(results => results[results.length - 1])
+            callbackReturnValue = executeThenableCallbacks(classContext, registeredCallbacks, originalCallbackArguments)
         }
         else {
             registeredCallbacks.every(callback => {
@@ -68,4 +57,48 @@ const getProxyFunction = ({ classContext, name }) => {
 
         return callbackReturnValue
     }
+}
+
+const executeThenableCallbacks = (callbackContext, callbacks, originalCallbackArguments) => {
+    if (callbacks.length) {
+        return executeThenableCallback(callbackContext, objectAssign([], callbacks).reverse(), originalCallbackArguments)
+    }
+
+    return Promise.resolve()
+}
+
+const executeThenableCallback = (callbackContext, callbacks, originalCallbackArguments) => {
+    return new Promise((resolve, reject) => {
+        const callback = callbacks.pop()
+
+        let returnValue = callback.apply(callbackContext, originalCallbackArguments)
+
+        if (returnValue && returnValue.then) {
+            returnValue
+                .then(result => {
+                    if (callbacks.length) {
+                        executeThenableCallback(callbackContext, callbacks, originalCallbackArguments)
+                            .then(resolve, reject)
+                    }
+                    else {
+                        resolve(result)
+                    }
+                })
+                .catch(error => {
+                    reject(error)
+                })
+        }
+        else if (returnValue === false) {
+            reject()
+        }
+        else {
+            if (callbacks.length) {
+                executeThenableCallback(callbackContext, callbacks, originalCallbackArguments)
+                    .then(resolve, reject)
+            }
+            else {
+                resolve()
+            }
+        }
+    })
 }
