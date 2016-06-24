@@ -36,7 +36,9 @@ const uploader = new FineUploaderTraditional({
 })
 ```
 
-- `on(eventName, handlerFunction)` - Register a new callback/event handler. The `eventName` can be formatted with _or_ without the 'on' prefix. If you do use the 'on', prefix, be sure to follow lower-camel-case exactly ('onSubmit', not 'onsubmit'). If a handler has already been registered for this event, yours will be added to the "pipeline" for this event. If a previously registered handler for this event fails for some reason or returns `false`, you handler will _not_ be called. Your handler function may return a `Promise` iff it is [listed as an event type that supports promissory/thenable return values](http://docs.fineuploader.com/branch/master/features/async-tasks-and-promises.html#promissory-callbacks). 
+##### `on(eventName, handlerFunction)`
+
+Register a new callback/event handler. The `eventName` can be formatted with _or_ without the 'on' prefix. If you do use the 'on', prefix, be sure to follow lower-camel-case exactly ('onSubmit', not 'onsubmit'). If a handler has already been registered for this event, yours will be added to the "pipeline" for this event. If a previously registered handler for this event fails for some reason or returns `false`, you handler will _not_ be called. Your handler function may return a `Promise` iff it is [listed as an event type that supports promissory/thenable return values](http://docs.fineuploader.com/branch/master/features/async-tasks-and-promises.html#promissory-callbacks). 
 
 ```javascript
 uploader.on('complete', (id, name, response) => {
@@ -44,7 +46,9 @@ uploader.on('complete', (id, name, response) => {
 })
 ```
 
-- `off(eventName, handlerFunction)` - Unregister a previously registered callback/event handler. Same rules for `eventName` as  the `on` method apply here. The `handlerFunction` _must_ be the _exact_ `handlerFunction` passed to the `on` method when you initially registered said function.
+##### `off(eventName, handlerFunction)`
+
+Unregister a previously registered callback/event handler. Same rules for `eventName` as  the `on` method apply here. The `handlerFunction` _must_ be the _exact_ `handlerFunction` passed to the `on` method when you initially registered said function.
 
 ```javascript
 const completeHandler = (id, name, response) => {
@@ -57,9 +61,13 @@ uploader.on('complete', completeHandler)
 uploader.off('complete', completeHandler)
 ```
 
-- `options` - The `options` property you used when constructing a new instance, sans any `callbacks`.
+##### `options`
 
-- `methods` - Use this property to access any [core API methods exposed by Fine Uploader](http://docs.fineuploader.com/branch/master/api/methods.html).
+The `options` property you used when constructing a new instance, sans any `callbacks`.
+
+##### `methods`
+
+Use this property to access any [core API methods exposed by Fine Uploader](http://docs.fineuploader.com/branch/master/api/methods.html).
 
 ```javascript
 uploader.methods.addFiles(myFiles)
