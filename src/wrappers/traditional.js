@@ -10,7 +10,7 @@ export default class FineUploaderTraditional {
     constructor({ options }) {
         const callbacks = options.callbacks || {}
 
-        const optionsSansCallbacks = Object.assign({}, options)
+        const optionsSansCallbacks = objectAssign({}, options)
         delete optionsSansCallbacks.callbacks
         this.options = optionsSansCallbacks
 
