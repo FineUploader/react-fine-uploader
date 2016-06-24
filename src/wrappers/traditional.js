@@ -25,12 +25,16 @@ export default class FineUploaderTraditional {
     }
 
     off(name, callback) {
-        const proxy = callbackProxies.get(this)[name]
+        const normalizedName = normalizeCallbackName(name)
+        const proxy = callbackProxies.get(this)[normalizedName]
+
         proxy.remove(callback)
     }
 
     on(name, callback) {
-        const proxy = callbackProxies.get(this)[name]
+        const normalizedName = normalizeCallbackName(name)
+        const proxy = callbackProxies.get(this)[normalizedName]
+
         proxy.add(callback)
     }
 }
@@ -55,6 +59,14 @@ const createFineUploader = ({ callbackProxies, options} ) => {
     })
     
     return new qq.FineUploaderBasic(optionsCopy)
+}
+
+const normalizeCallbackName = name => {
+    if (!name.match(/^on[A-Z]/)) {
+        return `on${name[0].toUpperCase()}${name.slice(1)}`
+    }
+
+    return name
 }
 
 const registerOptionsCallbacks = ({ callbacks, callbackProxies }) => {

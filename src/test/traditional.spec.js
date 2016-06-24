@@ -71,7 +71,7 @@ describe('FineUploaderTraditional', () => {
                 }
             })
 
-            wrapper.on('onSubmit', (id, name) => {
+            wrapper.on('submit', (id, name) => {
                 const records = wrapper.methods.getUploads()
                 expect(records.length).toBe(1)
                 expect(records[0].status).toBe(qq.status.SUBMITTING)
@@ -109,7 +109,7 @@ describe('FineUploaderTraditional', () => {
             })
 
             // this callback should never be executed
-            wrapper.on('onSubmitted', () => {
+            wrapper.on('submitted', () => {
                 callbacksHit++
             })
 
@@ -140,7 +140,7 @@ describe('FineUploaderTraditional', () => {
             })
 
             // this callback should never be executed
-            wrapper.on('onSubmit', () => {
+            wrapper.on('submit', () => {
                 callbacksHit++
             })
 
@@ -175,7 +175,7 @@ describe('FineUploaderTraditional', () => {
             })
 
             // this callback should never be executed
-            wrapper.on('onSubmit', () => {
+            wrapper.on('submit', () => {
                 callbacksHit++
             })
 
@@ -200,13 +200,13 @@ describe('FineUploaderTraditional', () => {
                 options: { autoUpload: false }
             })
 
-            wrapper.on('onSubmit', handler)
+            wrapper.on('submit', handler)
             wrapper.methods.addFiles(sampleBlobWrapper)
 
             setTimeout(() => {
                 expect(callbacksHit).toBe(1)
 
-                wrapper.off('onSubmit', handler)
+                wrapper.off('submit', handler)
                 wrapper.methods.addFiles(sampleBlobWrapper)
 
                 setTimeout(() => {
