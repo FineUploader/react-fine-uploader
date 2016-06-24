@@ -1,3 +1,5 @@
+import qq from 'fine-uploader'
+
 import FineUploaderTraditional from 'src/wrappers/traditional'
 
 const sampleBlob = new Blob(['hi!'], { type : 'text/plain' })
@@ -33,7 +35,7 @@ describe('FineUploaderTraditional', () => {
             })
         })
 
-        it('associates passed callbacks with underlying uploader instance', (done) => {
+        it('associates passed callbacks with underlying uploader instance', done => {
             const wrapper = new FineUploaderTraditional({
                 options: {
                     autoUpload: false,
@@ -41,6 +43,7 @@ describe('FineUploaderTraditional', () => {
                         onSubmit: function(id, name) {
                             expect(id).toBe(0)
                             expect(name).toBe(sampleBlobWrapper.name)
+
                             done()
                         }
                     }
@@ -52,7 +55,7 @@ describe('FineUploaderTraditional', () => {
     })
 
     describe('callback handling', () => {
-        it('associates multiple registered callback handlers w/ a single FU callback option && calls them in the order they were registered', (done) => {
+        it('associates multiple registered callback handlers w/ a single FU callback option && calls them in the order they were registered', done => {
             let callbacksHit = 0
 
             const wrapper = new FineUploaderTraditional({
@@ -69,16 +72,57 @@ describe('FineUploaderTraditional', () => {
             })
 
             wrapper.on('onSubmit', (id, name) => {
+                const records = wrapper.methods.getUploads()
+                expect(records.length).toBe(1)
+                expect(records[0].status).toBe(qq.status.SUBMITTING)
+
                 expect(++callbacksHit).toBe(2)
                 expect(id).toBe(0)
                 expect(name).toBe(sampleBlobWrapper.name)
-                done()
             })
+
+            setTimeout(() => {
+                const records = wrapper.methods.getUploads()
+                expect(records[0].status).toBe(qq.status.SUBMITTED)
+
+                done()
+            }, 100)
 
             wrapper.methods.addFiles(sampleBlobWrapper)
         })
 
-        it('does not call subsequent registered callbacks if an earlier callback indicates failure - non-thenable', (done) => {
+        it('does not call subsequent registered non-thenable callbacks if an earlier callback indicates failure w/ `false`', done => {
+            let callbacksHit = 0
+
+            const wrapper = new FineUploaderTraditional({
+                options: {
+                    autoUpload: false,
+                    callbacks: {
+                        onSubmitted: function(id, name) {
+                            callbacksHit++
+                            expect(id).toBe(0)
+                            expect(name).toBe(sampleBlobWrapper.name)
+                            return false
+                        }
+                    }
+                }
+            })
+
+            // this callback should never be executed
+            wrapper.on('onSubmitted', () => {
+                callbacksHit++
+            })
+
+            wrapper.methods.addFiles(sampleBlobWrapper)
+
+            setTimeout(() => {
+                expect(callbacksHit).toBe(1)
+
+                done()
+            }, 100)
+        })
+
+        it('does not call subsequent registered thenable callbacks if an earlier callback indicates failure w/ a Promise', done => {
             let callbacksHit = 0
 
             const wrapper = new FineUploaderTraditional({
@@ -103,12 +147,17 @@ describe('FineUploaderTraditional', () => {
             wrapper.methods.addFiles(sampleBlobWrapper)
 
             setTimeout(() => {
+                const records = wrapper.methods.getUploads()
+                expect(records.length).toBe(1)
+                expect(records[0].status).toBe(qq.status.REJECTED)
+
                 expect(callbacksHit).toBe(1)
+
                 done()
-            }, 500)
+            }, 100)
         })
 
-        it('does not call subsequent registered callbacks if an earlier callback indicates failure - thenable', (done) => {
+        it('does not call subsequent registered thenable callbacks if an earlier callback indicates failure w/ `false`', done => {
             let callbacksHit = 0
 
             const wrapper = new FineUploaderTraditional({
@@ -133,9 +182,39 @@ describe('FineUploaderTraditional', () => {
             wrapper.methods.addFiles(sampleBlobWrapper)
 
             setTimeout(() => {
+                const records = wrapper.methods.getUploads()
+                expect(records.length).toBe(1)
+                expect(records[0].status).toBe(qq.status.REJECTED)
+
                 expect(callbacksHit).toBe(1)
+
                 done()
-            }, 500)
+            }, 100)
+        })
+
+        it('allows callback handlers to be removed', done => {
+            const handler = () => callbacksHit++
+            let callbacksHit = 0
+
+            const wrapper = new FineUploaderTraditional({
+                options: { autoUpload: false }
+            })
+
+            wrapper.on('onSubmit', handler)
+            wrapper.methods.addFiles(sampleBlobWrapper)
+
+            setTimeout(() => {
+                expect(callbacksHit).toBe(1)
+
+                wrapper.off('onSubmit', handler)
+                wrapper.methods.addFiles(sampleBlobWrapper)
+
+                setTimeout(() => {
+                    expect(callbacksHit).toBe(1)
+
+                    done()
+                }, 100)
+            }, 100)
         })
     })
 })
