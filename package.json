@@ -24,10 +24,10 @@
   ],
   "main": "lib/index.js",
   "peerDependencies": {
+    "fine-uploader": "^5.10.0",
     "react": "^0.14.0 || ^15.0.0-rc"
   },
   "dependencies": {
-    "fine-uploader": "^5.10.0",
     "object-assign": "latest"
   },
   "devDependencies": {
@@ -50,15 +50,20 @@
     "karma-sourcemap-loader": "latest",
     "karma-spec-reporter": "latest",
     "karma-webpack": "latest",
+    "less": "latest",
+    "less-loader": "latest",
     "react": "latest",
+    "react-dom": "latest",
     "style-loader": "latest",
-    "webpack": "latest"
+    "webpack": "latest",
+    "webpack-node-externals": "latest"
   },
   "engines": {
     "node": ">=5.0.0"
   },
   "scripts": {
-    "build-lib": "babel src/wrappers --out-dir lib --ignore test/",
+    "build": "webpack --config config/webpack.config.js",
+    "build-manual-test": "webpack --config config/webpack.manual-test.config.js --watch --display-error-details",
     "lint": "eslint src/. --ext .js,.jsx --cache",
     "test": "npm run lint && karma start config/karma.dev.conf"
   }

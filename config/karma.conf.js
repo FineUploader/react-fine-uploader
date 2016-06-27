@@ -40,17 +40,18 @@ var path = require('path'),
     }
 
 webpackConfig.devtool = 'inline-source-map'
+webpackConfig.externals = []
 
 module.exports = function (config) {
     config.set({
         basePath: 'src',
         files: [
-            path.resolve('src/test/tests.bundle.js')
+            path.resolve('src/test/unit/tests.bundle.js')
         ],
         frameworks: ['jasmine'],
         preprocessors: (function() {
             var preprocessors = {}
-            preprocessors[path.resolve('src/test/tests.bundle.js')] = ['webpack', 'sourcemap']
+            preprocessors[path.resolve('src/test/unit/tests.bundle.js')] = ['webpack', 'sourcemap']
             return preprocessors
         }()),
         sauceLabs: {

@@ -1,18 +1,14 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const isProduction = process.env.NODE_ENV === 'production';
-const nodeExternals = require('webpack-node-externals');
 const path = require('path')
 
 module.exports = {
     entry: {
-        'traditional-wrapper': [path.resolve('src/wrappers/traditional.js')],
-        'file-input': [path.resolve('src/components/file-input/stylable-element.jsx')]
+        'index': [path.resolve('src/test/manual/index.jsx')]
     },
     output: {
-        path: path.resolve('dist'),
-        filename: `[name].${isProduction ? 'min.js' : '.js'}`
+        path: path.resolve('src/test/manual/bundle'),
+        filename: '[name].js'
     },
-    externals: [nodeExternals()],
     resolve: {
         alias: {
             src: path.resolve('src')
