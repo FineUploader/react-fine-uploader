@@ -1,0 +1,18 @@
+.react-fine-uploader-file-input-container {
+  display: inline-block;
+  position: relative;
+}
+
+.react-fine-uploader-file-input {
+  bottom: 0;
+  cursor: pointer;
+  height: 100%;
+  left: 0;
+  margin: 0;
+  opacity: 0;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+}

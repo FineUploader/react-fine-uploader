@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './styleable-element.less'
+import './styleable-element.css'
 
 const StyleableFileInput = ({ children }) => (
     <div className='react-fine-uploader-file-input-container'>

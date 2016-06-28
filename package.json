@@ -62,8 +62,10 @@
     "node": ">=5.0.0"
   },
   "scripts": {
-    "build": "webpack --config config/webpack.config.js --display-error-details",
+    "build": "npm run build-js ; npm run build-stylesheets",
+    "build-js": "babel src --out-dir lib --ignore test/",
     "build-manual-test": "webpack --config config/webpack.manual-test.config.js --watch --display-error-details",
+    "build-stylesheets": "(cd src; rsync -R components/**/*.css ../lib)",
     "lint": "eslint src/. --ext .js,.jsx --cache",
     "test": "npm run lint && karma start config/karma.dev.conf"
   }
