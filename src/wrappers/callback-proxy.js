@@ -88,9 +88,7 @@ const executeThenableCallback = ({ registeredCallbacks, originalCallbackArgument
                         resolve(result)
                     }
                 })
-                .catch(error => {
-                    reject(error)
-                })
+                .catch(error => reject(error))
         }
         else if (returnValue === false) {
             reject()
