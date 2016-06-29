@@ -2,11 +2,13 @@ import React from 'react'
 
 import './styleable-element.css'
 
-const StyleableFileInput = ({ children }) => (
+const StyleableFileInput = ({ children, onChange, ...params }) => (
     <div className='react-fine-uploader-file-input-container'>
         { children }
-        <input className='react-fine-uploader-file-input' 
-               type='file' 
+        <input { ...params }
+               className='react-fine-uploader-file-input'
+               onChange={ onChange }
+               type='file'
         />
     </div>
 )
