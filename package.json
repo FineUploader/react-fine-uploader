@@ -70,6 +70,6 @@
     "build-stylesheets": "(cd src; rsync -R components/**/*.css ../lib)",
     "lint": "eslint src/. --ext .js,.jsx --cache",
     "manual-test": "webpack --config config/webpack.manual-test.config.js --watch --display-error-details",
-    "test": "npm run lint && karma start config/karma.dev.conf"
+    "test": "npm run lint && if [ $CI ]; then karma start config/karma.conf; else karma start config/karma.dev.conf; fi"
   }
 }
