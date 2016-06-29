@@ -42,6 +42,7 @@
     "babel-plugin-transform-class-properties": "latest",
     "babel-plugin-transform-object-rest-spread": "latest",
     "css-loader": "latest",
+    "es6-promise": "latest",
     "eslint": "latest",
     "eslint-plugin-react": "latest",
     "extract-text-webpack-plugin": "latest",
