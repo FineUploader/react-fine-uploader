@@ -1,6 +1,5 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const isProduction = process.env.NODE_ENV === 'production';
-const nodeExternals = require('webpack-node-externals');
 const path = require('path')
 
 module.exports = {
@@ -12,10 +11,10 @@ module.exports = {
         path: path.resolve('lib'),
         filename: `[name].${isProduction ? 'min.js' : '.js'}`
     },
-    externals: [nodeExternals()],
     resolve: {
         alias: {
-            src: path.resolve('src')
+            src: path.resolve('src'),
+            test: path.resolve('src/test/unit')
         },
         extensions: ['', '.js', '.jsx']
     },
