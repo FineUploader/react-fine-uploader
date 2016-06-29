@@ -56,7 +56,9 @@ module.exports = function (config) {
             return preprocessors
         }()),
         sauceLabs: {
-            testName: 'react-fine-uploader tests'
+            startConnect: false,
+            testName: 'react-fine-uploader tests',
+            tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER
         },
         customLaunchers: customLaunchers,
         browsers: Object.keys(customLaunchers),
