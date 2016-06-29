@@ -78,3 +78,43 @@ Use this property to access any [core API methods exposed by Fine Uploader](http
 uploader.methods.addFiles(myFiles)
 uploader.methods.deleteFile(3)
 ```
+
+
+### Components
+
+#### `<FileInput />`
+
+The `<FileInput />` component allows you to easily render and style `<input type="file">` element and connect it to a Fine Uploader instance. When any files are selected via the file chooser dialog, they will be submitted directly to the associated Fine Uploder instance.
+
+For example, suppose you wanted to create a file input button with an upload icon and some text that allows the user to select multiple files, but excludes everything but images in the chooser dialog ([where supported](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Browser_compatibility)). When files are selected by the user, they should be submitted directly to a Fine Uploader traditional endpoint handler:
+
+Note: This assumes you have [the Ionicons CSS file](http://ionicons.com/#cdn) loaded on your page, _and_ that you have an element on your page with an ID of "content".
+
+```javascript
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+import FileInput 'react-fine-uploader/components/file-input'
+import FineUploaderTraditional from 'react-fine-uploader'
+
+const uploader = new FineUploaderTraditional({
+   options: {
+      request: {
+         endpoint: 'my/upload/endpoint'
+      }
+   }
+})
+
+const fileInput = (
+   <FileInput multiple accept='image/*' uploader={ uploader }>
+      <button class="icon ion-upload">Choose Files</button>
+   </FileInput>
+)
+
+ReactDOM.render(
+    fileInput,
+    document.getElementById('content')
+)
+```
+
+You may pass _any_ [standard `<input type="file">` attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) to the `<FileInput />` component.
