@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/FineUploader/react-fine-uploader.svg?branch=master)](https://travis-ci.org/FineUploader/react-fine-uploader)
 [![Freenode](https://img.shields.io/badge/chat-on%20freenode-brightgreen.svg)](irc://chat.freenode.net/#fineuploader)
 
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/reactfineuploader.svg)](https://saucelabs.com/u/reactfineuploader)
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/react-fine-uploader.svg)](https://saucelabs.com/u/react-fine-uploader)
 
 
 Makes using Fine Uploader in a React app simple. Drop-in high-level components for a turn-key UI. Use small focused components to build a more custom UI.
