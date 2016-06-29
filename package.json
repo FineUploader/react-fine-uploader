@@ -50,8 +50,6 @@
     "karma-sourcemap-loader": "latest",
     "karma-spec-reporter": "latest",
     "karma-webpack": "latest",
-    "less": "latest",
-    "less-loader": "latest",
     "react": "latest",
     "react-dom": "latest",
     "style-loader": "latest",
