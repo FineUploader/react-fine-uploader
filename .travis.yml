@@ -10,3 +10,8 @@ addons:
 before_script:
 - export DISPLAY=:99.0
 - 'sh -e /etc/init.d/xvfb start'
+
+env:
+  global:
+  - SAUCE_USERNAME: react-fine-uploadeer
+  - secure: "LAtKkf5d978bHypDAFHr16w1zZ6YOYXY/OncCd43fxEF4uH2XM30/Ez2Z8Yrsbw2d8KmjbvP9DV4oBC8Sxn9leySTIDx0c40wkA09rdv5ABq+hG4GolszD716FlX4ZwCxf4f2GzfxPEgIC0kdAsgeE4E2hHHb1nOyZ4yYJRY0MfkcnyXr7Y8gL64v4f1RRTNM4vxb+lrSWczkIkc/tsJ+KzEh43PdTR4pU274UfpkdoV2kzHUAAtgt5xCdGh/q6Va30qALhaSzZmOsT2nuSXZfnYVJJ2Mo01uQDdUU+1EqH2M06XWZcZKlyqGqRiTFTmTXwWRsvCg7xjIEww0xGSzp6jrZF+JpbNSHIodBjT4K/20OEcllhoJaiP4X5WvLWLYnvev72ly4/cvtvsvVNb0obFunhWOlwLXnR/1cRCnz2G68fddQUcu21p5/LHDYWwuBkDmlcbvEoyElJS1atm7DiJ4LxjLICjGRLqH1+3pKlJlBndEx4vh0X4viAhv3qSSc7TckTUMkEkYEm6KfFBMicumjyG3Q3hEROjzsdBzRU+EKHfSjTe8+xSllQn80x17rhFJzPTy4r1wQYC/Warhh1pMUG/rQFQyaQbSApLzB5lh+S5t0FzRsoqgdHKRzDXQFb3juVXfsdN9nnUnBOtjtENHNfFzNOovbzvP4FqYpE="
