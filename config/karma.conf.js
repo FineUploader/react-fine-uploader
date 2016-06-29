@@ -41,7 +41,6 @@ var path = require('path'),
 
 webpackConfig.module.loaders[0].query = { plugins: ['rewire'] }
 webpackConfig.devtool = 'inline-source-map'
-webpackConfig.externals = []
 
 module.exports = function (config) {
     config.set({
@@ -56,9 +55,7 @@ module.exports = function (config) {
             return preprocessors
         }()),
         sauceLabs: {
-            startConnect: false,
-            testName: 'react-fine-uploader tests',
-            tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER
+            testName: 'react-fine-uploader tests'
         },
         customLaunchers: customLaunchers,
         browsers: Object.keys(customLaunchers),
