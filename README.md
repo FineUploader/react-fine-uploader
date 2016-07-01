@@ -17,12 +17,16 @@ For a better understanding of the architecture and goals of the project, please 
 
 ### Quick Reference
 
+- [Installing](#installing)
 - [Wrapper Classes](#wrapper-classes)
    - [Traditional](#traditional)
-
 - [Components](#components)
    - [`<Dropzone />`](#dropzone-)
    - [`<FileInput />`](#fileinput-)
+
+### Installing
+
+0.1.0 will likely be the first version of react-fine-uploader published on npm. There are a number of components to write before that milestone can be closed out. Until then, you'll need to `git clone` the project to play around with any in-progress components. Instructions will be updated once something has been published to npm. Until then, take a look at the [unit tests](src/test/unit) and the [manual tests](src/test/manual) for examples. Two dependencies that you will need to install yourself: an A+/Promise spec compliant polyfill (for IE11) and React (which is a peer dependency).
 
 ### Wrapper Classes
 
