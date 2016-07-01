@@ -15,6 +15,14 @@ This is currently an unstable in-progress project. Breaking changes may occur at
 
 For a better understanding of the architecture and goals of the project, please read the [wiki](../../wiki). The docs section here will simply detail the various APIs exposed.
 
+### Quick Reference
+
+- [Wrapper Classes](#wrapper-classes)
+   - [Traditional](#traditional)
+
+- [Components](#components)
+   - [`<FileInput />`](#fileinput-)
+
 ### Wrapper Classes
 
 #### Traditional
