@@ -1,18 +1,18 @@
-import React from 'react'
+import React, { Component, PropTypes } from 'react'
 
 import StyleableElement from './styleable-element'
 
-class FileInput extends React.Component {
+class FileInput extends Component {
+    static propTypes = {
+        uploader: PropTypes.object.isRequired
+    };
+
     constructor() {
         super()
 
         this.state = { key: newKey() }
         this._onFilesSelected = onFilesSelected.bind(this)
     }
-
-    static propTypes = {
-        uploader: React.PropTypes.object.isRequired
-    };
 
     render() {
         return (
