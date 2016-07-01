@@ -28,7 +28,10 @@ class DropzoneElement extends Component {
 
     render() {
         return (
-            <div className='fine-uploader-dropzone-container' ref='dropZone'>
+            <div {...this.props}
+                className={`fine-uploader-dropzone-container ${this.props.className || ''}`}
+                 ref='dropZone'
+            >
                 { this.props.children }
             </div>
         )

@@ -8,10 +8,10 @@ import FineUploader from 'src/wrappers/traditional'
 const uploader = new FineUploader({options: {}})
 
 const DropzoneComponent = () => (
-    <Dropzone uploader={ uploader }>
-        <div style={ { border: '1px solid', height: 200, width: 200} }>
-            Drop Files Here
-        </div>
+    <Dropzone style={ { border: '1px dotted', height: 200, width: 200} }
+              uploader={ uploader }
+    >
+        <span>Drop Files Here</span>
     </Dropzone>
 )
 
