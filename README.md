@@ -21,6 +21,7 @@ For a better understanding of the architecture and goals of the project, please 
    - [Traditional](#traditional)
 
 - [Components](#components)
+   - [`<Dropzone />`](#dropzone-)
    - [`<FileInput />`](#fileinput-)
 
 ### Wrapper Classes
@@ -89,6 +90,57 @@ uploader.methods.deleteFile(3)
 
 
 ### Components
+
+#### `<Dropzone />`
+
+This component provides an element that will accept dropped files or directories to be passed on to an underlying Fine Uploader instance. By default, the rendered component itself will accept these files, but you can also register another element in the DOM (such as `document.body`) to receive dropped files instead. 
+
+##### Properties
+
+- `dropActiveClassName` - Directly maps to the [`classes.dropActive property` on Fine Uploader's standalone drag-and-drop module](http://docs.fineuploader.com/branch/master/features/drag-and-drop.html#classes.dropActive). 
+
+- `element` - The DOM element to register as a drop zone. If omitted, the rendered `<Dropzone />` element will become the drop zone.
+
+- `multiple` - Directly maps to the [`allowMultipleItems` property on Fine Uploader's standalone drag-and-drop module](http://docs.fineuploader.com/branch/master/features/drag-and-drop.html#allowMultipleItems).
+
+- `onDropError` - Directly maps to the [`callbacks.dropError` option on Fine Uploader's standalone drag-and-drop module](http://docs.fineuploader.com/branch/master/features/drag-and-drop.html#dropError). React Fine Uploader will log any errors when the underlying DnD instance invokes the `dropError` callback, but you can specify additional behavior as well.
+
+- `onProcesssingDroppedFiles` - Directly maps to the [`callbacks.processingDroppedFiles` option on Fine Uploader's standalone drag-and-drop module](http://docs.fineuploader.com/branch/master/features/drag-and-drop.html#processingDroppedFiles). 
+
+- `onProcessingDroppedFilesComplete` - Directly maps to the [`callbacks.processingDroppedFilesComplete` option on Fine Uploader's standalone drag-and-drop module](http://docs.fineuploader.com/branch/master/features/drag-and-drop.html#processingDroppedFilesComplete). React Fine Uploader will send all files to the underlying Fine Uploader instance when this callback is invoked, but you may specify additional logic as well.
+
+- `uploader` - The only required option - a Fine Uploader [wrapper class](#wrapper-classes).
+
+A _very_ simple but completely functional and effective use of the `<Dropzone />` component can be seen below. This will render an element on the page that accepts files (all supported browsers) or even directories (Chrome & Opera only) and then submits them to Fine Uploader:
+
+```javascript
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+import FileInput 'react-fine-uploader/components/dropzone'
+import FineUploaderTraditional from 'react-fine-uploader'
+
+const uploader = new FineUploaderTraditional({
+   options: {
+      request: {
+         endpoint: 'my/upload/endpoint'
+      }
+   }
+})
+
+const dropzone = (
+    <Dropzone style={ { border: '1px dotted', height: 200, width: 200} }
+              uploader={ uploader }
+    >
+        <span>Drop Files Here</span>
+    </Dropzone>
+)
+
+ReactDOM.render(
+    dropzone,
+    document.getElementById('content')
+)
+```
 
 #### `<FileInput />`
 
