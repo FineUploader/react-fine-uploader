@@ -133,7 +133,7 @@ const uploader = new FineUploaderTraditional({
 })
 
 const dropzone = (
-    <Dropzone style={ { border: '1px dotted', height: 200, width: 200} }
+    <Dropzone style={ { border: '1px dotted', height: 200, width: 200 } }
               uploader={ uploader }
     >
         <span>Drop Files Here</span>
