@@ -26,16 +26,8 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.less$/,
-                loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader')
-            },
-            {
                 test: /\.css$/,
                 loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
-            },
-            {
-                test: /\.gif$/,
-                loader: 'url-loader?mimetype=image/png'
             }
         ]
     },

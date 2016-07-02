@@ -15,8 +15,10 @@ class FileInput extends Component {
     }
 
     render() {
+        const { uploader, ...elementProps } = this.props // eslint-disable-line no-unused-vars
+
         return (
-            <StyleableElement { ...this.props }
+            <StyleableElement { ...elementProps }
                               key={ this.state.key }
                               onChange={ this._onFilesSelected }
             >

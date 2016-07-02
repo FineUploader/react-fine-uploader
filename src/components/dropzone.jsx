@@ -4,7 +4,7 @@ import React, { Component, PropTypes } from 'react'
 
 class DropzoneElement extends Component {
     static propTypes = {
-        children: PropTypes.object,
+        children: PropTypes.array,
         dropActiveClassName: PropTypes.string,
         element: PropTypes.string,
         multiple: PropTypes.bool,
@@ -27,8 +27,10 @@ class DropzoneElement extends Component {
     }
 
     render() {
+        const { uploader, ...elementProps } = this.props // eslint-disable-line no-unused-vars
+
         return (
-            <div {...this.props}
+            <div { ...getElementProps(this.props) }
                 className={`fine-uploader-dropzone-container ${this.props.className || ''}`}
                  ref='dropZone'
             >
@@ -71,8 +73,12 @@ class DropzoneElement extends Component {
     }
 }
 
-DropzoneElement.propTypes = {
-    multiple: PropTypes.bool
+const getElementProps = actualProps => {
+    const actualPropsCopy = { ...actualProps }
+    const expectedPropNames = Object.keys(DropzoneElement.propTypes)
+
+    expectedPropNames.forEach(expectedPropName => delete actualPropsCopy[expectedPropName])
+    return actualPropsCopy
 }
 
 export default DropzoneElement
