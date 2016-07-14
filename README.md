@@ -182,3 +182,65 @@ ReactDOM.render(
 ```
 
 You may pass _any_ [standard `<input type="file">` attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) to the `<FileInput />` component.
+
+#### `<Thumbnail />`
+
+The `<Thumbnail />` component allows you to easily render Fine Uploader generated thumbnail previews for a specific submitted file. While the thumbnail generation is in progress, a SVG "waiting" graphic will render. Of the thumbnail generation succeeds, the "waiting" graphic will be removed from the DOM and replaced with a `<canvas>` element containing the thumbnail preview. If thumbnail generation fails, a "not available" SVG graphic will be rendered instead.
+
+##### Properties
+
+- `id` - The Fine Uploader ID of the submitted file. (required)
+
+- `maxSize` - Maps directly to the [`maxSize` parameter](http://docs.fineuploader.com/branch/master/api/methods.html#drawThumbnail) of the Fine Uploader `drawThumbnail` API method. If not supplied a default value is used, which is exported as a named constant.
+
+- `uploader` - A Fine Uploader [wrapper class](#wrapper-classes). (required)
+
+Suppose you wanted to render a thumbnail for each file as new files are submitted to Fine Uploader. Your React component may look like this:
+
+Note: This assumes you have additional components or code to allow files to actually be submitted to Fine Uploader.
+
+```javascript
+import React, { Component } from 'react'
+
+import FineUploaderTraditional from 'react-fine-uploader'
+import Thumbnail 'react-fine-uploader/components/thumbnail'
+
+const uploader = new FineUploader({
+   options: {
+      request: {
+         endpoint: 'my/upload/endpoint'
+      }
+   }
+})
+
+export default class FileListener extends Component {
+    constructor() {
+        super()
+
+        this.state = {
+            submittedFiles: []
+        }
+    }
+
+    componentDidMount() {
+        uploader.on('submitted', id => {
+            const submittedFiles = this.state.submittedFiles
+
+            submittedFiles.push(id)
+            this.setState({ submittedFiles })
+        })
+    }
+
+    render() {
+        return (
+            <div>
+                {
+                    this.state.submittedFiles.map(id => (
+                        <Thumbnail id={ id } uploader={ uploader } />
+                    ))
+                }
+            </div>
+        )
+    }
+}
+```
