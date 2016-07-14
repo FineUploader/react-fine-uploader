@@ -1,6 +1,6 @@
 # React Fine Uploader
 
-[![Build Status](https://travis-ci.org/FineUploader/react-fine-uploader.svg?branch=master)](https://travis-ci.org/FineUploader/react-fine-uploader)
+[![Build Status](https://travis-ci.org/FineUploader/react-fine-uploader2.svg?branch=master)](https://travis-ci.org/FineUploader/react-fine-uploader2)
 [![Freenode](https://img.shields.io/badge/chat-on%20freenode-brightgreen.svg)](irc://chat.freenode.net/#fineuploader)
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/react-fine-uploader.svg)](https://saucelabs.com/u/react-fine-uploader)
