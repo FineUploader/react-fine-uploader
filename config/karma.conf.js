@@ -33,9 +33,9 @@ var path = require('path'),
         },
         sl_edge: {
             base: 'SauceLabs',
-            browserName: 'microsoftedge',
+            browserName: 'MicrosoftEdge',
             platform: 'Windows 10',
-            version: '13.10586'
+            version: '13'
         }
     }
 
