@@ -23,6 +23,7 @@ For a better understanding of the architecture and goals of the project, please 
 - [Components](#components)
    - [`<Dropzone />`](#dropzone-)
    - [`<FileInput />`](#fileinput-)
+   - [`<Thumbnail />`](#thumbnail-)
 
 ### Installing
 
