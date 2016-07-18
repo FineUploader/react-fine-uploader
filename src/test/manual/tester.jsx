@@ -8,6 +8,7 @@ import React, { Component } from 'react'
 import Dropzone from 'src/components/dropzone'
 import FileInput from 'src/components/file-input'
 import FineUploader from 'src/wrappers/traditional'
+import ProgressBar from 'src/components/progress-bar'
 import Thumbnail from 'src/components/thumbnail'
 
 const uploader = new FineUploader({
@@ -42,9 +43,13 @@ class Tester extends Component {
             >
                 <span>Drop Files Here</span>
                 <FileInputComponent />
+                <ProgressBar uploader={ uploader } />
                 {
                     this.state.submittedFiles.map(id => (
-                        <Thumbnail id={ id } uploader={ uploader } />
+                        <span>
+                            <ProgressBar id={ id } uploader={ uploader } />
+                            <Thumbnail id={ id } uploader={ uploader } />
+                        </span>
                     ))
                 }
             </Dropzone>
@@ -53,7 +58,7 @@ class Tester extends Component {
 }
 
 const FileInputComponent = () => (
-    <FileInput multiple accept='image/*' uploader={ uploader }>
+    <FileInput multiple uploader={ uploader }>
         <button>Select Files</button>
     </FileInput>
 )
