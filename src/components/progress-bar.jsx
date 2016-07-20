@@ -22,7 +22,7 @@ class ProgressBar extends Component {
             totalSize: null
         }
 
-        this._createEventHandler()
+        this._createEventHandlers()
     }
 
     componentDidMount() {
@@ -32,10 +32,12 @@ class ProgressBar extends Component {
         else {
             this.props.uploader.on('progress', this._trackProgressEventHandler)
         }
+
+        this.props.uploader.on('statusChange', this._trackStatusEventHandler)
     }
 
     componentWillUnmount() {
-        this._unregisterEventHandler()
+        this._unregisterEventHandlers()
     }
 
     render() {
@@ -50,29 +52,35 @@ class ProgressBar extends Component {
         )
     }
 
-    _createEventHandler() {
+    _createEventHandlers() {
         if (this._isTotalProgress) {
             this._trackProgressEventHandler = (bytesUploaded, totalSize) => {
-                let hidden = false
-
-                if (bytesUploaded == totalSize && this.props.hideOnComplete) {
-                    hidden = true
-                }
-
-                this.setState({ bytesUploaded, hidden, totalSize })
+                this.setState({ bytesUploaded, totalSize })
             }
         }
         else {
             this._trackProgressEventHandler = (id, name, bytesUploaded, totalSize) => {
                 if (id === this.props.id) {
-                    let hidden = false
-
-                    if (bytesUploaded == totalSize && this.props.hideOnComplete) {
-                        hidden = true
-                    }
-
-                    this.setState({ bytesUploaded, hidden, totalSize })
+                    this.setState({ bytesUploaded, totalSize })
                 }
+            }
+        }
+
+        this._trackStatusEventHandler = (id, oldStatus, newStatus) => {
+            if (newStatus === 'UPLOADING' && this.state.hidden) {
+                this.setState({ hidden: false })
+            }
+            else if (this._isTotalProgress) {
+                if (this.state.hidden
+                    && this.props.hideOnComplete
+                    && isUploadComplete(newStatus)
+                    && !this.props.uploader.methods.getInProgress()) {
+
+                    this.setState({ hidden: true })
+                }
+            }
+            else if (this.status.hidden && this.props.hideOnComplete && isUploadComplete(newStatus)) {
+                this.setState({ hidden: true })
             }
         }
     }
@@ -81,14 +89,20 @@ class ProgressBar extends Component {
         return this.props.id == null
     }
 
-    _unregisterEventHandler() {
+    _unregisterEventHandlers() {
         if (this._isTotalProgress) {
             this.props.uploader.off('totalProgress', this._trackProgressEventHandler)
         }
         else {
             this.props.uploader.off('progress', this._trackProgressEventHandler)
         }
+
+        this.props.uploader.off('statusChange', this._trackStatusEventHandler)
     }
 }
+
+const isUploadComplete = status => (
+    status === 'UPLOAD_FAILED' || status === 'UPLOAD_SUCCESSFUL' || status === 'CANCELED'
+)
 
 export default ProgressBar
