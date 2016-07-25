@@ -206,8 +206,7 @@ has completed uploading. For total progress bars, the bar is hidden once _all_ f
 - `uploader` - The only required option - a Fine Uploader [wrapper class](#wrapper-classes).
 
 Consider embedding a per-file `<ProgressBar />`, such as `<ProgressBar id={ 3 } uploader={ uploader } />`, alongside
-a [`<Thumbnail />` component](#thumbnail-) for the same file. A total progress bar 
-- `<ProgressBar uploader={ uploader } />` - should probably be included before the container element that holds all file 
+a [`<Thumbnail />` component](#thumbnail-) for the same file. A total progress bar - `<ProgressBar uploader={ uploader } />` - should probably be included before the container element that holds all file 
 `<Thumbnail />` elements, such as at the top of a [`<Dropzone />`](#dropzone-).
 
 #### `<Thumbnail />`
