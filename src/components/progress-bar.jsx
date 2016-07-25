@@ -71,7 +71,7 @@ class ProgressBar extends Component {
                 this.setState({ hidden: false })
             }
             else if (this._isTotalProgress) {
-                if (this.state.hidden
+                if (!this.state.hidden
                     && this.props.hideOnComplete
                     && isUploadComplete(newStatus)
                     && !this.props.uploader.methods.getInProgress()) {
@@ -79,7 +79,7 @@ class ProgressBar extends Component {
                     this.setState({ hidden: true })
                 }
             }
-            else if (this.status.hidden && this.props.hideOnComplete && isUploadComplete(newStatus)) {
+            else if (!this.state.hidden && this.props.hideOnComplete && isUploadComplete(newStatus)) {
                 this.setState({ hidden: true })
             }
         }
