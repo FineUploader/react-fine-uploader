@@ -7,6 +7,7 @@ import React, { Component } from 'react'
 
 import Dropzone from 'src/components/dropzone'
 import FileInput from 'src/components/file-input'
+import Filename from 'src/components/filename'
 import FineUploader from 'src/wrappers/traditional'
 import ProgressBar from 'src/components/progress-bar'
 import Thumbnail from 'src/components/thumbnail'
@@ -38,7 +39,7 @@ class Tester extends Component {
     render() {
         return (
             <Dropzone multiple
-                      style={ { border: '1px dotted', minHeight: 200, width: 400} }
+                      style={ { border: '1px dotted', minHeight: 400, width: 700} }
                       uploader={ uploader }
             >
                 <span>Drop Files Here</span>
@@ -46,10 +47,13 @@ class Tester extends Component {
                 <ProgressBar uploader={ uploader } />
                 {
                     this.state.submittedFiles.map(id => (
-                        <span>
+                        <div style={ { display: 'inline-block' } }>
                             <ProgressBar id={ id } uploader={ uploader } />
                             <Thumbnail id={ id } uploader={ uploader } />
-                        </span>
+                            <div>
+                                <Filename id={ id } uploader={ uploader } />
+                            </div>
+                        </div>
                     ))
                 }
             </Dropzone>

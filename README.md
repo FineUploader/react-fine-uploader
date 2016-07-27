@@ -23,6 +23,7 @@ For a better understanding of the architecture and goals of the project, please 
 - [Components](#components)
    - [`<Dropzone />`](#dropzone-)
    - [`<FileInput />`](#fileinput-)
+   - [`<Filename />`](#filename-)
    - [`<ProgressBar />`](#progressbar-)
    - [`<Thumbnail />`](#thumbnail-)
 
@@ -184,6 +185,66 @@ ReactDOM.render(
 ```
 
 You may pass _any_ [standard `<input type="file">` attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) to the `<FileInput />` component.
+
+#### `<Filename />`
+
+The `<Filename />` component renders the initial name of the associated file _and_ updates when the file's name is changed through the API.
+
+##### Properties
+
+- `id` - The Fine Uploader ID of the submitted file. (required)
+
+- `uploader` - A Fine Uploader [wrapper class](#wrapper-classes). (required)
+
+Suppose you wanted to render a filename for each file as new files are submitted to Fine Uploader. Your React component may look like this:
+
+Note: This assumes you have additional components or code to allow files to actually be submitted to Fine Uploader.
+
+```javascript
+import React, { Component } from 'react'
+
+import FineUploaderTraditional from 'react-fine-uploader'
+import Filename 'react-fine-uploader/components/filename'
+
+const uploader = new FineUploader({
+   options: {
+      request: {
+         endpoint: 'my/upload/endpoint'
+      }
+   }
+})
+
+export default class FileListener extends Component {
+    constructor() {
+        super()
+
+        this.state = {
+            submittedFiles: []
+        }
+    }
+
+    componentDidMount() {
+        uploader.on('submitted', id => {
+            const submittedFiles = this.state.submittedFiles
+
+            submittedFiles.push(id)
+            this.setState({ submittedFiles })
+        })
+    }
+
+    render() {
+        return (
+            <div>
+                {
+                    this.state.submittedFiles.map(id => (
+                        <Filename id={ id } uploader={ uploader } />
+                    ))
+                }
+            </div>
+        )
+    }
+}
+```
 
 #### `<ProgressBar />`
 
