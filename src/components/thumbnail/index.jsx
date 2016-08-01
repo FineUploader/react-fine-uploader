@@ -14,8 +14,8 @@ class Thumbnail extends Component {
     static propTypes = {
         id: PropTypes.number.isRequired,
         maxSize: PropTypes.number,
-        uploader: PropTypes.object.isRequired,
         notAvailablePlaceholder: PropTypes.element,
+        uploader: PropTypes.object.isRequired,
         waitingPlaceholder: PropTypes.element
     };
 
