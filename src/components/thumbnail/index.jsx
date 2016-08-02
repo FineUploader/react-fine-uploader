@@ -14,7 +14,9 @@ class Thumbnail extends Component {
     static propTypes = {
         id: PropTypes.number.isRequired,
         maxSize: PropTypes.number,
-        uploader: PropTypes.object.isRequired
+        notAvailablePlaceholder: PropTypes.element,
+        uploader: PropTypes.object.isRequired,
+        waitingPlaceholder: PropTypes.element
     };
 
     static defaultProps = {
@@ -76,7 +78,7 @@ class Thumbnail extends Component {
             )
             
             return (
-                <Placeholder image={ notAvailableImage }
+                <Placeholder image={ this.props.notAvailablePlaceholder || notAvailableImage }
                              size={ this.props.maxSize }
                              status={ notAvailableStatus }
                 />
@@ -88,7 +90,7 @@ class Thumbnail extends Component {
             )
 
             return (
-                <Placeholder image={ waitingImage }
+                <Placeholder image={ this.props.waitingPlaceholder || waitingImage }
                              size={ this.props.maxSize }
                              status={ waitingStatus }
                 />

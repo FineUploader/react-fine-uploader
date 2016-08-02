@@ -280,7 +280,11 @@ The `<Thumbnail />` component allows you to easily render Fine Uploader generate
 
 - `maxSize` - Maps directly to the [`maxSize` parameter](http://docs.fineuploader.com/branch/master/api/methods.html#drawThumbnail) of the Fine Uploader `drawThumbnail` API method. If not supplied a default value is used, which is exported as a named constant.
 
+- `notAvailablePlaceholder` - A custom element to display if the thumbnail is not available.
+
 - `uploader` - A Fine Uploader [wrapper class](#wrapper-classes). (required)
+
+- `waitingPlaceholder` - A custom element to display while waiting for the thumbnail.
 
 Suppose you wanted to render a thumbnail for each file as new files are submitted to Fine Uploader. Your React component may look like this:
 
