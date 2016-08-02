@@ -3,7 +3,8 @@ import React, { PropTypes } from 'react'
 const Placeholder = ({ image, size, status }) => {
     const style = {
         maxHeight: size,
-        maxWidth: size
+        maxWidth: size,
+        overflow: 'hidden'
     }
 
     return (
