@@ -8,6 +8,7 @@ import React, { Component } from 'react'
 import Dropzone from 'src/components/dropzone'
 import FileInput from 'src/components/file-input'
 import Filename from 'src/components/filename'
+import Filesize from 'src/components/filesize'
 import FineUploader from 'src/wrappers/traditional'
 import ProgressBar from 'src/components/progress-bar'
 import Thumbnail from 'src/components/thumbnail'
@@ -53,6 +54,7 @@ class Tester extends Component {
                             <div>
                                 <Filename id={ id } uploader={ uploader } />
                             </div>
+                            <Filesize id={ id } uploader={ uploader } />
                         </div>
                     ))
                 }
