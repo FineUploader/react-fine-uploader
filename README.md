@@ -24,6 +24,7 @@ For a better understanding of the architecture and goals of the project, please 
    - [`<Dropzone />`](#dropzone-)
    - [`<FileInput />`](#fileinput-)
    - [`<Filename />`](#filename-)
+   - [`<Filesize />`](#filesize-)
    - [`<ProgressBar />`](#progressbar-)
    - [`<Thumbnail />`](#thumbnail-)
 
@@ -244,6 +245,90 @@ export default class FileListener extends Component {
         )
     }
 }
+```
+
+#### `<Filesize />`
+
+The `<Filesize />` component renders the size of a specific file, formatted based on the a set of customizable rules.
+It also accounts for scaled images, which do not have a file size available until upload time.
+
+The internal logic of this component uses the IEEE definition when determining whether to display the
+size as kilobytes, megabytes, gigabytes, or terabytes. For example, 1100 bytes is represented, by default,
+as "1.10 KB".
+
+##### Properties
+
+- `id` - The Fine Uploader ID of the submitted file. (required)
+
+- `units` - An object containing printable text for each size unit. The size unit keys include
+`byte`, `kilobyte`, `megabyte`, `gigabyte`, and `terabyte`. The default text values for these units are
+`B`, `KB`, `MB`, `GB`, and `TB` (respectively).
+
+- `uploader` - A Fine Uploader [wrapper class](#wrapper-classes). (required)
+
+Suppose you wanted to render a file size for each file as new files are submitted to Fine Uploader. Your React component may look like this:
+
+Note: This assumes you have additional components or code to allow files to actually be submitted to Fine Uploader.
+
+```javascript
+import React, { Component } from 'react'
+
+import FineUploaderTraditional from 'react-fine-uploader'
+import Filesize 'react-fine-uploader/components/filesize'
+
+const uploader = new FineUploader({
+   options: {
+      request: {
+         endpoint: 'my/upload/endpoint'
+      }
+   }
+})
+
+export default class FileListener extends Component {
+    constructor() {
+        super()
+
+        this.state = {
+            submittedFiles: []
+        }
+    }
+
+    componentDidMount() {
+        uploader.on('submitted', id => {
+            const submittedFiles = this.state.submittedFiles
+
+            submittedFiles.push(id)
+            this.setState({ submittedFiles })
+        })
+    }
+
+    render() {
+        return (
+            <div>
+                {
+                    this.state.submittedFiles.map(id => (
+                        <Filesize id={ id } uploader={ uploader } />
+                    ))
+                }
+            </div>
+        )
+    }
+}
+```
+
+If you wanted to display units as "bytes", "kilobytes", etc (instead of the default text), your `FileSize`
+component would look like this instead:
+
+```javascript
+const customUnits = {
+    byte: 'bytes',
+    kilobyte: 'kilobytes',
+    megabyte: 'megabytes',
+    gigabyte: 'gigabytes',
+    terabyte: 'terabytes'
+}
+
+<Filesize id={ id } units={ customUnits } uploader={ uploader } />
 ```
 
 #### `<ProgressBar />`
