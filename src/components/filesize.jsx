@@ -30,22 +30,26 @@ class Filesize extends Component {
             size: props.uploader.methods.getSize(props.id)
         }
 
-        // If this is a scaled image, the size won't be known until upload time.
-        this._onUploadHandler = id => {
-            if (id === this.props.id) {
-                this.setState({
-                    size: this.props.uploader.getSize(id)
-                })
+        // Don't bother to check size at upload time if scaling feature is not enabled.
+        const scalingOption = this.props.uploader.options.scaling
+        if (scalingOption && scalingOption.sizes.length) {
+            // If this is a scaled image, the size won't be known until upload time.
+            this._onUploadHandler = id => {
+                if (id === this.props.id) {
+                    this.setState({
+                        size: this.props.uploader.methods.getSize(id)
+                    })
+                }
             }
         }
     }
 
     componentDidMount() {
-        this.props.uploader.on('upload', this._onUploadHandler)
+        this._onUploadHandler && this.props.uploader.on('upload', this._onUploadHandler)
     }
 
     componentWillUnmount() {
-        this.props.uploader.off('upload', this._onUploadHandler)
+        this._onUploadHandler && this.props.uploader.off('upload', this._onUploadHandler)
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -54,6 +58,13 @@ class Filesize extends Component {
 
     render() {
         const size = this.state.size
+
+        if (size == null || size < 0) {
+            return (
+                <span className='react-fine-uploader-filesize' />
+            )
+        }
+
         const units = this.props.units
         const { formattedSize, formattedUnits } = formatSizeAndUnits({ size, units })
 
@@ -62,6 +73,7 @@ class Filesize extends Component {
                 <span className='react-fine-uploader-filesize-value'>
                     { formattedSize }
                 </span>
+                <span className='react-fine-uploader-filesize-separator'> </span>
                 <span className='react-fine-uploader-filesize-unit'>
                     { formattedUnits }
                 </span>
@@ -74,31 +86,25 @@ const formatSizeAndUnits = ({ size, units }) => {
     let formattedSize,
         formattedUnits
 
-    switch(size) {
-        case size < 1e+3: {
-            formattedSize = size
-            formattedUnits = units.byte
-            break
-        }
-        case size >= 1e+3 && size < 1e+6: {
-            formattedSize = (1e+3 / size).toFixed(2)
-            formattedUnits = units.kilobyte
-            break
-        }
-        case size >= 1e+6 && size < 1e+9: {
-            formattedSize = (1e+6 / size).toFixed(2)
-            formattedUnits = units.megabyte
-            break
-        }
-        case size >= 1e+9 && size < 1e+12: {
-            formattedSize = (1e+9 / size).toFixed(2)
-            formattedUnits = units.gigabyte
-            break
-        }
-        default: {
-            formattedSize = (1e+12 / size).toFixed(2)
-            formattedUnits = units.terabyte
-        }
+    if (size < 1e+3) {
+        formattedSize = size
+        formattedUnits = units.byte
+    }
+    else if (size >= 1e+3 && size < 1e+6) {
+        formattedSize = (size / 1e+3).toFixed(2)
+        formattedUnits = units.kilobyte
+    }
+    else if (size >= 1e+6 && size < 1e+9) {
+        formattedSize = (size / 1e+6).toFixed(2)
+        formattedUnits = units.megabyte
+    }
+    else if (size >= 1e+9 && size < 1e+12) {
+        formattedSize = (size / 1e+9).toFixed(2)
+        formattedUnits = units.gigabyte
+    }
+    else {
+        formattedSize = (size / 1e+12).toFixed(2)
+        formattedUnits = units.terabyte
     }
 
     return { formattedSize, formattedUnits }
