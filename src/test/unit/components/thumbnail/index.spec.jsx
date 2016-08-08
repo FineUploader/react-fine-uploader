@@ -1,4 +1,4 @@
-import qq from 'fine-uploader'
+import qq from 'fine-uploader/all.fine-uploader/all.fine-uploader.core'
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 

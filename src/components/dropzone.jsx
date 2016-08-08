@@ -1,5 +1,4 @@
-// TODO change this to the standalone Fine Uploader DnD module once https://github.com/FineUploader/fine-uploader/issues/1605 is complete
-import qq from 'fine-uploader'
+import qq from 'fine-uploader/lib/dnd'
 import React, { Component, PropTypes } from 'react'
 
 class DropzoneElement extends Component {
