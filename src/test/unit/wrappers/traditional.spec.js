@@ -1,4 +1,4 @@
-import qq from 'fine-uploader'
+import qq from 'fine-uploader/lib/core'
 
 import FineUploaderTraditional from 'src/wrappers/traditional'
 

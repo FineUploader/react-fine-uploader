@@ -1,5 +1,5 @@
 import objectAssign from 'object-assign'
-import qq from 'fine-uploader/fine-uploader/fine-uploader.core'
+import qq from 'fine-uploader/lib/core'
 
 import CallbackProxy from './callback-proxy'
 import { traditional as callbackNames } from './callback-names'
