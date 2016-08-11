@@ -5,6 +5,7 @@
 
 import React, { Component } from 'react'
 
+import CancelButton from 'src/components/cancel-button'
 import Dropzone from 'src/components/dropzone'
 import FileInput from 'src/components/file-input'
 import Filename from 'src/components/filename'
@@ -29,11 +30,20 @@ class Tester extends Component {
     }
 
     componentDidMount() {
-        uploader.on('submitted', id => {
-            const submittedFiles = this.state.submittedFiles
+        uploader.on('statusChange', (id, oldStatus, newStatus) => {
+            if (newStatus === 'submitted') {
+                const submittedFiles = this.state.submittedFiles
 
-            submittedFiles.push(id)
-            this.setState({ submittedFiles })
+                submittedFiles.push(id)
+                this.setState({ submittedFiles })
+            }
+            else if (isFileGone(newStatus)) {
+                const submittedFiles = this.state.submittedFiles
+                const indexToRemove = submittedFiles.indexOf(id)
+
+                submittedFiles.splice(indexToRemove, 1)
+                this.setState({ submittedFiles })
+            }
         })
     }
 
@@ -48,13 +58,14 @@ class Tester extends Component {
                 <ProgressBar uploader={ uploader } />
                 {
                     this.state.submittedFiles.map(id => (
-                        <div style={ { display: 'inline-block' } }>
+                        <div key={ id } style={ { display: 'inline-block' } }>
                             <ProgressBar id={ id } uploader={ uploader } />
                             <Thumbnail id={ id } uploader={ uploader } />
                             <div>
                                 <Filename id={ id } uploader={ uploader } />
                             </div>
                             <Filesize id={ id } uploader={ uploader } />
+                            <CancelButton id={ id } uploader={ uploader } />
                         </div>
                     ))
                 }
@@ -68,5 +79,12 @@ const FileInputComponent = () => (
         <button>Select Files</button>
     </FileInput>
 )
+
+const isFileGone = status => {
+    return [
+        'canceled',
+        'deleted',
+    ].indexOf(status) >= 0
+}
 
 export default Tester
