@@ -67,7 +67,7 @@ class ProgressBar extends Component {
         }
 
         this._trackStatusEventHandler = (id, oldStatus, newStatus) => {
-            if (newStatus === 'UPLOADING' && this.state.hidden) {
+            if (newStatus === 'uploading' && this.state.hidden) {
                 this.setState({ hidden: false })
             }
             else if (this._isTotalProgress) {
@@ -102,7 +102,7 @@ class ProgressBar extends Component {
 }
 
 const isUploadComplete = status => (
-    status === 'UPLOAD_FAILED' || status === 'UPLOAD_SUCCESSFUL' || status === 'CANCELED'
+    status === 'upload failed' || status === 'upload successful' || status === 'canceled'
 )
 
 export default ProgressBar
