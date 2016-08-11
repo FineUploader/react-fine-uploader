@@ -3,8 +3,8 @@ import React, { Component, PropTypes } from 'react'
 class CancelButton extends Component {
     static propTypes = {
         children: PropTypes.node,
-        onlyRenderIfCancelable: PropTypes.bool,
         id: PropTypes.number.isRequired,
+        onlyRenderIfCancelable: PropTypes.bool,
         uploader: PropTypes.object.isRequired
     };
 
