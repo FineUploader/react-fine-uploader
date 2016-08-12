@@ -47,7 +47,7 @@ const getProxyFunction = function({ name }) {
             callbackReturnValue = executeThenableCallbacks({ registeredCallbacks, originalCallbackArguments })
         }
         else {
-            registeredCallbacks.every(callback => {
+            objectAssign([], registeredCallbacks).every(callback => {
                 const returnValue = callback.apply(null, originalCallbackArguments)
 
                 callbackReturnValue = returnValue
