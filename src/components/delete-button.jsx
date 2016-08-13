@@ -22,14 +22,14 @@ class DeleteButton extends Component {
 
         this._onStatusChange = (id, oldStatus, newStatus) => {
             if (id === this.props.id) {
-                if (newStatus !== 'upload successful' && newStatus !== 'deleting' && this.state.deletable) {
+                if (!isDeletable(newStatus) && newStatus !== 'deleting' && this.state.deletable) {
                     !this._unmounted && this.setState({
                         deletable: false,
                         deleting: false
                     })
                     this._unregisterStatusChangeHandler()
                 }
-                else if (newStatus === 'upload successful' && !this.state.deletable) {
+                else if (isDeletable(newStatus) && !this.state.deletable) {
                     this.setState({
                         deletable: true,
                         deleting: false
@@ -59,8 +59,8 @@ class DeleteButton extends Component {
 
         if (this.state.deletable || this.state.deleting || !onlyRenderIfDeletable) {
             return (
-                <button aria-label='cancel'
-                        className='react-fine-uploader-cancel-button'
+                <button aria-label='delete'
+                        className='react-fine-uploader-delete-button'
                         disabled={ !this.state.deletable || this.state.deleting }
                         onClick={ this.state.deletable && !this.state.deleting && this._onClick }
                         { ...elementProps }
@@ -76,6 +76,13 @@ class DeleteButton extends Component {
     _unregisterStatusChangeHandler() {
         this.props.uploader.off('statusChange', this._onStatusChange)
     }
+}
+
+const isDeletable = status => {
+    return [
+        'delete failed',
+        'upload successful'
+    ].indexOf(status) >= 0
 }
 
 export default DeleteButton

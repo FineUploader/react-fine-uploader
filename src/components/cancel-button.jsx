@@ -65,13 +65,13 @@ class CancelButton extends Component {
 
 const isCancelable = status => {
     return [
-        'submitted',
-        'queued',
-        'uploading',
-        'upload retrying',
-        'upload failed',
         'delete failed',
-        'paused'
+        'paused',
+        'queued',
+        'submitted',
+        'uploading',
+        'upload failed',
+        'upload retrying'
     ].indexOf(status) >= 0
 }
 
