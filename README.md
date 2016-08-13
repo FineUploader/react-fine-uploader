@@ -1,7 +1,6 @@
 # React Fine Uploader
 
 [![Build Status](https://travis-ci.org/FineUploader/react-fine-uploader.svg?branch=master)](https://travis-ci.org/FineUploader/react-fine-uploader)
-[![Freenode](https://img.shields.io/badge/chat-on%20freenode-brightgreen.svg)](irc://chat.freenode.net/#fineuploader)
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/react-fine-uploader2.svg)](https://saucelabs.com/u/react-fine-uploader2)
 
@@ -22,6 +21,7 @@ For a better understanding of the architecture and goals of the project, please 
    - [Traditional](#traditional)
 - [Components](#components)
    - [`<CancelButton />`](#cancelbutton-)
+   - [`<DeleteButton />`](#deletebutton-)
    - [`<Dropzone />`](#dropzone-)
    - [`<FileInput />`](#fileinput-)
    - [`<Filename />`](#filename-)
@@ -114,10 +114,6 @@ By default, the `<CancelButton />` will be rendered and clickable only when the 
 
 - `onlyRenderIfCancelable` - Defaults to `true`. If set to `false`, the element will be rendered as a disabled button if the associated file is not cancelable.
 
-- `units` - An object containing printable text for each size unit. The size unit keys include
-`byte`, `kilobyte`, `megabyte`, `gigabyte`, and `terabyte`. The default text values for these units are
-`B`, `KB`, `MB`, `GB`, and `TB` (respectively).
-
 - `uploader` - A Fine Uploader [wrapper class](#wrapper-classes). (required)
 
 The example below will include a cancel button for each submitted file along with a `<Thumbnail />, and will ensure the elements representing a file are removed if the file is canceled.
@@ -189,6 +185,96 @@ const isFileGone = status => {
 ```
 
 You may pass _any_ standard [`<button>` attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) (or any standard element attributes, such as `data-` attributes) to the `<CancelButton />` as well. These attributes will be attached to the underlying `<button>` element.
+
+#### `<DeleteButton />`
+
+The `<DeleteButton />` component allows you to easily render a useable delete button for an uploaded file. An file can be deleted from the server if the option has been enabled and if the file has already uploaded successfully.
+
+By default, the `<DeleteButton />` will be rendered and clickable only when the associated file is eligible for deletion. Otherwise, the component will _not_ render a button. In other words, once, for example, the associated file has been deleted, or while it is still uploading, the button will not be visible. You can change this behavior by setting appropriate options.
+
+##### Properties
+
+- `children` - (child elements/components of `<DeleteButton>`. Use this for any text of graphics that you would like to display inside the rendered button. If the component is childless, the button will be rendered with a simple text node of "Delete".
+
+- `id` - The Fine Uploader ID of the submitted file. (required)
+
+- `onlyRenderIfDeletable` - Defaults to `true`. If set to `false`, the element will be rendered as a disabled button if the associated file is not deletable.
+
+- `uploader` - A Fine Uploader [wrapper class](#wrapper-classes). (required)
+
+The example below will include a delete button for each submitted file along with a `<Thumbnail />, and will ensure the elements representing a file are removed if the file is deleted.
+
+```javascript
+import React, { Component } from 'react'
+
+import DeleteButton 'react-fine-uploader/components/delete-button'
+import FineUploaderTraditional from 'react-fine-uploader'
+import Thumbnail 'react-fine-uploader/components/thumbnail'
+
+const uploader = new FineUploader({
+   options: {
+      deleteFile: {
+         enabled: true,
+         endpoint: 'my/delete/endpoint'
+      },
+      request: {
+         endpoint: 'my/upload/endpoint'
+      }
+   }
+})
+
+export default class FileListener extends Component {
+    constructor() {
+        super()
+
+        this.state = {
+            submittedFiles: []
+        }
+    }
+
+    componentDidMount() {
+        uploader.on('statusChange', (id, oldStatus, newStatus) => {
+            if (newStatus === 'submitted') {
+                const submittedFiles = this.state.submittedFiles
+
+                submittedFiles.push(id)
+                this.setState({ submittedFiles })
+            }
+            else if (isFileGone(newStatus)) {
+                const submittedFiles = this.state.submittedFiles
+                const indexToRemove = submittedFiles.indexOf(id)
+
+                submittedFiles.splice(indexToRemove, 1)
+                this.setState({ submittedFiles })
+            }
+        })
+    }
+
+    render() {
+        return (
+            <div>
+                {
+                   this.state.submittedFiles.map(id => {
+                        <div key={ id }>
+                           <Thumbnail id={ id } uploader={ uploader } />
+                           <DeleteButton id={ id } uploader={ uploader } />
+                        </div>
+                    ))
+                }
+            </div>
+        )
+    }
+}
+
+const isFileGone = status => {
+    return [
+        'canceled',
+        'deleted',
+    ].indexOf(status) >= 0
+}
+```
+
+You may pass _any_ standard [`<button>` attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) (or any standard element attributes, such as `data-` attributes) to the `<DeleteButton />` as well. These attributes will be attached to the underlying `<button>` element.
 
 #### `<Dropzone />`
 
