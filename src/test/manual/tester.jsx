@@ -6,6 +6,7 @@
 import React, { Component } from 'react'
 
 import CancelButton from 'src/components/cancel-button'
+import DeleteButton from 'src/components/delete-button'
 import Dropzone from 'src/components/dropzone'
 import FileInput from 'src/components/file-input'
 import Filename from 'src/components/filename'
@@ -16,7 +17,14 @@ import Thumbnail from 'src/components/thumbnail'
 
 const uploader = new FineUploader({
     options: {
-        debug: true
+        debug: true,
+        deleteFile: {
+            enabled: true,
+            endpoint: '/uploads'
+        },
+        request: {
+            endpoint: '/uploads'
+        }
     }
 })
 
@@ -66,6 +74,7 @@ class Tester extends Component {
                             </div>
                             <Filesize id={ id } uploader={ uploader } />
                             <CancelButton id={ id } uploader={ uploader } />
+                            <DeleteButton id={ id } uploader={ uploader } />
                         </div>
                     ))
                 }
