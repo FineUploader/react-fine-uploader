@@ -18,7 +18,7 @@ For a better understanding of the architecture and goals of the project, please 
 
 - [Installing](#installing)
 - [Wrapper Classes](#wrapper-classes)
-   - [Traditional](#traditional)
+   - [Traditional](#traditional) - upload files to a server you created and control.
 - [Components](#components)
    - [`<CancelButton />`](#cancelbutton-)
    - [`<DeleteButton />`](#deletebutton-)
