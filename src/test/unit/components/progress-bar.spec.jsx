@@ -101,13 +101,14 @@ describe('<ProgressBar />', () => {
         const ProgressBarComponent = TestUtils.renderIntoDocument(<ProgressBar uploader={ uploader } />)
 
         // uploading
+        spyOn(uploader.methods, 'getInProgress').and.returnValue(2)
         statusChangeCallback(3, qq.status.QUEUED, qq.status.UPLOADING)
         statusChangeCallback(4, qq.status.QUEUED, qq.status.UPLOADING)
         let totalProgressEl = TestUtils.findRenderedDOMComponentWithClass(ProgressBarComponent, 'react-fine-uploader-total-progress-bar')
         expect(totalProgressEl.hasAttribute('hidden')).toBeFalsy()
 
         // still uploading
-        spyOn(uploader.methods, 'getInProgress').and.returnValue(1)
+        uploader.methods.getInProgress.and.returnValue(1)
         statusChangeCallback(3, qq.status.UPLOADING, qq.status.UPLOAD_SUCCESSFUL)
         totalProgressEl = TestUtils.findRenderedDOMComponentWithClass(ProgressBarComponent, 'react-fine-uploader-total-progress-bar')
         expect(totalProgressEl.hasAttribute('hidden')).toBeFalsy()

@@ -77,7 +77,7 @@ class ProgressBar extends Component {
 
                         this.setState({ hidden: true })
                     }
-                    else if (this.state.hidden) {
+                    else if (this.state.hidden && this.props.uploader.methods.getInProgress()) {
                         this.setState({ hidden: false })
                     }
                 }
