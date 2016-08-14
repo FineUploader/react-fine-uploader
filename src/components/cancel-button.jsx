@@ -18,9 +18,14 @@ class CancelButton extends Component {
         this.state = { cancelable: true }
 
         this._onStatusChange = (id, oldStatus, newStatus) => {
-            if (id === this.props.id) {
-                if (!isCancelable(newStatus) && this.state.cancelable && !this._unmounted) {
+            if (id === this.props.id && !this._unmounted) {
+                if (!isCancelable(newStatus) && this.state.cancelable) {
                     this.setState({ cancelable: false })
+                }
+                else if (isCancelable(newStatus) && !this.state.cancelable) {
+                    this.setState({ cancelable: true })
+                }
+                else if (newStatus === 'deleted' || newStatus === 'canceled') {
                     this._unregisterStatusChangeHandler()
                 }
             }
