@@ -37,6 +37,7 @@ class ProgressBar extends Component {
     }
 
     componentWillUnmount() {
+        this._unmounted = true
         this._unregisterEventHandlers()
     }
 
@@ -67,20 +68,27 @@ class ProgressBar extends Component {
         }
 
         this._trackStatusEventHandler = (id, oldStatus, newStatus) => {
-            if (newStatus === 'uploading' && this.state.hidden) {
-                this.setState({ hidden: false })
-            }
-            else if (this._isTotalProgress) {
-                if (!this.state.hidden
-                    && this.props.hideOnComplete
-                    && isUploadComplete(newStatus)
-                    && !this.props.uploader.methods.getInProgress()) {
+            if (!this._unmounted) {
+                if (this._isTotalProgress) {
+                    if (!this.state.hidden
+                        && this.props.hideOnComplete
+                        && isUploadComplete(newStatus)
+                        && !this.props.uploader.methods.getInProgress()) {
 
-                    this.setState({ hidden: true })
+                        this.setState({ hidden: true })
+                    }
+                    else if (this.state.hidden) {
+                        this.setState({ hidden: false })
+                    }
                 }
-            }
-            else if (!this.state.hidden && this.props.hideOnComplete && isUploadComplete(newStatus)) {
-                this.setState({ hidden: true })
+                else if (id === this.props.id) {
+                    if (this.state.hidden && newStatus === 'uploading') {
+                        this.setState({ hidden: false })
+                    }
+                    else if (!this.state.hidden && this.props.hideOnComplete && isUploadComplete(newStatus)) {
+                        this.setState({ hidden: true })
+                    }
+                }
             }
         }
     }
