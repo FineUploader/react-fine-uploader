@@ -1,5 +1,6 @@
 # React Fine Uploader
 
+[![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 [![Build Status](https://travis-ci.org/FineUploader/react-fine-uploader.svg?branch=master)](https://travis-ci.org/FineUploader/react-fine-uploader)
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/react-fine-uploader2.svg)](https://saucelabs.com/u/react-fine-uploader2)
