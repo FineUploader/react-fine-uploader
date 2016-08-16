@@ -1,4 +1,4 @@
-<img class="nav-logo" src="https://facebook.github.io/react/img/logo.svg" width="36" height="36">
+<img class="nav-logo" src="https://facebook.github.io/react/img/logo.svg" width="32" height="32">
 <a href="http://fineuploader.com/designers">
    <img src="http://fineuploader.smartimage.com/pimg/a8680d51" width="300">
 </a>
