@@ -1,4 +1,7 @@
-# React Fine Uploader
+<img class="nav-logo" src="https://facebook.github.io/react/img/logo.svg" width="36" height="36">
+<a href="http://fineuploader.com/designers">
+   <img src="http://fineuploader.smartimage.com/pimg/a8680d51" width="300">
+</a>
 
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 [![Build Status](https://travis-ci.org/FineUploader/react-fine-uploader.svg?branch=master)](https://travis-ci.org/FineUploader/react-fine-uploader)
