@@ -607,7 +607,7 @@ export default class FileListener extends Component {
 }
 ```
 
-You may pass _any_ standard [`<button>` attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) (or any standard element attributes, such as `data-` attributes) to the `<CancelButton />` as well. These attributes will be attached to the underlying `<button>` element.
+You may pass _any_ standard [`<button>` attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) (or any standard element attributes, such as `data-` attributes) to the `<RetryButton />` as well. These attributes will be attached to the underlying `<button>` element.
 
 #### `<Thumbnail />`
 
