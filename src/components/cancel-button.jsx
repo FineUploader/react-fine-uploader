@@ -12,8 +12,8 @@ class CancelButton extends Component {
         onlyRenderIfCancelable: true
     };
 
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
 
         this.state = { cancelable: true }
 

@@ -12,6 +12,7 @@ import FileInput from 'src/components/file-input'
 import Filename from 'src/components/filename'
 import Filesize from 'src/components/filesize'
 import FineUploader from 'src/wrappers/traditional'
+import RetryButton from 'src/components/retry-button'
 import ProgressBar from 'src/components/progress-bar'
 import Thumbnail from 'src/components/thumbnail'
 
@@ -24,6 +25,9 @@ const uploader = new FineUploader({
         },
         request: {
             endpoint: '/uploads'
+        },
+        retry: {
+            enableAuto: true
         }
     }
 })
@@ -74,6 +78,7 @@ class Tester extends Component {
                             </div>
                             <Filesize id={ id } uploader={ uploader } />
                             <CancelButton id={ id } uploader={ uploader } />
+                            <RetryButton id={ id } uploader={ uploader } />
                             <DeleteButton id={ id } uploader={ uploader } />
                         </div>
                     ))

@@ -12,8 +12,8 @@ class DeleteButton extends Component {
         onlyRenderIfDeletable: true
     };
 
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
 
         this.state = {
             deletable: false,
