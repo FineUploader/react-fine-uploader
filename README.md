@@ -31,6 +31,7 @@ For a better understanding of the architecture and goals of the project, please 
    - [`<Filename />`](#filename-)
    - [`<Filesize />`](#filesize-)
    - [`<ProgressBar />`](#progressbar-)
+   - [`<RetryButton />`](#retrybutton-)
    - [`<Thumbnail />`](#thumbnail-)
 
 ### Installing
@@ -120,7 +121,7 @@ By default, the `<CancelButton />` will be rendered and clickable only when the 
 
 - `uploader` - A Fine Uploader [wrapper class](#wrapper-classes). (required)
 
-The example below will include a cancel button for each submitted file along with a `<Thumbnail />, and will ensure the elements representing a file are removed if the file is canceled.
+The example below will include a cancel button for each submitted file along with a [`<Thumbnail />`](#thumbnail-), and will ensure the elements representing a file are removed if the file is canceled.
 
 ```javascript
 import React, { Component } from 'react'
@@ -206,7 +207,7 @@ By default, the `<DeleteButton />` will be rendered and clickable only when the 
 
 - `uploader` - A Fine Uploader [wrapper class](#wrapper-classes). (required)
 
-The example below will include a delete button for each submitted file along with a `<Thumbnail />, and will ensure the elements representing a file are removed if the file is deleted.
+The example below will include a delete button for each submitted file along with a [`<Thumbnail />`](#thumbnail-), and will ensure the elements representing a file are removed if the file is deleted.
 
 ```javascript
 import React, { Component } from 'react'
@@ -535,6 +536,78 @@ has completed uploading. For total progress bars, the bar is hidden once _all_ f
 Consider embedding a per-file `<ProgressBar />`, such as `<ProgressBar id={ 3 } uploader={ uploader } />`, alongside
 a [`<Thumbnail />` component](#thumbnail-) for the same file. A total progress bar - `<ProgressBar uploader={ uploader } />` - should probably be included before the container element that holds all file 
 `<Thumbnail />` elements, such as at the top of a [`<Dropzone />`](#dropzone-).
+
+#### `<RetryButton />`
+
+The `<RetryButton />` component allows you to easily render a useable retry button for a submitted file. An file can be "retried" manually after all auto retries have been exhausted on an upload failed _and_ if the [server has not forbidden retries in the upload response](http://docs.fineuploader.com/branch/master/api/options.html#retry.preventRetryResponseProperty).
+
+By default, the `<RetryButton />` will be rendered and clickable only when the associated file is eligible to be manually retried. Otherwise, the component will _not_ render a button. In other words, once, for example, the associated file has been canceled or has uploaded successfully, the button will essentially disappear. You can change this behavior by setting appropriate options
+
+##### Properties
+
+- `children` - (child elements/components of `<RetryButton>`. Use this for any text of graphics that you would like to display inside the rendered button. If the component is childless, the button will be rendered with a simple text node of "Retry".
+
+- `id` - The Fine Uploader ID of the submitted file. (required)
+
+- `onlyRenderIfRetryable` - Defaults to `true`. If set to `false`, the element will be rendered as a disabled button if the associated file is not retryable.
+
+- `uploader` - A Fine Uploader [wrapper class](#wrapper-classes). (required)
+
+The example below will include a retry button for each submitted file along with a [`<Thumbnail />`](#thumbnail-).
+
+```javascript
+import React, { Component } from 'react'
+
+import FineUploaderTraditional from 'react-fine-uploader'
+import RetryButton 'react-fine-uploader/components/retry-button'
+import Thumbnail 'react-fine-uploader/components/thumbnail'
+
+const uploader = new FineUploader({
+   options: {
+      request: {
+         endpoint: 'my/upload/endpoint'
+      }
+   }
+})
+
+export default class FileListener extends Component {
+    constructor() {
+        super()
+
+        this.state = {
+            submittedFiles: []
+        }
+    }
+
+    componentDidMount() {
+        uploader.on('statusChange', (id, oldStatus, newStatus) => {
+            if (newStatus === 'submitted') {
+                const submittedFiles = this.state.submittedFiles
+
+                submittedFiles.push(id)
+                this.setState({ submittedFiles })
+            }
+        })
+    }
+
+    render() {
+        return (
+            <div>
+                {
+                   this.state.submittedFiles.map(id => {
+                        <div key={ id }>
+                           <Thumbnail id={ id } uploader={ uploader } />
+                           <RetryButton id={ id } uploader={ uploader } />
+                        </div>
+                    ))
+                }
+            </div>
+        )
+    }
+}
+```
+
+You may pass _any_ standard [`<button>` attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) (or any standard element attributes, such as `data-` attributes) to the `<CancelButton />` as well. These attributes will be attached to the underlying `<button>` element.
 
 #### `<Thumbnail />`
 
