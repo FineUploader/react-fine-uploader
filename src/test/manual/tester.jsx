@@ -13,11 +13,15 @@ import Filename from 'src/components/filename'
 import Filesize from 'src/components/filesize'
 import FineUploader from 'src/wrappers/traditional'
 import RetryButton from 'src/components/retry-button'
+import PauseResumeButton from 'src/components/pause-resume-button'
 import ProgressBar from 'src/components/progress-bar'
 import Thumbnail from 'src/components/thumbnail'
 
 const uploader = new FineUploader({
     options: {
+        chunking: {
+            enabled: true
+        },
         debug: true,
         deleteFile: {
             enabled: true,
@@ -80,6 +84,7 @@ class Tester extends Component {
                             <CancelButton id={ id } uploader={ uploader } />
                             <RetryButton id={ id } uploader={ uploader } />
                             <DeleteButton id={ id } uploader={ uploader } />
+                            <PauseResumeButton id={ id } uploader={ uploader } />
                         </div>
                     ))
                 }

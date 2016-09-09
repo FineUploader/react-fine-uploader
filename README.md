@@ -30,6 +30,7 @@ For a better understanding of the architecture and goals of the project, please 
    - [`<FileInput />`](#fileinput-)
    - [`<Filename />`](#filename-)
    - [`<Filesize />`](#filesize-)
+   - [`<PauseResumeButton />`](#pauseresumebutton-)
    - [`<ProgressBar />`](#progressbar-)
    - [`<RetryButton />`](#retrybutton-)
    - [`<Thumbnail />`](#thumbnail-)
@@ -512,6 +513,80 @@ const customUnits = {
 
 <Filesize id={ id } units={ customUnits } uploader={ uploader } />
 ```
+
+#### `<PauseResumeButton />`
+
+The `<PauseResumeButton />` component allows you to easily render a useable pause/resume button for a submitted file. An file can be "paused" manually when the upload is in progress after at least one chunk has uploaded successfully. A paused upload can then be resumed by pressing the same button.
+
+When a file can be paused, the word "Pause" will appear in the button if no `pauseChildren` property has been specified. When it can be resumed, the button will be changed to "Resume" if no `resumeChildren` property has been defined. The former case will pause the upload on click, and the latter will resume. If the file cannot be paused or resumed, by default, the button will not be rendered.
+
+##### Properties
+
+- `id` - The Fine Uploader ID of the submitted file. (required)
+
+- `onlyRenderIfEnabled` - Defaults to `true`. If set to `false`, the element will be rendered as a disabled button if the associated file is both not pausable and not resumable.
+
+- `pauseChildren` - (child elements/components of `<RetryButton>`. Use this for any text of graphics that you would like to display inside the rendered pause button. If the component is childless, the button will be rendered with a simple text node of "Pause".
+
+- `resumeChildren` - (child elements/components of `<RetryButton>`. Use this for any text of graphics that you would like to display inside the rendered resume button. If the component is childless, the button will be rendered with a simple text node of "Resume".
+
+- `uploader` - A Fine Uploader [wrapper class](#wrapper-classes). (required)
+
+The example below will include a pause/resume button for each submitted file along with a [`<Thumbnail />`](#thumbnail-).
+
+```javascript
+import React, { Component } from 'react'
+
+import FineUploaderTraditional from 'react-fine-uploader'
+import PauseResumeButton 'react-fine-uploader/components/PauseResume-button'
+import Thumbnail 'react-fine-uploader/components/thumbnail'
+
+const uploader = new FineUploader({
+   options: {
+      request: {
+         endpoint: 'my/upload/endpoint'
+      }
+   }
+})
+
+export default class FileListener extends Component {
+    constructor() {
+        super()
+
+        this.state = {
+            submittedFiles: []
+        }
+    }
+
+    componentDidMount() {
+        uploader.on('statusChange', (id, oldStatus, newStatus) => {
+            if (newStatus === 'submitted') {
+                const submittedFiles = this.state.submittedFiles
+
+                submittedFiles.push(id)
+                this.setState({ submittedFiles })
+            }
+        })
+    }
+
+    render() {
+        return (
+            <div>
+                {
+                   this.state.submittedFiles.map(id => {
+                        <div key={ id }>
+                           <Thumbnail id={ id } uploader={ uploader } />
+                           <PauseResumeButton id={ id } uploader={ uploader } />
+                        </div>
+                    ))
+                }
+            </div>
+        )
+    }
+}
+```
+
+You may pass _any_ standard [`<button>` attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) (or any standard element attributes, such as `data-` attributes) to the `<PauseResumeButton />` as well. These attributes will be attached to the underlying `<button>` element.
 
 #### `<ProgressBar />`
 
