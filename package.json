@@ -27,7 +27,7 @@
     "react": "^0.14.0 || ^15.0.0-rc"
   },
   "dependencies": {
-    "fine-uploader": "^5.11.2",
+    "fine-uploader": "5.x.x",
     "object-assign": "latest"
   },
   "devDependencies": {
