@@ -22,7 +22,9 @@ class Gallery extends Component {
     static defaultProps = {
         className: '',
         'dropzone-content': <span>Drop Files Here</span>,
-        'dropzone-multiple': true
+        'dropzone-multiple': true,
+        'fileInput-children': <button>Select Files</button>,
+        'fileInput-multiple': true
     }
 
     constructor() {
@@ -53,11 +55,15 @@ class Gallery extends Component {
 
     render() {
         const dropzoneProps = getComponentProps('dropzone', this.props)
+        const fileInputProps = getComponentProps('fileInput', this.props)
         const uploader = this.props.uploader
 
         return (
             <MaybeDropzone uploader={ uploader } { ...dropzoneProps }>
-                <FileInputComponent uploader={ uploader }/>
+                {
+                    !fileInputProps.disabled &&
+                    <FileInputComponent uploader={ uploader } { ...fileInputProps }/>
+                }
                 <ProgressBar uploader={ uploader } />
                 {
                     this.state.submittedFiles.map(id => (
@@ -97,10 +103,15 @@ const MaybeDropzone = ({ children, content, uploader, ...props }) => {
     )
 }
 
-const FileInputComponent = ({ uploader }) => {
+const FileInputComponent = ({ uploader, ...props }) => {
+    const { children, ...fileInputProps } = props
+
     return (
-        <FileInput multiple uploader={ uploader }>
-            <button>Select Files</button>
+        <FileInput multiple
+                   uploader={ uploader }
+                   { ...fileInputProps }
+        >
+            { children }
         </FileInput>
     )
 }
