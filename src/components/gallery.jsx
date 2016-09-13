@@ -131,9 +131,9 @@ const getComponentProps = (componentName, allProps) => {
 
 const isFileGone = status => {
     return [
-            'canceled',
-            'deleted',
-        ].indexOf(status) >= 0
+        'canceled',
+        'deleted',
+    ].indexOf(status) >= 0
 }
 
 export default Gallery
