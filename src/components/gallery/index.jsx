@@ -77,48 +77,59 @@ class Gallery extends Component {
                     !fileInputProps.disabled &&
                         <FileInputComponent uploader={ uploader } { ...fileInputProps }/>
                 }
-                <ProgressBar uploader={ uploader } { ...progressBarProps } />
+                <ProgressBar className='react-fine-uploader-gallery-total-progress-bar'
+                             uploader={ uploader }
+                             { ...progressBarProps }
+                />
                 {
                     this.state.submittedFiles.map(id => (
                         <div key={ id }
                              className='react-fine-uploader-gallery-files'
                         >
-                            <ProgressBar id={ id }
+                            <ProgressBar className='react-fine-uploader-gallery-progress-bar'
+                                         id={ id }
                                          uploader={ uploader }
                                          { ...progressBarProps }
                             />
-                            <Thumbnail id={ id }
+                            <Thumbnail className='react-fine-uploader-gallery-thumbnail'
+                                       id={ id }
                                        uploader={ uploader }
                                        { ...thumbnailProps }
                             />
                             <div>
-                                <Filename id={ id }
+                                <Filename className='react-fine-uploader-gallery-filename'
+                                          id={ id }
                                           uploader={ uploader }
                                           { ...filenameProps }
                                 />
                             </div>
-                            <Filesize id={ id }
+                            <Filesize className='react-fine-uploader-gallery-filesize'
+                                      id={ id }
                                       uploader={ uploader }
                                       { ...filesizeProps }
                             />
-                            <CancelButton id={ id }
+                            <CancelButton className='react-fine-uploader-gallery-cancel-button'
+                                          id={ id }
                                           uploader={ uploader }
                                           { ...cancelButtonProps }
                             />
-                            <RetryButton id={ id }
+                            <RetryButton className='react-fine-uploader-gallery-retry-button'
+                                         id={ id }
                                          uploader={ uploader }
                                          { ...retryButtonProps }
                             />
                             {
                                 deleteEnabled &&
-                                    <DeleteButton id={ id }
+                                    <DeleteButton className='react-fine-uploader-gallery-delete-button'
+                                                  id={ id }
                                                   uploader={ uploader }
                                                   { ...deleteButtonProps }
                                     />
                             }
                             {
                                 chunkingEnabled &&
-                                    <PauseResumeButton id={ id }
+                                    <PauseResumeButton className='react-fine-uploader-gallery-pause-resume-button'
+                                                       id={ id }
                                                        uploader={ uploader }
                                                        { ...pauseResumeButtonProps }
                                     />
@@ -135,11 +146,16 @@ const MaybeDropzone = ({ children, content, uploader, ...props }) => {
     const { disabled, ...dropzoneProps } = props
 
     if (disabled) {
-        return <span>{ children }</span>
+        return (
+            <span className='react-fine-uploader-gallery-nodrop-container'>
+                { children }
+            </span>
+        )
     }
 
     return (
-        <Dropzone uploader={ uploader }
+        <Dropzone className='react-fine-uploader-gallery-dropzone'
+                  uploader={ uploader }
                   { ...dropzoneProps }
         >
             { content }

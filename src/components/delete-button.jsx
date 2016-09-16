@@ -60,7 +60,7 @@ class DeleteButton extends Component {
         if (this.state.deletable || this.state.deleting || !onlyRenderIfDeletable) {
             return (
                 <button aria-label='delete'
-                        className='react-fine-uploader-delete-button'
+                        className={ `react-fine-uploader-delete-button ${this.props.className || ''}` }
                         disabled={ !this.state.deletable || this.state.deleting }
                         onClick={ this.state.deletable && !this.state.deleting && this._onClick }
                         { ...elementProps }

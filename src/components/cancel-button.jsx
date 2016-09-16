@@ -50,7 +50,7 @@ class CancelButton extends Component {
         if (this.state.cancelable || !onlyRenderIfCancelable) {
             return (
                 <button aria-label='cancel'
-                        className='react-fine-uploader-cancel-button'
+                        className={ `react-fine-uploader-cancel-button ${this.props.className || ''}` }
                         disabled={ !this.state.cancelable }
                         onClick={ this.state.cancelable && this._onClick }
                         { ...elementProps }

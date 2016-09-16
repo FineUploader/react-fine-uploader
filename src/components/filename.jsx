@@ -22,7 +22,7 @@ class Filename extends Component {
 
     render() {
         return (
-            <span className='react-fine-uploader-filename'>
+            <span className={ `react-fine-uploader-filename ${this.props.className || ''}` }>
                 { this.state.filename }
             </span>
         )

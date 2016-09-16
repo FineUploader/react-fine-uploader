@@ -53,7 +53,7 @@ class RetryButton extends Component {
         if (this.state.retryable || !onlyRenderIfRetryable) {
             return (
                 <button aria-label='retry'
-                        className='react-fine-uploader-retry-button'
+                        className={ `react-fine-uploader-retry-button ${this.props.className || ''}` }
                         disabled={ !this.state.retryable }
                         onClick={ this.state.retryable && this._onClick }
                     { ...elementProps }

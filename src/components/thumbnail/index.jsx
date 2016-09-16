@@ -57,7 +57,7 @@ class Thumbnail extends Component {
 
     render() {
         return (
-            <span className='react-fine-uploader-thumbnail'>
+            <span className={ `react-fine-uploader-thumbnail ${this.props.className || ''}` }>
                 <canvas ref='canvas'
                         hidden={ !this.state.drawComplete || this._failure }
                 />
