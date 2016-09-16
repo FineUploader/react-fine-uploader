@@ -45,7 +45,7 @@ class ProgressBar extends Component {
         const className = this._isTotalProgress ? 'react-fine-uploader-total-progress-bar' : 'react-fine-uploader-file-progress-bar'
 
         return (
-            <progress className={ `className ${this.props.className || ''}` }
+            <progress className={ `${className} ${this.props.className || ''}` }
                       hidden={ this.state.hidden }
                       max={ this.state.totalSize || 100 }
                       value={ this.state.bytesUploaded || 0 }

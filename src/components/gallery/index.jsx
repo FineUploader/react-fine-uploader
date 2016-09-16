@@ -168,7 +168,8 @@ const FileInputComponent = ({ uploader, ...props }) => {
     const { children, ...fileInputProps } = props
 
     return (
-        <FileInput multiple
+        <FileInput className='react-fine-uploader-gallery-file-input-container'
+                   multiple
                    uploader={ uploader }
                    { ...fileInputProps }
         >
