@@ -1,3 +1,7 @@
+.react-fine-uploader-gallery-filename {
+    display: block;
+}
+
 .react-fine-uploader-gallery-files {
     display: inline-block;
 }

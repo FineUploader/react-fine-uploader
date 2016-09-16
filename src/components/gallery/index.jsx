@@ -96,13 +96,11 @@ class Gallery extends Component {
                                        uploader={ uploader }
                                        { ...thumbnailProps }
                             />
-                            <div>
-                                <Filename className='react-fine-uploader-gallery-filename'
-                                          id={ id }
-                                          uploader={ uploader }
-                                          { ...filenameProps }
-                                />
-                            </div>
+                            <Filename className='react-fine-uploader-gallery-filename'
+                                      id={ id }
+                                      uploader={ uploader }
+                                      { ...filenameProps }
+                            />
                             <Filesize className='react-fine-uploader-gallery-filesize'
                                       id={ id }
                                       uploader={ uploader }
