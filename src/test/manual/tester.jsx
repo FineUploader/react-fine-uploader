@@ -25,9 +25,7 @@ const uploader = new FineUploader({
 class Tester extends Component {
     render() {
         return (
-            <Gallery dropzone-style={ { border: '1px dotted', minHeight: 400, width: 700} }
-                     uploader={ uploader }
-            />
+            <Gallery uploader={ uploader } />
         )
     }
 }

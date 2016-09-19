@@ -1,3 +1,48 @@
+.react-fine-uploader-gallery-nodrop-container,
+.react-fine-uploader-gallery-dropzone {
+    border-radius: 6px;
+    background-color: #FAFAFA;
+    max-height: 490px;
+    min-height: 200px;
+    overflow-y: hidden;
+    padding: 15px;
+    position: relative;
+}
+
+.react-fine-uploader-gallery-dropzone {
+    border: 2px dashed #00ABC7;
+}
+
+.react-fine-uploader-gallery-nodrop-container {
+    border: 2px solid #00ABC7;
+}
+
+.react-fine-uploader-gallery-dropzone-active  {
+    background: #FDFDFD;
+    border: 2px solid #00ABC7;
+}
+
+.react-fine-uploader-gallery-file-input-container {
+    background: #00ABC7;
+    border: 1px solid #37B7CC;
+    border-radius: 3px;
+    color: #FFFFFF;
+    display: inline;
+    float: left;
+    padding-bottom: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 7px;
+    text-align: center;
+    width: 105px;
+}
+.react-fine-uploader-gallery-file-input-container:hover {
+    background: #33B6CC;
+}
+.react-fine-uploader-gallery-file-input-container:focus {
+    outline: 1px dotted #000000;
+}
+
 .react-fine-uploader-gallery-filename {
     display: block;
 }
@@ -5,3 +50,4 @@
 .react-fine-uploader-gallery-files {
     display: inline-block;
 }
+

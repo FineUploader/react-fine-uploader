@@ -1,4 +1,5 @@
 // TODO CSS
+// TODO Allow <FileInput /> to be omitted (-disabled)
 
 import React, { Component, PropTypes } from 'react'
 
@@ -23,9 +24,9 @@ class Gallery extends Component {
 
     static defaultProps = {
         className: '',
-        'dropzone-content': <span>Drop Files Here</span>,
+        'dropzone-content': <span />,
+        'dropzone-dropActiveClassName': 'react-fine-uploader-gallery-dropzone-active',
         'dropzone-multiple': true,
-        'fileInput-children': <button>Select Files</button>,
         'fileInput-multiple': true
     }
 
@@ -145,9 +146,9 @@ const MaybeDropzone = ({ children, content, uploader, ...props }) => {
 
     if (disabled) {
         return (
-            <span className='react-fine-uploader-gallery-nodrop-container'>
+            <div className='react-fine-uploader-gallery-nodrop-container'>
                 { children }
-            </span>
+            </div>
         )
     }
 
@@ -167,7 +168,6 @@ const FileInputComponent = ({ uploader, ...props }) => {
 
     return (
         <FileInput className='react-fine-uploader-gallery-file-input-container'
-                   multiple
                    uploader={ uploader }
                    { ...fileInputProps }
         >
