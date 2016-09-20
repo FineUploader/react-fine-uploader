@@ -597,9 +597,7 @@ You may pass _any_ standard [`<button>` attributes](https://developer.mozilla.or
 #### `<ProgressBar />`
 
 The ProgressBar component allows for a per-file _or_ a total progress bar to be rendered and automatically updated
-by the underlying upload wrapper instance. This covers the per-file and total progress bar elements found in Fine Uploader UI. The underlying element used to display progress is the native [HTML5 `<progress>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress), which should display a 
-progress bar consistent with the look and feel of the underlying operating system. This progress bar _can_ be
-styled though. 
+by the underlying upload wrapper instance. This covers the per-file and total progress bar elements found in Fine Uploader UI. This progress bar itself is made up of a container element and a child element that marks the file progress. 
 
 ##### Properties
 

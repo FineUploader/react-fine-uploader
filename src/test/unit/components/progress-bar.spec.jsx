@@ -25,8 +25,7 @@ describe('<ProgressBar />', () => {
 
         totalProgressCallback(100, 1000)
         const totalProgressEl = TestUtils.findRenderedDOMComponentWithClass(ProgressBarComponent, 'react-fine-uploader-total-progress-bar')
-        expect(totalProgressEl.value).toBe(100)
-        expect(totalProgressEl.max).toBe(1000)
+        expect(totalProgressEl.style.width).toBe('10%')
     })
 
     it('renders file progress bar when a file ID is supplied & updates progress appropriately', () => {
@@ -48,16 +47,15 @@ describe('<ProgressBar />', () => {
 
         fileProgressCallback(3, 'foo.jpeg', 100, 1000)
         const fileProgressEl = TestUtils.findRenderedDOMComponentWithClass(ProgressBarComponent, 'react-fine-uploader-file-progress-bar')
-        expect(fileProgressEl.value).toBe(100)
-        expect(fileProgressEl.max).toBe(1000)
+        expect(fileProgressEl.style.width).toBe('10%')
     })
 
     it('hides total progress bar initially, by default', () => {
         const uploader = new FineUploaderTraditional({options: {}})
         const ProgressBarComponent = TestUtils.renderIntoDocument(<ProgressBar uploader={ uploader } />)
-        const totalProgressEl = TestUtils.findRenderedDOMComponentWithClass(ProgressBarComponent, 'react-fine-uploader-total-progress-bar')
+        const totalProgressElContainer = TestUtils.findRenderedDOMComponentWithClass(ProgressBarComponent, 'react-fine-uploader-total-progress-bar-container')
 
-        expect(totalProgressEl.hasAttribute('hidden')).toBeTruthy()
+        expect(totalProgressElContainer.hasAttribute('hidden')).toBeTruthy()
     })
     
     it('does not hide total progress bar initially, if ordered to do so', () => {
@@ -65,17 +63,17 @@ describe('<ProgressBar />', () => {
         const ProgressBarComponent = TestUtils.renderIntoDocument(
             <ProgressBar hideBeforeStart={ false } uploader={ uploader } />
         )
-        const totalProgressEl = TestUtils.findRenderedDOMComponentWithClass(ProgressBarComponent, 'react-fine-uploader-total-progress-bar')
+        const totalProgressElContainer = TestUtils.findRenderedDOMComponentWithClass(ProgressBarComponent, 'react-fine-uploader-total-progress-bar-container')
 
-        expect(totalProgressEl.hasAttribute('hidden')).toBeFalsy()
+        expect(totalProgressElContainer.hasAttribute('hidden')).toBeFalsy()
     })
 
     it('hides file progress bar initially, by default', () => {
         const uploader = new FineUploaderTraditional({options: {}})
         const ProgressBarComponent = TestUtils.renderIntoDocument(<ProgressBar id={ 3 } uploader={ uploader } />)
-        const fileProgressEl = TestUtils.findRenderedDOMComponentWithClass(ProgressBarComponent, 'react-fine-uploader-file-progress-bar')
+        const fileProgressElContainer = TestUtils.findRenderedDOMComponentWithClass(ProgressBarComponent, 'react-fine-uploader-file-progress-bar-container')
 
-        expect(fileProgressEl.hasAttribute('hidden')).toBeTruthy()
+        expect(fileProgressElContainer.hasAttribute('hidden')).toBeTruthy()
     })
 
     it('does not hide file progress bar initially, if ordered to do so', () => {
@@ -83,9 +81,9 @@ describe('<ProgressBar />', () => {
         const ProgressBarComponent = TestUtils.renderIntoDocument(
             <ProgressBar hideBeforeStart={ false } id={ 3 } uploader={ uploader } />
         )
-        const fileProgressEl = TestUtils.findRenderedDOMComponentWithClass(ProgressBarComponent, 'react-fine-uploader-file-progress-bar')
+        const fileProgressElContainer = TestUtils.findRenderedDOMComponentWithClass(ProgressBarComponent, 'react-fine-uploader-file-progress-bar-container')
 
-        expect(fileProgressEl.hasAttribute('hidden')).toBeFalsy()
+        expect(fileProgressElContainer.hasAttribute('hidden')).toBeFalsy()
     })
 
     it('hides total progress bar after all uploads are complete, by default', () => {
@@ -104,20 +102,20 @@ describe('<ProgressBar />', () => {
         spyOn(uploader.methods, 'getInProgress').and.returnValue(2)
         statusChangeCallback(3, qq.status.QUEUED, qq.status.UPLOADING)
         statusChangeCallback(4, qq.status.QUEUED, qq.status.UPLOADING)
-        let totalProgressEl = TestUtils.findRenderedDOMComponentWithClass(ProgressBarComponent, 'react-fine-uploader-total-progress-bar')
-        expect(totalProgressEl.hasAttribute('hidden')).toBeFalsy()
+        let totalProgressElContainer = TestUtils.findRenderedDOMComponentWithClass(ProgressBarComponent, 'react-fine-uploader-total-progress-bar-container')
+        expect(totalProgressElContainer.hasAttribute('hidden')).toBeFalsy()
 
         // still uploading
         uploader.methods.getInProgress.and.returnValue(1)
         statusChangeCallback(3, qq.status.UPLOADING, qq.status.UPLOAD_SUCCESSFUL)
-        totalProgressEl = TestUtils.findRenderedDOMComponentWithClass(ProgressBarComponent, 'react-fine-uploader-total-progress-bar')
-        expect(totalProgressEl.hasAttribute('hidden')).toBeFalsy()
+        totalProgressElContainer = TestUtils.findRenderedDOMComponentWithClass(ProgressBarComponent, 'react-fine-uploader-total-progress-bar-container')
+        expect(totalProgressElContainer.hasAttribute('hidden')).toBeFalsy()
 
         // done uploading
         uploader.methods.getInProgress.and.returnValue(0)
         statusChangeCallback(4, qq.status.UPLOADING, qq.status.UPLOAD_SUCCESSFUL)
-        totalProgressEl = TestUtils.findRenderedDOMComponentWithClass(ProgressBarComponent, 'react-fine-uploader-total-progress-bar')
-        expect(totalProgressEl.hasAttribute('hidden')).toBeTruthy()
+        totalProgressElContainer = TestUtils.findRenderedDOMComponentWithClass(ProgressBarComponent, 'react-fine-uploader-total-progress-bar-container')
+        expect(totalProgressElContainer.hasAttribute('hidden')).toBeTruthy()
     })
 
     it('hides file progress bar after upload is complete, by default', () => {
@@ -134,12 +132,12 @@ describe('<ProgressBar />', () => {
 
         // uploading
         statusChangeCallback(3, qq.status.QUEUED, qq.status.UPLOADING)
-        let fileProgressEl = TestUtils.findRenderedDOMComponentWithClass(ProgressBarComponent, 'react-fine-uploader-file-progress-bar')
-        expect(fileProgressEl.hasAttribute('hidden')).toBeFalsy()
+        let fileProgressElContainer = TestUtils.findRenderedDOMComponentWithClass(ProgressBarComponent, 'react-fine-uploader-file-progress-bar-container')
+        expect(fileProgressElContainer.hasAttribute('hidden')).toBeFalsy()
 
         // done uploading
         statusChangeCallback(3, qq.status.UPLOADING, qq.status.UPLOAD_SUCCESSFUL)
-        fileProgressEl = TestUtils.findRenderedDOMComponentWithClass(ProgressBarComponent, 'react-fine-uploader-file-progress-bar')
-        expect(fileProgressEl.hasAttribute('hidden')).toBeTruthy()
+        fileProgressElContainer = TestUtils.findRenderedDOMComponentWithClass(ProgressBarComponent, 'react-fine-uploader-file-progress-bar-container')
+        expect(fileProgressElContainer.hasAttribute('hidden')).toBeTruthy()
     })
 })

@@ -1,3 +1,7 @@
+[hidden] {
+    display: none !important;
+}
+
 .react-fine-uploader-gallery-nodrop-container,
 .react-fine-uploader-gallery-dropzone {
     border-radius: 6px;
@@ -51,3 +55,19 @@
     display: inline-block;
 }
 
+.react-fine-uploader-gallery-total-progress-bar-container {
+    background: #F2F2F2;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) inset;
+    display: inline-block;
+    height: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 4px;
+    position: absolute;
+    width: 70%;
+}
+.react-fine-uploader-gallery-total-progress-bar {
+    background: #00ABC7;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) inset;
+    height: inherit;
+}
