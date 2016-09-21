@@ -26,6 +26,17 @@
     border: 2px solid #00ABC7;
 }
 
+.react-fine-uploader-gallery-dropzone-content,
+.react-fine-uploader-gallery-nodrop-content {
+    font-size: 36px;
+    left: 0;
+    opacity: 0.25;
+    position: absolute;
+    text-align: center;
+    top: 38%;
+    width: 100%;
+}
+
 .react-fine-uploader-gallery-file-input-container {
     background: #00ABC7;
     border: 1px solid #37B7CC;

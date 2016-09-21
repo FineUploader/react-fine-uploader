@@ -24,7 +24,6 @@ class Gallery extends Component {
 
     static defaultProps = {
         className: '',
-        'dropzone-content': <span />,
         'dropzone-dropActiveClassName': 'react-fine-uploader-gallery-dropzone-active',
         'dropzone-multiple': true,
         'fileInput-multiple': true
@@ -34,24 +33,24 @@ class Gallery extends Component {
         super()
 
         this.state = {
-            submittedFiles: []
+            visibleFiles: []
         }
     }
 
     componentDidMount() {
         this.props.uploader.on('statusChange', (id, oldStatus, newStatus) => {
             if (newStatus === 'submitted') {
-                const submittedFiles = this.state.submittedFiles
+                const visibleFiles = this.state.visibleFiles
 
-                submittedFiles.push(id)
-                this.setState({ submittedFiles })
+                visibleFiles.push(id)
+                this.setState({ visibleFiles })
             }
             else if (isFileGone(newStatus)) {
-                const submittedFiles = this.state.submittedFiles
-                const indexToRemove = submittedFiles.indexOf(id)
+                const visibleFiles = this.state.visibleFiles
+                const indexToRemove = visibleFiles.indexOf(id)
 
-                submittedFiles.splice(indexToRemove, 1)
-                this.setState({ submittedFiles })
+                visibleFiles.splice(indexToRemove, 1)
+                this.setState({ visibleFiles })
             }
         })
     }
@@ -73,7 +72,11 @@ class Gallery extends Component {
         const pauseResumeButtonProps = chunkingEnabled && getComponentProps('pauseResumeButton', this.props)
 
         return (
-            <MaybeDropzone uploader={ uploader } { ...dropzoneProps }>
+            <MaybeDropzone content={ this.props.children }
+                           hasVisibleFiles={ this.state.visibleFiles.length > 0 }
+                           uploader={ uploader }
+                           { ...dropzoneProps }
+            >
                 {
                     !fileInputProps.disabled &&
                         <FileInputComponent uploader={ uploader } { ...fileInputProps }/>
@@ -83,7 +86,7 @@ class Gallery extends Component {
                              { ...progressBarProps }
                 />
                 {
-                    this.state.submittedFiles.map(id => (
+                    this.state.visibleFiles.map(id => (
                         <div key={ id }
                              className='react-fine-uploader-gallery-files'
                         >
@@ -141,12 +144,20 @@ class Gallery extends Component {
     }
 }
 
-const MaybeDropzone = ({ children, content, uploader, ...props }) => {
+const MaybeDropzone = ({ children, content, hasVisibleFiles, uploader, ...props }) => {
     const { disabled, ...dropzoneProps } = props
+
+    if (hasVisibleFiles) {
+        content = <span/>
+    }
+    else {
+        content = content || getDefaultMaybeDropzoneContent({ content, disabled })
+    }
 
     if (disabled) {
         return (
             <div className='react-fine-uploader-gallery-nodrop-container'>
+                { content }
                 { children }
             </div>
         )
@@ -187,6 +198,22 @@ const getComponentProps = (componentName, allProps) => {
     })
 
     return componentProps
+}
+
+const getDefaultMaybeDropzoneContent = ({ content, disabled }) => {
+    const className = disabled
+        ? 'react-fine-uploader-gallery-nodrop-content'
+        : 'react-fine-uploader-gallery-dropzone-content'
+
+    if (disabled) {
+        return <span />
+    }
+    else if (content) {
+        return <span className={ className }>{ content }</span>
+    }
+    else if (!disabled) {
+        return <span className={ className }>Drop files here</span>
+    }
 }
 
 const isFileGone = status => {
