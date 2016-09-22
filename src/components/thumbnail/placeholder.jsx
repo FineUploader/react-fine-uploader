@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react'
 
-const Placeholder = ({ image, size, status }) => {
+const Placeholder = ({ className, image, size, status }) => {
     const style = {
         maxHeight: size,
         maxWidth: size
     }
 
     return (
-        <div className={ `react-fine-uploader-thumbnail-placeholder react-fine-uploader-thumbnail-${status}` }
+        <div className={ `react-fine-uploader-thumbnail-placeholder react-fine-uploader-thumbnail-${status} ${className || ''}` }
              style={ style }
         >
             { image }

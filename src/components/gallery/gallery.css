@@ -7,7 +7,7 @@
     border-radius: 6px;
     background-color: #FAFAFA;
     max-height: 490px;
-    min-height: 200px;
+    min-height: 310px;
     overflow-y: hidden;
     padding: 15px;
     position: relative;
@@ -58,14 +58,6 @@
     outline: 1px dotted #000000;
 }
 
-.react-fine-uploader-gallery-filename {
-    display: block;
-}
-
-.react-fine-uploader-gallery-files {
-    display: inline-block;
-}
-
 .react-fine-uploader-gallery-total-progress-bar-container {
     background: #F2F2F2;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) inset;
@@ -81,4 +73,43 @@
     background: #00ABC7;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) inset;
     height: inherit;
+}
+
+.react-fine-uploader-gallery-files {
+    clear: both;
+    list-style: none;
+    max-height: 450px;
+    overflow-y: auto;
+    padding-left: 0;
+    padding-top: 15px;
+}
+
+.react-fine-uploader-gallery-file {
+    background-color: #FFFFFF;
+    border-radius: 3px;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.22);
+    display: inline-block;
+    font-size: 13px;
+    height: 185px;
+    line-height: 16px;
+    margin: 0 25px 25px 0;
+    max-width: 140px;
+    vertical-align: top;
+}
+
+.react-fine-uploader-gallery-thumbnail-container {
+    display: block;
+    height: 120px;
+    margin: 10px;
+    text-align: center;
+    width: 120px;
+}
+.react-fine-uploader-gallery-thumbnail {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.react-fine-uploader-gallery-filename {
+    display: block;
 }

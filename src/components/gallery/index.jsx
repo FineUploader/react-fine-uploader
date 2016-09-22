@@ -85,10 +85,11 @@ class Gallery extends Component {
                              uploader={ uploader }
                              { ...progressBarProps }
                 />
+                <ul className='react-fine-uploader-gallery-files'>
                 {
                     this.state.visibleFiles.map(id => (
-                        <div key={ id }
-                             className='react-fine-uploader-gallery-files'
+                        <li key={ id }
+                             className='react-fine-uploader-gallery-file'
                         >
                             <ProgressBar className='react-fine-uploader-gallery-progress-bar'
                                          id={ id }
@@ -136,9 +137,10 @@ class Gallery extends Component {
                                                        { ...pauseResumeButtonProps }
                                     />
                             }
-                        </div>
+                        </li>
                     ))
                 }
+                </ul>
             </MaybeDropzone>
         )
     }
