@@ -90,19 +90,19 @@
     box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.22);
     display: inline-block;
     font-size: 13px;
-    height: 185px;
+    height: 155px;
     line-height: 16px;
     margin: 0 25px 25px 0;
-    max-width: 140px;
+    padding: 10px;
+    position: relative;
     vertical-align: top;
+    width: 120px;
 }
 
 .react-fine-uploader-gallery-thumbnail-container {
     display: block;
     height: 120px;
-    margin: 10px;
     text-align: center;
-    width: 120px;
 }
 .react-fine-uploader-gallery-thumbnail {
     position: relative;
@@ -112,4 +112,15 @@
 
 .react-fine-uploader-gallery-filename {
     display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.react-fine-uploader-gallery-delete-button {
+    background: transparent;
+    border: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
 }

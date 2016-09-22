@@ -5,6 +5,7 @@ import React, { Component, PropTypes } from 'react'
 
 import CancelButton from '../cancel-button'
 import DeleteButton from '../delete-button'
+import DeleteIcon from './delete-icon'
 import Dropzone from '../dropzone'
 import FileInput from '../file-input'
 import Filename from '../filename'
@@ -24,6 +25,7 @@ class Gallery extends Component {
 
     static defaultProps = {
         className: '',
+        'deleteButton-children': <DeleteIcon />,
         'dropzone-dropActiveClassName': 'react-fine-uploader-gallery-dropzone-active',
         'dropzone-multiple': true,
         'fileInput-multiple': true
@@ -68,7 +70,7 @@ class Gallery extends Component {
 
         const chunkingEnabled = uploader.options.chunking && uploader.options.chunking.enabled
         const deleteEnabled = uploader.options.deleteFile && uploader.options.deleteFile.enabled
-        const deleteButtonProps = deleteEnabled && getComponentProps('deleteFileButton', this.props)
+        const deleteButtonProps = deleteEnabled && getComponentProps('deleteButton', this.props)
         const pauseResumeButtonProps = chunkingEnabled && getComponentProps('pauseResumeButton', this.props)
 
         return (
