@@ -101,14 +101,12 @@
 .react-fine-uploader-gallery-thumbnail-container {
     display: block;
     height: 120px;
-    overflow: hidden;
     text-align: center;
 }
 .react-fine-uploader-gallery-thumbnail {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
-    width: 100%;
 }
 
 .react-fine-uploader-gallery-filename {
