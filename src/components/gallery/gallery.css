@@ -86,14 +86,13 @@
 
 .react-fine-uploader-gallery-file {
     background-color: #FFFFFF;
-    border-radius: 3px;
+    border-radius: 9px;
     box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.22);
     display: inline-block;
     font-size: 13px;
     height: 155px;
     line-height: 16px;
     margin: 0 25px 25px 0;
-    padding: 10px;
     position: relative;
     vertical-align: top;
     width: 120px;
@@ -102,12 +101,14 @@
 .react-fine-uploader-gallery-thumbnail-container {
     display: block;
     height: 120px;
+    overflow: hidden;
     text-align: center;
 }
 .react-fine-uploader-gallery-thumbnail {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+    width: 100%;
 }
 
 .react-fine-uploader-gallery-filename {
@@ -118,9 +119,15 @@
 }
 
 .react-fine-uploader-gallery-delete-button {
-    background: transparent;
-    border: 0;
+    background: lightgray;
+    border: none;
+    border-radius: 60px;
+    height: 35px;
     position: absolute;
-    right: 0;
-    top: 0;
+    right: -12px;
+    top: -12px;
+}
+.react-fine-uploader-gallery-delete-button-icon {
+    margin-top: -1px;
+    margin-right: 3px;
 }

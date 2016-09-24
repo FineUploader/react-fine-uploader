@@ -25,7 +25,7 @@ class Gallery extends Component {
 
     static defaultProps = {
         className: '',
-        'deleteButton-children': <DeleteIcon />,
+        'deleteButton-children': <DeleteIcon className='react-fine-uploader-gallery-delete-button-icon' />,
         'dropzone-dropActiveClassName': 'react-fine-uploader-gallery-dropzone-active',
         'dropzone-multiple': true,
         'fileInput-multiple': true
