@@ -119,22 +119,26 @@
 
 .react-fine-uploader-gallery-cancel-button:hover svg,
 .react-fine-uploader-gallery-delete-button:hover svg,
-.react-fine-uploader-gallery-pause-resume-button:hover svg {
+.react-fine-uploader-gallery-pause-resume-button:hover svg,
+.react-fine-uploader-gallery-retry-button:hover svg {
     fill: grey;
 }
 .react-fine-uploader-gallery-cancel-button:focus,
 .react-fine-uploader-gallery-delete-button:focus,
-.react-fine-uploader-gallery-pause-resume-button:focus {
+.react-fine-uploader-gallery-pause-resume-button:focus,
+.react-fine-uploader-gallery-retry-button:focus {
     outline: none;
 }
 .react-fine-uploader-gallery-cancel-button:focus svg,
 .react-fine-uploader-gallery-delete-button:focus svg,
-.react-fine-uploader-gallery-pause-resume-button:focus svg {
+.react-fine-uploader-gallery-pause-resume-button:focus svg,
+.react-fine-uploader-gallery-retry-button:focus svg {
     fill: grey;
 }
 .react-fine-uploader-gallery-cancel-button,
 .react-fine-uploader-gallery-delete-button,
-.react-fine-uploader-gallery-pause-resume-button {
+.react-fine-uploader-gallery-pause-resume-button,
+.react-fine-uploader-gallery-retry-button {
     background: transparent;
     border: 0;
     position: absolute;
@@ -144,7 +148,8 @@
     right: -18px;
     top: -12px;
 }
-.react-fine-uploader-gallery-pause-resume-button {
+.react-fine-uploader-gallery-pause-resume-button,
+.react-fine-uploader-gallery-retry-button {
     left: -18px;
     top: -12px
 }

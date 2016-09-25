@@ -34,6 +34,7 @@ class Gallery extends Component {
         'fileInput-multiple': true,
         'pauseResumeButton-pauseChildren': <PauseIcon />,
         'pauseResumeButton-resumeChildren': <PlayIcon />,
+        'retryButton-children': <PlayIcon />,
         'thumbnail-maxSize': 130
     }
 
