@@ -73,10 +73,10 @@ const isCancelable = status => {
         'delete failed',
         'paused',
         'queued',
+        'retrying upload',
         'submitted',
         'uploading',
-        'upload failed',
-        'upload retrying'
+        'upload failed'
     ].indexOf(status) >= 0
 }
 
