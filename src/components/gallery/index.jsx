@@ -1,11 +1,11 @@
 // TODO Allow <FileInput /> to be omitted (-disabled)
-// TODO Animation
 // TODO filesize styling
 // TODO File progress bar styling
 // TODO Total progress bar: list transfer speed & % complete
 // TODO status message (failed, queued, retrying, etc)
 
 import React, { Component, PropTypes } from 'react'
+import ReactCssTransitionGroup from 'react-addons-css-transition-group'
 
 import CancelButton from '../cancel-button'
 import DeleteButton from '../delete-button'
@@ -98,7 +98,12 @@ class Gallery extends Component {
                              uploader={ uploader }
                              { ...progressBarProps }
                 />
-                <ul className='react-fine-uploader-gallery-files'>
+                <ReactCssTransitionGroup className='react-fine-uploader-gallery-files'
+                                         component='ul'
+                                         transitionEnterTimeout={ 500 }
+                                         transitionLeaveTimeout={ 300 }
+                                         transitionName='react-fine-uploader-gallery-files'
+                >
                 {
                     this.state.visibleFiles.map(id => (
                         <li key={ id }
@@ -153,7 +158,7 @@ class Gallery extends Component {
                         </li>
                     ))
                 }
-                </ul>
+                </ReactCssTransitionGroup>
             </MaybeDropzone>
         )
     }

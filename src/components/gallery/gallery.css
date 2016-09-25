@@ -84,6 +84,20 @@
     padding-left: 0;
     padding-top: 15px;
 }
+.react-fine-uploader-gallery-files-enter {
+    opacity: 0.01;
+}
+.react-fine-uploader-gallery-files-enter.react-fine-uploader-gallery-files-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+}
+.react-fine-uploader-gallery-files-leave {
+    opacity: 1;
+}
+.react-fine-uploader-gallery-files-leave.react-fine-uploader-gallery-files-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+}
 
 .react-fine-uploader-gallery-file {
     background-color: #FFFFFF;
@@ -93,7 +107,7 @@
     font-size: 13px;
     height: 165px;
     line-height: 16px;
-    margin: 0 15px 25px 10px;
+    margin: 0 25px 25px 10px;
     position: relative;
     vertical-align: top;
     width: 130px;

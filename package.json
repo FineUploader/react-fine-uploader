@@ -24,7 +24,8 @@
   ],
   "main": "lib/index.js",
   "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0-rc"
+    "react": "^0.14.0 || ^15.0.0-rc",
+    "react-addons-css-transition-group": "^0.14.0 || ^15.0.0-rc"
   },
   "dependencies": {
     "fine-uploader": "5.x.x",
@@ -57,6 +58,7 @@
     "karma-spec-reporter": "latest",
     "karma-webpack": "latest",
     "react": "latest",
+    "react-addons-css-transition-group": "latest",
     "react-addons-test-utils": "latest",
     "react-dom": "latest",
     "style-loader": "latest",
