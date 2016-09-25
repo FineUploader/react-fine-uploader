@@ -9,7 +9,7 @@
     max-height: 490px;
     min-height: 310px;
     overflow-y: hidden;
-    padding: 15px;
+    padding: 15px 15px 15px 5px;
     position: relative;
 }
 
@@ -44,6 +44,7 @@
     color: #FFFFFF;
     display: inline;
     float: left;
+    margin-left: 10px;
     padding-bottom: 7px;
     padding-left: 10px;
     padding-right: 10px;
@@ -92,7 +93,7 @@
     font-size: 13px;
     height: 165px;
     line-height: 16px;
-    margin: 0 25px 25px 0;
+    margin: 0 15px 25px 10px;
     position: relative;
     vertical-align: top;
     width: 130px;
@@ -116,11 +117,34 @@
     white-space: nowrap;
 }
 
+.react-fine-uploader-gallery-cancel-button:hover svg,
+.react-fine-uploader-gallery-delete-button:hover svg,
+.react-fine-uploader-gallery-pause-resume-button:hover svg {
+    fill: grey;
+}
+.react-fine-uploader-gallery-cancel-button:focus,
+.react-fine-uploader-gallery-delete-button:focus,
+.react-fine-uploader-gallery-pause-resume-button:focus {
+    outline: none;
+}
+.react-fine-uploader-gallery-cancel-button:focus svg,
+.react-fine-uploader-gallery-delete-button:focus svg,
+.react-fine-uploader-gallery-pause-resume-button:focus svg {
+    fill: grey;
+}
 .react-fine-uploader-gallery-cancel-button,
-.react-fine-uploader-gallery-delete-button {
+.react-fine-uploader-gallery-delete-button,
+.react-fine-uploader-gallery-pause-resume-button {
     background: transparent;
     border: 0;
     position: absolute;
+}
+.react-fine-uploader-gallery-cancel-button,
+.react-fine-uploader-gallery-delete-button {
     right: -18px;
     top: -12px;
+}
+.react-fine-uploader-gallery-pause-resume-button {
+    left: -18px;
+    top: -12px
 }

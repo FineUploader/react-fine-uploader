@@ -15,6 +15,8 @@ import ProgressBar from '../progress-bar'
 import Thumbnail from '../thumbnail'
 
 import './gallery.css'
+import PauseIcon from './pause-icon'
+import PlayIcon from './play-icon'
 import XIcon from './x-icon'
 
 class Gallery extends Component {
@@ -30,6 +32,8 @@ class Gallery extends Component {
         'dropzone-dropActiveClassName': 'react-fine-uploader-gallery-dropzone-active',
         'dropzone-multiple': true,
         'fileInput-multiple': true,
+        'pauseResumeButton-pauseChildren': <PauseIcon />,
+        'pauseResumeButton-resumeChildren': <PlayIcon />,
         'thumbnail-maxSize': 130
     }
 
