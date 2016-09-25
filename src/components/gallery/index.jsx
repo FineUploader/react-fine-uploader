@@ -5,7 +5,6 @@ import React, { Component, PropTypes } from 'react'
 
 import CancelButton from '../cancel-button'
 import DeleteButton from '../delete-button'
-import DeleteIcon from './delete-icon'
 import Dropzone from '../dropzone'
 import FileInput from '../file-input'
 import Filename from '../filename'
@@ -16,6 +15,7 @@ import ProgressBar from '../progress-bar'
 import Thumbnail from '../thumbnail'
 
 import './gallery.css'
+import XIcon from './x-icon'
 
 class Gallery extends Component {
     static propTypes = {
@@ -25,10 +25,12 @@ class Gallery extends Component {
 
     static defaultProps = {
         className: '',
-        'deleteButton-children': <DeleteIcon className='react-fine-uploader-gallery-delete-button-icon' />,
+        'cancelButton-children': <XIcon />,
+        'deleteButton-children': <XIcon />,
         'dropzone-dropActiveClassName': 'react-fine-uploader-gallery-dropzone-active',
         'dropzone-multiple': true,
-        'fileInput-multiple': true
+        'fileInput-multiple': true,
+        'thumbnail-maxSize': 130
     }
 
     constructor() {

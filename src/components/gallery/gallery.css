@@ -90,17 +90,17 @@
     box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.22);
     display: inline-block;
     font-size: 13px;
-    height: 155px;
+    height: 165px;
     line-height: 16px;
     margin: 0 25px 25px 0;
     position: relative;
     vertical-align: top;
-    width: 120px;
+    width: 130px;
 }
 
 .react-fine-uploader-gallery-thumbnail-container {
     display: block;
-    height: 120px;
+    height: 130px;
     text-align: center;
 }
 .react-fine-uploader-gallery-thumbnail {
@@ -116,16 +116,11 @@
     white-space: nowrap;
 }
 
+.react-fine-uploader-gallery-cancel-button,
 .react-fine-uploader-gallery-delete-button {
-    background: #FEFEFA;
-    border: none;
-    border-radius: 60px;
-    height: 35px;
+    background: transparent;
+    border: 0;
     position: absolute;
-    right: -12px;
+    right: -18px;
     top: -12px;
-}
-.react-fine-uploader-gallery-delete-button-icon {
-    margin-top: -1px;
-    margin-right: 3px;
 }
