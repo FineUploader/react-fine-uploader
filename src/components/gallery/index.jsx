@@ -21,6 +21,7 @@ import Thumbnail from '../thumbnail'
 import './gallery.css'
 import PauseIcon from './pause-icon'
 import PlayIcon from './play-icon'
+import UploadIcon from './upload-icon'
 import XIcon from './x-icon'
 
 class Gallery extends Component {
@@ -196,13 +197,19 @@ const MaybeDropzone = ({ children, content, hasVisibleFiles, uploader, ...props 
 
 const FileInputComponent = ({ uploader, ...props }) => {
     const { children, ...fileInputProps } = props
+    const content = children || (
+        <span>
+            <UploadIcon className='react-fine-uploader-gallery-file-input-upload-icon' />
+            Select Files
+        </span>
+    )
 
     return (
         <FileInput className='react-fine-uploader-gallery-file-input-container'
                    uploader={ uploader }
                    { ...fileInputProps }
         >
-            { children }
+            { content }
         </FileInput>
     )
 }
@@ -232,7 +239,12 @@ const getDefaultMaybeDropzoneContent = ({ content, disabled }) => {
         return <span className={ className }>{ content }</span>
     }
     else if (!disabled) {
-        return <span className={ className }>Drop files here</span>
+        return (
+            <span className={ className }>
+                <UploadIcon className='react-fine-uploader-gallery-dropzone-upload-icon' />
+                Drop files here
+            </span>
+        )
     }
 }
 

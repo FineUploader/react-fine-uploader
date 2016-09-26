@@ -16,6 +16,12 @@
 .react-fine-uploader-gallery-dropzone {
     border: 2px dashed #00ABC7;
 }
+.react-fine-uploader-gallery-dropzone-upload-icon {
+    height: 36px;
+    margin-bottom: -6px;
+    margin-right: 10px;
+    width: 36px;
+}
 
 .react-fine-uploader-gallery-nodrop-container {
     border: 2px solid #00ABC7;
@@ -57,6 +63,13 @@
 }
 .react-fine-uploader-gallery-file-input-container:focus {
     outline: 1px dotted #000000;
+}
+.react-fine-uploader-gallery-file-input-upload-icon {
+    fill: white;
+    height: 24px;
+    margin-bottom: -6px;
+    margin-right: 5px;
+    width: 24px;
 }
 
 .react-fine-uploader-gallery-total-progress-bar-container {
