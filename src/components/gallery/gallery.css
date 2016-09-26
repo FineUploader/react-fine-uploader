@@ -162,6 +162,12 @@
     white-space: nowrap;
 }
 
+.react-fine-uploader-gallery-filesize {
+    display: block;
+    position: relative;
+    text-align: center;
+}
+
 .react-fine-uploader-gallery-cancel-button:hover svg,
 .react-fine-uploader-gallery-delete-button:hover svg,
 .react-fine-uploader-gallery-pause-resume-button:hover svg,

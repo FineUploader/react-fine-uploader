@@ -1,7 +1,6 @@
 // TODO Allow <FileInput /> to be omitted (-disabled)
-// TODO filesize styling
-// TODO Total progress bar: list % complete & time remaining (maybe transfer speed?)
 // TODO status message (failed, queued, retrying, etc)
+// TODO LATER Total progress bar: list % complete & time remaining (maybe transfer speed?)
 
 import React, { Component, PropTypes } from 'react'
 import ReactCssTransitionGroup from 'react-addons-css-transition-group'
