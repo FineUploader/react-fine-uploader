@@ -1,7 +1,6 @@
 // TODO Allow <FileInput /> to be omitted (-disabled)
 // TODO filesize styling
-// TODO File progress bar styling
-// TODO Total progress bar: list transfer speed & % complete
+// TODO Total progress bar: list % complete & time remaining (maybe transfer speed?)
 // TODO status message (failed, queued, retrying, etc)
 
 import React, { Component, PropTypes } from 'react'

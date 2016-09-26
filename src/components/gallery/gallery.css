@@ -72,21 +72,39 @@
     width: 24px;
 }
 
+.react-fine-uploader-gallery-progress-bar,
+.react-fine-uploader-gallery-total-progress-bar {
+    border-radius: 3px;
+}
+.react-fine-uploader-gallery-progress-bar-container,
 .react-fine-uploader-gallery-total-progress-bar-container {
     background: #F2F2F2;
+    border-radius: 3px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) inset;
+    position: absolute;
+}
+.react-fine-uploader-gallery-total-progress-bar-container {
     display: inline-block;
     height: 25px;
     margin-left: 10px;
     margin-right: 10px;
     margin-top: 4px;
-    position: absolute;
     width: 70%;
 }
+.react-fine-uploader-gallery-progress-bar,
 .react-fine-uploader-gallery-total-progress-bar {
     background: #00ABC7;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) inset;
     height: inherit;
+}
+.react-fine-uploader-gallery-progress-bar-container {
+    height: 15px;
+    left: 50%;
+    opacity: 0.9;
+    top: 60px;
+    transform: translateX(-50%);
+    width: 90%;
+    z-index: 1;
 }
 
 .react-fine-uploader-gallery-files {
