@@ -1,7 +1,3 @@
-// TODO Allow <FileInput /> to be omitted (-disabled)
-// TODO status message (failed, queued, retrying, etc)
-// TODO LATER Total progress bar: list % complete & time remaining (maybe transfer speed?)
-
 import React, { Component, PropTypes } from 'react'
 import ReactCssTransitionGroup from 'react-addons-css-transition-group'
 
@@ -14,6 +10,7 @@ import Filesize from '../filesize'
 import RetryButton from '../retry-button'
 import PauseResumeButton from '../pause-resume-button'
 import ProgressBar from '../progress-bar'
+import Status from '../status'
 import Thumbnail from '../thumbnail'
 
 import './gallery.css'
@@ -75,6 +72,7 @@ class Gallery extends Component {
         const filesizeProps = getComponentProps('filesize', this.props)
         const progressBarProps = getComponentProps('progressBar', this.props)
         const retryButtonProps = getComponentProps('retryButton', this.props)
+        const statusProps = getComponentProps('status', this.props)
         const thumbnailProps = getComponentProps('thumbnail', this.props)
         const uploader = this.props.uploader
 
@@ -122,6 +120,11 @@ class Gallery extends Component {
                                       id={ id }
                                       uploader={ uploader }
                                       { ...filenameProps }
+                            />
+                            <Status className='react-fine-uploader-gallery-status'
+                                    id={ id }
+                                    uploader={ uploader }
+                                    { ...statusProps }
                             />
                             <Filesize className='react-fine-uploader-gallery-filesize'
                                       id={ id }
