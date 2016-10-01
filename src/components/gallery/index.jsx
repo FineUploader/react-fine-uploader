@@ -21,7 +21,7 @@ import XIcon from './x-icon'
 
 // Replace with qq drop feature detection once #27 is done or have <Dropzone /> handle this instead (?)
 const isTouchDevice = () => {
-    return (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)
+    return (('ontouchstart' in window) || window.DocumentTouch && document instanceof window.DocumentTouch)
 }
 
 class Gallery extends Component {
