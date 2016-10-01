@@ -19,6 +19,11 @@ import PlayIcon from './play-icon'
 import UploadIcon from './upload-icon'
 import XIcon from './x-icon'
 
+// Replace with qq drop feature detection once #27 is done or have <Dropzone /> handle this instead (?)
+const isTouchDevice = () => {
+    return (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)
+}
+
 class Gallery extends Component {
     static propTypes = {
         className: PropTypes.string,
@@ -29,6 +34,7 @@ class Gallery extends Component {
         className: '',
         'cancelButton-children': <XIcon />,
         'deleteButton-children': <XIcon />,
+        'dropzone-disabled': isTouchDevice(),
         'dropzone-dropActiveClassName': 'react-fine-uploader-gallery-dropzone-active',
         'dropzone-multiple': true,
         'fileInput-multiple': true,
@@ -237,8 +243,12 @@ const getDefaultMaybeDropzoneContent = ({ content, disabled }) => {
         ? 'react-fine-uploader-gallery-nodrop-content'
         : 'react-fine-uploader-gallery-dropzone-content'
 
-    if (disabled) {
-        return <span />
+    if (disabled && !content) {
+        return (
+            <span className={ className }>
+                Upload files
+            </span>
+        )
     }
     else if (content) {
         return <span className={ className }>{ content }</span>
