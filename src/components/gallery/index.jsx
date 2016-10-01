@@ -116,21 +116,23 @@ class Gallery extends Component {
                                        uploader={ uploader }
                                        { ...thumbnailProps }
                             />
-                            <Filename className='react-fine-uploader-gallery-filename'
-                                      id={ id }
-                                      uploader={ uploader }
-                                      { ...filenameProps }
-                            />
-                            <Status className='react-fine-uploader-gallery-status'
-                                    id={ id }
-                                    uploader={ uploader }
-                                    { ...statusProps }
-                            />
-                            <Filesize className='react-fine-uploader-gallery-filesize'
-                                      id={ id }
-                                      uploader={ uploader }
-                                      { ...filesizeProps }
-                            />
+                            <div className='react-fine-uploader-gallery-file-footer'>
+                                <Filename className='react-fine-uploader-gallery-filename'
+                                          id={ id }
+                                          uploader={ uploader }
+                                          { ...filenameProps }
+                                />
+                                <Status className='react-fine-uploader-gallery-status'
+                                        id={ id }
+                                        uploader={ uploader }
+                                        { ...statusProps }
+                                />
+                                <Filesize className='react-fine-uploader-gallery-filesize'
+                                          id={ id }
+                                          uploader={ uploader }
+                                          { ...filesizeProps }
+                                />
+                            </div>
                             <CancelButton className='react-fine-uploader-gallery-cancel-button'
                                           id={ id }
                                           uploader={ uploader }
@@ -210,7 +212,9 @@ const FileInputComponent = ({ uploader, ...props }) => {
                    uploader={ uploader }
                    { ...fileInputProps }
         >
-            { content }
+            <span className='react-fine-uploader-gallery-file-input-content'>
+                { content }
+            </span>
         </FileInput>
     )
 }

@@ -64,6 +64,10 @@
 .react-fine-uploader-gallery-file-input-container:focus {
     outline: 1px dotted #000000;
 }
+.react-fine-uploader-gallery-file-input-content {
+    display: inline-block;
+    margin-top: -2px;
+}
 .react-fine-uploader-gallery-file-input-upload-icon {
     fill: white;
     height: 24px;
@@ -155,8 +159,14 @@
     transform: translateY(-50%);
 }
 
+.react-fine-uploader-gallery-file-footer {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
 .react-fine-uploader-gallery-filename {
     display: block;
+    font-weight: bold;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -164,8 +174,11 @@
 
 .react-fine-uploader-gallery-filesize {
     display: block;
-    position: relative;
-    text-align: center;
+    float: right;
+}
+
+.react-fine-uploader-gallery-status {
+    font-style: italic;
 }
 
 .react-fine-uploader-gallery-cancel-button:hover svg,
