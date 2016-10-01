@@ -24,6 +24,7 @@ For a better understanding of the architecture and goals of the project, please 
 - [Wrapper Classes](#wrapper-classes)
    - [Traditional](#traditional) - upload files to a server you created and control.
 - [High-level Components](#high-level-components)
+   - [`<Gallery />`](#gallery-)
 - [Low-level Components](#low-level-components)
    - [`<CancelButton />`](#cancelbutton-)
    - [`<DeleteButton />`](#deletebutton-)
@@ -114,6 +115,46 @@ Similar to the Fine Uploader UI gallery template, the `<Gallery />` component la
 
 In the `<Gallery />` component, each file is rendered as a "card". CSS transitions are used to fade a card in when a file is submitted and then fade it out again when the file is either canceled during uploading or deleted after uploading. By default, a file input element is rendered and styled to allow access to the file chooser. And, if supported by the device, a drop zone is rendered as well.
 
+##### Properties
+
+The only required property is `uploader`, which must be a Fine Uploader [wrapper class](#wrapper-classes) instance. But you can pass any property supported by any low-level component through `<Gallery />` by following this simple convention: `{lowerCamelCaseComponentName}-{propertyName}: {value}`. For example, if you want to specify custom child elements for the [`<FileInput />` element](#fileinput-), you would initialize the component like so:
+
+```js
+const fileInputChildren = <span>Choose files</span>
+
+render() {
+   return (
+      <Gallery fileInput-children={ fileInputChildren } uploader={ uploader } />
+   )
+}
+```
+
+And if you wanted to instead change the rendered text for the [`<Status />` element](#status-) when the file uploads successfully, you would initialize your component like this:
+
+```js
+const statusTextOverride = {
+   upload_successful: 'Success!'
+}
+
+render() {
+   return (
+      <Gallery status-text={ { text: statusTextOverride } } uploader={ uploader } />
+   )
+}
+```
+
+Note that you can also disable some components by passing a `disabled` property. Currently, this is limited to the `<FileInput />` component and the `<Dropzone />` component. For example, if you wanted to prevent file dropping, your code would look similar to this:
+
+```js
+render() {
+   return (
+      <Gallery dropzone-disabled={ true } uploader={ uploader } />
+   )
+}
+```
+
+##### A simple example
+
 For example, if you render a `<Gallery />` component using the following code:
 
 ```js
@@ -153,11 +194,11 @@ export default UploadComponent
 
 ...you will see this initial UI on page load:
 
-
+<img src="img/gallery-initial.png" height="300">
 
 After setting up a [server to handle the upload and delete requests](http://docs.fineuploader.com/branch/master/quickstart/03-setting_up_server.html), and dropping a few files, you will see a modern-looking upload user interface with your files represented like so:
 
-
+<img src="img/gallery-with-files.png" height="300">
 
 ### Low-level Components
 
