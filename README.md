@@ -33,6 +33,7 @@ For a better understanding of the architecture and goals of the project, please 
    - [`<PauseResumeButton />`](#pauseresumebutton-)
    - [`<ProgressBar />`](#progressbar-)
    - [`<RetryButton />`](#retrybutton-)
+   - [`<Status />`](#status-)
    - [`<Thumbnail />`](#thumbnail-)
 
 ### Installing
@@ -687,6 +688,78 @@ export default class FileListener extends Component {
 ```
 
 You may pass _any_ standard [`<button>` attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) (or any standard element attributes, such as `data-` attributes) to the `<RetryButton />` as well. These attributes will be attached to the underlying `<button>` element.
+
+#### `<Status />`
+
+The `<Status />` component renders the current status of a file in a format appropriate for display. You may also override one or more default display values.
+
+##### Properties
+
+- `id` - The Fine Uploader ID of the submitted file. (required)
+
+- `text` - An object containing a map of status keys to display values. You may override one or more of these entries. Each entry with default values is listed below.
+   - `deleting` - 'Deleting...'
+   - `paused` - 'Paused'
+   - `queued` - 'Queued'
+   - `submitting` - 'Submitting...'
+   - `uploading` - 'Uploading...'
+   - `upload_failed` - 'Failed'
+   - `upload_retrying` - 'Retrying...'
+   - `upload_successful` - 'Completed'
+
+- `uploader` - A Fine Uploader [wrapper class](#wrapper-classes). (required)
+
+Below, the current status of each file is rendered underneath its thumbnail. As the status changes, so does the rendered text. The display value for the `upload_success` status has also been overridden to display as "Success!"
+
+Note: This assumes you have additional components or code to allow files to actually be submitted to Fine Uploader.
+
+```javascript
+import React, { Component } from 'react'
+
+import FineUploaderTraditional from 'react-fine-uploader'
+import Status 'react-fine-uploader/components/filesize'
+import Thumbnail 'react-fine-uploader/components/thumbnail'
+
+const uploader = new FineUploader({
+   options: {
+      request: {
+         endpoint: 'my/upload/endpoint'
+      }
+   }
+})
+
+export default class FileListener extends Component {
+    constructor() {
+        super()
+
+        this.state = {
+            submittedFiles: []
+        }
+    }
+
+    componentDidMount() {
+        uploader.on('submitted', id => {
+            const submittedFiles = this.state.submittedFiles
+
+            submittedFiles.push(id)
+            this.setState({ submittedFiles })
+        })
+    }
+
+    render() {
+        return (
+            <div>
+                {
+                    this.state.submittedFiles.map(id => (
+                        <Thumbnail id={ id } text={ { upload_successful: 'Success!' } uploader={ uploader } />
+                        <Status id={ id } uploader={ uploader } />
+                    ))
+                }
+            </div>
+        )
+    }
+}
+```
 
 #### `<Thumbnail />`
 
