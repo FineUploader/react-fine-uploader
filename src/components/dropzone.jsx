@@ -13,6 +13,10 @@ class DropzoneElement extends Component {
         uploader: PropTypes.object.isRequired
     };
 
+    static defaultProps = {
+        dropActiveClassName: 'react-fine-uploader-dropzone-active'
+    }
+
     componentDidMount() {
         this._registerDropzone()
     }

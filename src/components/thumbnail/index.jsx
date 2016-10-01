@@ -56,10 +56,13 @@ class Thumbnail extends Component {
 
 
     render() {
+        const customContainerClassName = this.props.className && this.props.className + '-container'
+
         return (
-            <span className='react-fine-uploader-thumbnail'>
-                <canvas ref='canvas'
+            <span className={ `react-fine-uploader-thumbnail-container ${customContainerClassName || ''}` }>
+                <canvas className={ `react-fine-uploader-thumbnail ${this.props.className || ''}` }
                         hidden={ !this.state.drawComplete || this._failure }
+                        ref='canvas'
                 />
 
                 { this._maybePlaceholder }
@@ -78,7 +81,8 @@ class Thumbnail extends Component {
             )
             
             return (
-                <Placeholder image={ this.props.notAvailablePlaceholder || notAvailableImage }
+                <Placeholder className={ `react-fine-uploader-thumbnail ${this.props.className || ''}` }
+                             image={ this.props.notAvailablePlaceholder || notAvailableImage }
                              size={ this.props.maxSize }
                              status={ notAvailableStatus }
                 />
@@ -90,7 +94,8 @@ class Thumbnail extends Component {
             )
 
             return (
-                <Placeholder image={ this.props.waitingPlaceholder || waitingImage }
+                <Placeholder className={ `react-fine-uploader-thumbnail ${this.props.className || ''}` }
+                             image={ this.props.waitingPlaceholder || waitingImage }
                              size={ this.props.maxSize }
                              status={ waitingStatus }
                 />

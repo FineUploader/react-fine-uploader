@@ -29,8 +29,14 @@ class RetryButton extends Component {
                 }
                 else if (retryForbidden && this.state.retryable) {
                     this.setState({ retryable: false })
-                    this._unregisterOnCompleteHandler()
+                    this._unregisterEventHandlers()
                 }
+            }
+        }
+
+        this._onStatusChange = (id, oldStatus, newStatus) => {
+            if (id === this.props.id && !this._unmounted && newStatus === 'retrying upload') {
+                this.setState({ retryable: false })
             }
         }
 
@@ -39,11 +45,12 @@ class RetryButton extends Component {
 
     componentDidMount() {
         this.props.uploader.on('complete', this._onComplete)
+        this.props.uploader.on('statusChange', this._onStatusChange)
     }
 
     componentWillUnmount() {
         this._unmounted = true
-        this._unregisterOnCompleteHandler()
+        this._unregisterEventHandlers()
     }
 
     render() {
@@ -53,7 +60,7 @@ class RetryButton extends Component {
         if (this.state.retryable || !onlyRenderIfRetryable) {
             return (
                 <button aria-label='retry'
-                        className='react-fine-uploader-retry-button'
+                        className={ `react-fine-uploader-retry-button ${this.props.className || ''}` }
                         disabled={ !this.state.retryable }
                         onClick={ this.state.retryable && this._onClick }
                     { ...elementProps }
@@ -66,8 +73,9 @@ class RetryButton extends Component {
         return null
     }
 
-    _unregisterOnCompleteHandler() {
+    _unregisterEventHandlers() {
         this.props.uploader.off('complete', this._onComplete)
+        this.props.uploader.off('statusChange', this._onStatusChange)
     }
 }
 

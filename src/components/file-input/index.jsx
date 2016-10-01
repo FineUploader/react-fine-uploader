@@ -4,8 +4,19 @@ import StyleableElement from './styleable-element'
 
 class FileInput extends Component {
     static propTypes = {
+        text: PropTypes.shape({
+            selectFile: PropTypes.string,
+            selectFiles: PropTypes.string,
+        }),
         uploader: PropTypes.object.isRequired
     };
+
+    static defaultProps = {
+        text: {
+            selectFile: 'Select a File',
+            selectFiles: 'Select Files',
+        }
+    }
 
     constructor() {
         super()
@@ -15,14 +26,18 @@ class FileInput extends Component {
     }
 
     render() {
-        const { uploader, ...elementProps } = this.props // eslint-disable-line no-unused-vars
+        const { text, uploader, ...elementProps } = this.props // eslint-disable-line no-unused-vars
 
         return (
             <StyleableElement { ...elementProps }
                               key={ this.state.key }
                               onChange={ this._onFilesSelected }
             >
-                { this.props.children }
+                {
+                    this.props.children
+                        ? this.props.children
+                        : <span>{ elementProps.multiple ? text.selectFiles : text.selectFile }</span>
+                }
             </StyleableElement>
         )
     }

@@ -61,7 +61,7 @@ class Filesize extends Component {
 
         if (size == null || size < 0) {
             return (
-                <span className='react-fine-uploader-filesize' />
+                <span className={ `react-fine-uploader-filesize ${this.props.className || ''}` }/>
             )
         }
 
@@ -69,7 +69,7 @@ class Filesize extends Component {
         const { formattedSize, formattedUnits } = formatSizeAndUnits({ size, units })
 
         return (
-            <span className='react-fine-uploader-filesize'>
+            <span className={ `react-fine-uploader-filesize ${this.props.className || ''}` }>
                 <span className='react-fine-uploader-filesize-value'>
                     { formattedSize }
                 </span>
