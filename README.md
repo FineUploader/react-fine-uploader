@@ -23,7 +23,8 @@ For a better understanding of the architecture and goals of the project, please 
 - [Installing](#installing)
 - [Wrapper Classes](#wrapper-classes)
    - [Traditional](#traditional) - upload files to a server you created and control.
-- [Components](#components)
+- [High-level Components](#high-level-components)
+- [Low-level Components](#low-level-components)
    - [`<CancelButton />`](#cancelbutton-)
    - [`<DeleteButton />`](#deletebutton-)
    - [`<Dropzone />`](#dropzone-)
@@ -105,7 +106,60 @@ uploader.methods.deleteFile(3)
 ```
 
 
-### Components
+### High-level Components
+
+#### `<Gallery />`
+
+Similar to the Fine Uploader UI gallery template, the `<Gallery />` component lays out an uploader using all of the available [low-level components](#low-level-components). Appealing styles are provided, which can be easily overriden in your own style sheet.
+
+In the `<Gallery />` component, each file is rendered as a "card". CSS transitions are used to fade a card in when a file is submitted and then fade it out again when the file is either canceled during uploading or deleted after uploading. By default, a file input element is rendered and styled to allow access to the file chooser. And, if supported by the device, a drop zone is rendered as well.
+
+For example, if you render a `<Gallery />` component using the following code:
+
+```js
+import React, { Component } from 'react'
+
+import FineUploaderTraditional from 'react-fine-uploader'
+import Gallery from 'react-fine-uploader/components/gallery'
+
+const uploader = new FineUploaderTraditional({
+    options: {
+        chunking: {
+            enabled: true
+        },
+        deleteFile: {
+            enabled: true,
+            endpoint: '/uploads'
+        },
+        request: {
+            endpoint: '/uploads'
+        },
+        retry: {
+            enableAuto: true
+        }
+    }
+})
+
+class UploadComponent extends Component {
+    render() {
+        return (
+            <Gallery uploader={ uploader } />
+        )
+    }
+}
+
+export default UploadComponent
+```
+
+...you will see this initial UI on page load:
+
+
+
+After setting up a [server to handle the upload and delete requests](http://docs.fineuploader.com/branch/master/quickstart/03-setting_up_server.html), and dropping a few files, you will see a modern-looking upload user interface with your files represented like so:
+
+
+
+### Low-level Components
 
 #### `<CancelButton />`
 
@@ -127,6 +181,7 @@ The example below will include a cancel button for each submitted file along wit
 
 ```javascript
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 
 import CancelButton 'react-fine-uploader/components/cancel-button'
 import FineUploaderTraditional from 'react-fine-uploader'
