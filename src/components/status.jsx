@@ -1,3 +1,4 @@
+import objectAssign from 'object-assign'
 import React, { Component, PropTypes } from 'react'
 
 class Status extends Component {
@@ -31,15 +32,18 @@ class Status extends Component {
         }
     }
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
-        this.state = { status: '' }
+        this.state = {
+            status: '',
+            text: objectAssign({}, Status.defaultProps.text, props.text || {})
+        }
 
         this._onStatusChange = (id, oldStatus, newStatus) => {
             if (id === this.props.id && !this._unmounted) {
                 const newStatusToDisplay = getStatusToDisplay({
-                    displayMap: this.props.text,
+                    displayMap: this.state.text,
                     status: newStatus
                 })
 
@@ -50,6 +54,14 @@ class Status extends Component {
 
     componentDidMount() {
         this.props.uploader.on('statusChange', this._onStatusChange)
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.text) {
+            this.setState({
+                text: objectAssign({}, this.state.text, nextProps.text)
+            })
+        }
     }
 
     componentWillUnmount() {
