@@ -163,7 +163,7 @@
 .react-fine-uploader-gallery-upload-failed-icon,
 .react-fine-uploader-gallery-upload-success-icon {
     left: 50%;
-    opacity: 0.7;
+    opacity: 0.5;
     position: absolute;
     top: 39%;
     transform: translate(-50%, -50%);
