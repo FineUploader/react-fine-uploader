@@ -107,6 +107,10 @@ class PauseResumeButton extends Component {
     _unregisterOnUploadChunkHandler() {
         this.props.uploader.off('uploadChunk', this._onUploadChunk)
     }
+
+    _unregisterStatusChangeHandler() {
+        this.props.uploader.off('statusChange', this._onStatusChange)
+    }
 }
 
 const getButtonClassName = state => {
