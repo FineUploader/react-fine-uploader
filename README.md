@@ -16,7 +16,22 @@ Makes using [Fine Uploader](http://fineuploader.com) in a React app simple. Drop
 
 ## Docs
 
-For a better understanding of the architecture and goals of the project, please read the [wiki](../../wiki). The docs section here will simply detail the various APIs exposed.
+### Overview 
+
+React Fine Uploader makes using Fine Uploader and all of its unique features very simple in a React-based project. Thie library provides useful resources that can be divided into three sections:
+
+#### Individual focused components (like `<Thumbnail>` and `<ProgressBar>`). 
+
+These allow you to easily build a highly customizable and powerful UI for your upload widget, backed by Fine Uploader's core feature set. Most of these components are unstyled (i.e. ready to be styled by you). Focused component-specific stylesheets may be provided at a later date.
+
+
+#### Higher-order components (like <Gallery>) 
+
+These combine many focused components that provide style (which can be adjusted via your own stylesheet) and enhanced UI-specific features. These components are essentially "turn-key", which means that you can get a fully functional upload widget up and running in your project with a few lines of code. Keep in mind that you of course still need a server to handle the requests sent by Fine Uploader and to server up the JavaScript and CSS files.
+
+#### Wrapper classes 
+
+These wrap a Fine Uploader instance for use in React Fine Uploader. They provide additional features such as the ability to dynamically register multiple event/callback listeners. All individual and higher-order/focused components require you to pass a constructed wrapper class instance.
 
 ### Quick Reference
 
