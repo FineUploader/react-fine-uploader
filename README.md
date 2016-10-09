@@ -797,10 +797,10 @@ The `<Status />` component renders the current status of a file in a format appr
    - `deleting` - 'Deleting...'
    - `paused` - 'Paused'
    - `queued` - 'Queued'
+   - `retrying_upload` - 'Retrying...'
    - `submitting` - 'Submitting...'
    - `uploading` - 'Uploading...'
    - `upload_failed` - 'Failed'
-   - `upload_retrying` - 'Retrying...'
    - `upload_successful` - 'Completed'
 
 - `uploader` - A Fine Uploader [wrapper class](#wrapper-classes). (required)

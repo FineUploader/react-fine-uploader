@@ -9,10 +9,10 @@ class Status extends Component {
             deleting: PropTypes.string,
             paused: PropTypes.string,
             queued: PropTypes.string,
+            retrying_upload: PropTypes.string,
             submitting: PropTypes.string,
             uploading: PropTypes.string,
             upload_failed: PropTypes.string,
-            upload_retrying: PropTypes.string,
             upload_successful: PropTypes.string
         }),
         uploader: PropTypes.object.isRequired
@@ -24,10 +24,10 @@ class Status extends Component {
             deleting: 'Deleting...',
             paused: 'Paused',
             queued: 'Queued',
+            retrying_upload: 'Retrying...',
             submitting: 'Submitting...',
             uploading: 'Uploading...',
             upload_failed: 'Failed',
-            upload_retrying: 'Retrying...',
             upload_successful: 'Completed'
         }
     }
