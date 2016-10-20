@@ -3,8 +3,8 @@ import React, { Component, PropTypes } from 'react'
 import Placeholder from './placeholder'
 
 import './thumbnail.css'
-import NotAvailablePlaceholder from './not-available-placeholder.jsx'
-import WaitingPlaceholder from './waiting-placeholder.jsx'
+import NotAvailablePlaceholder from './not-available-placeholder'
+import WaitingPlaceholder from './waiting-placeholder'
 
 export const defaultMaxSize = 120 
 export const notAvailableStatus = 'not-available'
