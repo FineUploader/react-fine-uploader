@@ -26,7 +26,7 @@ React Fine Uploader makes using Fine Uploader and all of its unique features ver
 These allow you to easily build a highly customizable and powerful UI for your upload widget, backed by Fine Uploader's core feature set. Most of these components are unstyled (i.e. ready to be styled by you). Focused component-specific stylesheets may be provided at a later date.
 
 
-#### Higher-order components (like <Gallery>) 
+#### Higher-order components (like `<Gallery>`) 
 
 These combine many focused components that provide style (which can be adjusted via your own stylesheet) and enhanced UI-specific features. These components are essentially "turn-key", which means that you can get a fully functional upload widget up and running in your project with a few lines of code. Keep in mind that you of course still need a server to handle the requests sent by Fine Uploader and to server up the JavaScript and CSS files.
 
