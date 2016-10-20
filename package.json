@@ -1,16 +1,13 @@
 {
   "name": "react-fine-uploader",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "license": "MIT",
   "description": "React UI components for using Fine Uploader in a React-based project.",
-  "author": "Widen Enterprises, Inc.",
-  "contributors": [
-    {
-      "name": "Ray Nicholus",
-      "url": "https://github.com/rnicholus"
-    }
-  ],
-  "homepage": "https://github.com/FineUploader/react-fine-uploader",
+  "author":     {
+    "name": "Ray Nicholus",
+    "url": "http://raynicholus.com"
+  },
+  "homepage": "https://github.com/FineUploader/react-fine-uploader#readme",
   "repository": "https://github.com/FineUploader/react-fine-uploader",
   "keywords": [
     "file",
@@ -22,14 +19,14 @@
     "upload",
     "widget"
   ],
-  "main": "lib/index.js",
+  "main": "wrappers/traditional.js",
   "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0-rc",
-    "react-addons-css-transition-group": "^0.14.0 || ^15.0.0-rc"
+    "react": "0.14.x || 15.x.x",
+    "react-addons-css-transition-group": "0.14.x || 15.x.x"
   },
   "dependencies": {
-    "fine-uploader": "5.x.x",
-    "object-assign": "latest"
+    "fine-uploader": ">=5.11.5 <6.0.0",
+    "object-assign": "4.1.0"
   },
   "devDependencies": {
     "babel-cli": "latest",
@@ -70,8 +67,6 @@
   },
   "scripts": {
     "build": "npm run build-js ; npm run build-stylesheets",
-    "build-js": "babel src --out-dir lib --ignore test/",
-    "build-stylesheets": "(cd src; rsync -R components/**/*.css ../lib)",
     "lint": "eslint src/. --ext .js,.jsx --cache",
     "manual-test": "webpack --config config/webpack.manual-test.config.js --watch --display-error-details",
     "start": "PUBLIC_DIR=$(pwd)/src/test/manual/ NODE_MODULES_DIR=$(pwd)/node_modules/ UPLOADED_FILES_DIR=$(pwd)/uploads/ node node_modules/fine-uploader-traditional-server/nodejs",
