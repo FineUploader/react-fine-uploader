@@ -69,6 +69,8 @@
     "build": "babel src --out-dir lib --ignore test/**/*",
     "lint": "eslint src/. --ext .js,.jsx --cache",
     "manual-test": "webpack --config config/webpack.manual-test.config.js --watch --display-error-details",
+    "push-to-npm": "cp package.json README.md LICENSE lib",
+    "release": "npm run test && npm run build && npm run push-to-npm",
     "start": "PUBLIC_DIR=$(pwd)/src/test/manual/ NODE_MODULES_DIR=$(pwd)/node_modules/ UPLOADED_FILES_DIR=$(pwd)/uploads/ node node_modules/fine-uploader-traditional-server/nodejs",
     "test": "npm run lint && if [ $CI ]; then karma start config/karma.conf; else karma start config/karma.dev.conf; fi"
   }
