@@ -41,17 +41,16 @@ describe('<Gallery />', () => {
         expect(DropzoneComponent).toBeFalsy()
     })
 
-    it('renders children inside <Dropzone />', () => {
+    it('renders children inside <MaybeDropzone />', () => {
         const GalleryComponent = TestUtils.renderIntoDocument(
             <Gallery uploader={ uploader }>
                 <span className='gallery-child'>test 123</span>
             </Gallery>
         )
-        const DropzoneComponent = TestUtils.findRenderedComponentWithType(GalleryComponent, Dropzone)
-        const dropzoneComponentChild = TestUtils.scryRenderedDOMComponentsWithClass(DropzoneComponent, 'gallery-child')[0]
+        const maybeDropzoneChild = TestUtils.scryRenderedDOMComponentsWithClass(GalleryComponent, 'gallery-child')[0]
 
-        expect(dropzoneComponentChild).toBeTruthy()
-        expect(dropzoneComponentChild.textContent).toBe('test 123')
+        expect(maybeDropzoneChild).toBeTruthy()
+        expect(maybeDropzoneChild.textContent).toBe('test 123')
     })
 
     it('renders a <FileInput /> by default', () => {
