@@ -69,7 +69,7 @@
     "build": "rm -rf lib && mkdir -p lib && cp -pR src/components lib && cp -pR src/wrappers lib && babel lib --out-dir lib && find lib -type f -name '*.jsx' -delete",
     "lint": "eslint src/. --ext .js,.jsx --cache",
     "manual-test": "webpack --config config/webpack.manual-test.config.js --watch --display-error-details",
-    "push-to-npm": "cp package.json README.md LICENSE lib",
+    "push-to-npm": "cp package.json README.md LICENSE lib && (cd lib ; npm publish)",
     "release": "npm run test && npm run build && npm run push-to-npm",
     "start": "PUBLIC_DIR=$(pwd)/src/test/manual/ NODE_MODULES_DIR=$(pwd)/node_modules/ UPLOADED_FILES_DIR=$(pwd)/uploads/ node node_modules/fine-uploader-traditional-server/nodejs",
     "test": "npm run lint && if [ $CI ]; then karma start config/karma.conf; else karma start config/karma.dev.conf; fi"
