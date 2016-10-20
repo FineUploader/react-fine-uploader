@@ -79,7 +79,7 @@ describe('<Gallery />', () => {
 
             expect(tiles.length).toBe(2)
             done()
-        }, 10)
+        }, 100)
     })
 
     it('removes a tile when cancel is clicked', done => {
@@ -101,7 +101,7 @@ describe('<Gallery />', () => {
 
                 expect(tiles.length).toBe(1)
                 done()
-            }, 10)
-        }, 10)
+            }, 100)
+        }, 100)
     })
 })
