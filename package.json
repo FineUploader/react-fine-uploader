@@ -66,7 +66,7 @@
     "node": ">=5.0.0"
   },
   "scripts": {
-    "build": "npm run build-js ; npm run build-stylesheets",
+    "build": "babel src --out-dir lib --ignore test/**/*",
     "lint": "eslint src/. --ext .js,.jsx --cache",
     "manual-test": "webpack --config config/webpack.manual-test.config.js --watch --display-error-details",
     "start": "PUBLIC_DIR=$(pwd)/src/test/manual/ NODE_MODULES_DIR=$(pwd)/node_modules/ UPLOADED_FILES_DIR=$(pwd)/uploads/ node node_modules/fine-uploader-traditional-server/nodejs",
