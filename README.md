@@ -12,7 +12,7 @@
 
 Makes using [Fine Uploader](http://fineuploader.com) in a React app simple. Drop-in high-level components for a turn-key UI. Use small focused components to build a more custom UI.
 
-**This is currently an unstable in-progress project. Breaking changes may occur at any time without notice until the version has reached 1.0. See the [wiki for details regarding the design plans](../../wiki).**
+**This is currently an unstable in-progress project. Breaking changes may occur at any time without notice until the version has reached 1.0.**
 
 
 ## Docs
@@ -56,7 +56,7 @@ These wrap a Fine Uploader instance for use in React Fine Uploader. They provide
 
 ### Installing
 
-0.1.0 will likely be the first version of react-fine-uploader published on npm. There are a number of components to write before that milestone can be closed out. Until then, you'll need to `git clone` the project to play around with any in-progress components. Instructions will be updated once something has been published to npm. Until then, take a look at the [unit tests](src/test/unit) and the [manual tests](src/test/manual) for examples. Two dependencies that you will need to install yourself: an A+/Promise spec compliant polyfill (for IE11) and React (which is a peer dependency).
+0.1.0 is the first version of react-fine-uploader published on npm. Two dependencies that you will need to install yourself: an A+/Promise spec compliant polyfill (for IE11) and React (which is a peer dependency). Simply `npm install react-fine-uploader` and see the documentation for your specific integration instructions (based on your needs).
 
 ### Wrapper Classes
 
