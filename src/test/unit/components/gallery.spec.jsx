@@ -6,6 +6,7 @@ import FileInput from 'src/components/file-input'
 import FineUploaderTraditional from 'src/wrappers/traditional'
 import Gallery from 'src/components/gallery'
 
+const isMobile = !!('ontouchstart' in window)
 const sampleBlob = new Blob(['hi!'], { type : 'text/plain' })
 const sampleBlobWrapper = { blob: sampleBlob, name: 'test' }
 
@@ -20,12 +21,14 @@ describe('<Gallery />', () => {
         })
     })
 
-    it('renders a <Dropzone /> by default', () => {
-        const GalleryComponent = TestUtils.renderIntoDocument(<Gallery uploader={ uploader } />)
-        const DropzoneComponent = TestUtils.scryRenderedComponentsWithType(GalleryComponent, Dropzone)[0]
+    if (!isMobile) {
+        it('renders a <Dropzone /> by default', () => {
+            const GalleryComponent = TestUtils.renderIntoDocument(<Gallery uploader={ uploader } />)
+            const DropzoneComponent = TestUtils.scryRenderedComponentsWithType(GalleryComponent, Dropzone)[0]
 
-        expect(DropzoneComponent).toBeTruthy()
-    })
+            expect(DropzoneComponent).toBeTruthy()
+        })
+    }
 
     it('does not render a <Dropzone /> if disabled via dropzone-disabled', () => {
         const GalleryComponent = TestUtils.renderIntoDocument(
