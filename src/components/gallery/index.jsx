@@ -104,7 +104,9 @@ class Gallery extends Component {
                 />
                 <ReactCssTransitionGroup className='react-fine-uploader-gallery-files'
                                          component='ul'
+                                         transitionEnter={ !this.props.animationsDisabled }
                                          transitionEnterTimeout={ 500 }
+                                         transitionLeave={ !this.props.animationsDisabled }
                                          transitionLeaveTimeout={ 300 }
                                          transitionName='react-fine-uploader-gallery-files'
                 >

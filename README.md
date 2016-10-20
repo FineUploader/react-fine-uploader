@@ -168,6 +168,8 @@ render() {
 }
 ```
 
+Finally, you may disable the add/remove file animations by setting the `animationsDisabled` property to `true`.
+
 ##### A simple example
 
 For example, if you render a `<Gallery />` component using the following code:
