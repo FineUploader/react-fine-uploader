@@ -11,10 +11,10 @@ const uploader = new FineUploader({
         debug: true,
         deleteFile: {
             enabled: true,
-            endpoint: '/uploads'
+            endpoint: '/vendor/fineuploader/php-traditional-server/endpoint.php'
         },
         request: {
-            endpoint: '/uploads'
+            endpoint: '/vendor/fineuploader/php-traditional-server/endpoint.php'
         },
         retry: {
             enableAuto: true

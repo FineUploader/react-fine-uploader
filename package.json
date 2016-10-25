@@ -44,7 +44,6 @@
     "eslint": "latest",
     "eslint-plugin-react": "latest",
     "extract-text-webpack-plugin": "latest",
-    "fine-uploader-traditional-server": "latest",
     "jasmine": "latest",
     "jasmine-core": "latest",
     "karma": "latest",
@@ -71,7 +70,7 @@
     "manual-test": "webpack --config config/webpack.manual-test.config.js --watch --display-error-details",
     "push-to-npm": "cp package.json README.md LICENSE lib && (cd lib ; npm publish)",
     "release": "npm run test && npm run build && npm run push-to-npm",
-    "start": "PUBLIC_DIR=$(pwd)/src/test/manual/ NODE_MODULES_DIR=$(pwd)/node_modules/ UPLOADED_FILES_DIR=$(pwd)/uploads/ node node_modules/fine-uploader-traditional-server/nodejs",
+    "start": "php -S 0.0.0.0:9090 -t src/test/manual -c src/test/manual/php.ini",
     "test": "npm run lint && if [ $CI ]; then karma start config/karma.conf; else karma start config/karma.dev.conf; fi"
   }
 }
