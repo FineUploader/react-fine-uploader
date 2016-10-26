@@ -1,13 +1,11 @@
 import objectAssign from 'object-assign'
-import qq from 'fine-uploader/lib/core'
 
 import CallbackProxy from './callback-proxy'
-import { traditional as callbackNames } from './callback-names'
 
 const callbackProxies = new WeakMap()
 
 export default class BaseWrapper {
-    constructor({ options, type }) {
+    constructor({ callbackNames, options, qq, type }) {
         const callbacks = options.callbacks || {}
 
         const optionsSansCallbacks = objectAssign({}, options)
@@ -21,6 +19,7 @@ export default class BaseWrapper {
         this.methods = createFineUploader({
             callbackProxies: callbackProxies.get(this),
             options: optionsSansCallbacks,
+            qq,
             type
         })
     }
@@ -50,7 +49,7 @@ const createCallbackProxies = names => {
     return proxyMap
 }
 
-const createFineUploader = ({ callbackProxies, options, type } ) => {
+const createFineUploader = ({ callbackProxies, options, qq, type } ) => {
     const optionsCopy = objectAssign({ callbacks: {} }, options)
 
     Object.keys(callbackProxies).forEach(callbackName => {
