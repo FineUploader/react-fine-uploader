@@ -70,7 +70,8 @@
     "manual-test": "webpack --config config/webpack.manual-test.config.js --watch --display-error-details",
     "push-to-npm": "cp package.json README.md LICENSE lib && (cd lib ; npm publish)",
     "release": "npm run test && npm run build && npm run push-to-npm",
-    "start": "php -S 0.0.0.0:9090 -t src/test/manual -c src/test/manual/php.ini",
+    "start": "(. src/test/manual/s3keys.sh; php -S 0.0.0.0:9090 -t src/test/manual -c src/test/manual/php.ini)",
+    "start-no-s3": "php -S 0.0.0.0:9090 -t src/test/manual -c src/test/manual/php.ini",
     "test": "npm run lint && if [ $CI ]; then karma start config/karma.conf; else karma start config/karma.dev.conf; fi"
   }
 }
