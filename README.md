@@ -38,6 +38,7 @@ These wrap a Fine Uploader instance for use in React Fine Uploader. They provide
 
 - [Installing](#installing)
 - [Wrapper Classes](#wrapper-classes)
+   - [S3](#s3) - upload files to directly to an Amazon Simple Storage Service (S3) bucket. Your server must sign requests using a private key.
    - [Traditional](#traditional) - upload files to a server you created and control.
 - [High-level Components](#high-level-components)
    - [`<Gallery />`](#gallery-)
@@ -60,18 +61,81 @@ These wrap a Fine Uploader instance for use in React Fine Uploader. They provide
 
 ### Wrapper Classes
 
-#### Traditional
+#### S3
+
+Use the traditional endpoint wrapper class if you would like to upload files directly to an Amazon Simple Storage Service (S3 bucket). Your server must be able to sign requests sent by Fine Uploader. If you enable the delete file feature, your server must handle these as well. You can read more about [S3 server requests in the documentation](http://docs.fineuploader.com/branch/master/endpoint_handlers/amazon-s3.html). The S3 uploading workflow is documented on the [S3 feature page](http://docs.fineuploader.com/branch/master/features/s3.html). Some examples servers can be found in the [server-examples repository](https://github.com/FineUploader/server-examples).
 
 ##### `constructor({ options })`
 
-When creating a new instance of the traditional endpoint wrapper class, pass in an object that mirrors the format of the [Fine Uploader Core options object](http://docs.fineuploader.com/branch/master/api/options.html). You may also include a `callbacks` property to include any inital [core callback handlers](http://docs.fineuploader.com/branch/master/api/events.html) that you might need. This options property is entirely optional though :laughing:.  
+When creating a new instance of the S3 endpoint wrapper class, pass in an object that mirrors the format of the [Fine Uploader S3 Core options object](http://docs.fineuploader.com/branch/master/api/options-s3.html). You may also include a `callbacks` property to include any initial [core callback handlers](http://docs.fineuploader.com/branch/master/api/events-s3.html) that you might need. This options property is entirely optional though :laughing:.
+
+```javascript
+import FineUploaderS3 from 'react-fine-uploader/wrappers/s3'
+
+const uploader = new FineUploaderS3({
+    options: {
+        request: {
+            endpoint: "http://fineuploadertest.s3.amazonaws.com",
+            accessKey: "AKIAIXVR6TANOGNBGANQ"
+        },
+        signature: {
+            endpoint: "/vendor/fineuploader/php-s3-server/endpoint.php"
+        }
+    }
+})
+```
+
+##### `on(eventName, handlerFunction)`
+
+Register a new callback/event handler. The `eventName` can be formatted with _or_ without the 'on' prefix. If you do use the 'on', prefix, be sure to follow lower-camel-case exactly ('onSubmit', not 'onsubmit'). If a handler has already been registered for this event, yours will be added to the "pipeline" for this event. If a previously registered handler for this event fails for some reason or returns `false`, you handler will _not_ be called. Your handler function may return a `Promise` iff it is [listed as an event type that supports promissory/thenable return values](http://docs.fineuploader.com/branch/master/features/async-tasks-and-promises.html#promissory-callbacks).
+
+```javascript
+uploader.on('complete', (id, name, response) => {
+   // handle completed upload
+})
+```
+
+##### `off(eventName, handlerFunction)`
+
+Unregister a previously registered callback/event handler. Same rules for `eventName` as  the `on` method apply here. The `handlerFunction` _must_ be the _exact_ `handlerFunction` passed to the `on` method when you initially registered said function.
+
+```javascript
+const completeHandler = (id, name, response) => {
+   // handle completed upload
+})
+
+uploader.on('complete', completeHandler)
+
+// ...later
+uploader.off('complete', completeHandler)
+```
+
+##### `options`
+
+The `options` property you used when constructing a new instance, sans any `callbacks`.
+
+##### `methods`
+
+Use this property to access any [core API methods exposed by Fine Uploader S3](http://docs.fineuploader.com/branch/master/api/methods-s3.html).
+
+```javascript
+uploader.methods.addFiles(myFiles)
+uploader.methods.deleteFile(3)
+```
+
+#### Traditional
+
+Use the traditional endpoint wrapper class if you would like to upload files to a server you control. Your server must handle _all_ requests sent by Fine Uploader, such as upload, delete file (optional), and chunking success (optional). You can read more about [traditional server requests in the documentation](http://docs.fineuploader.com/branch/master/endpoint_handlers/traditional.html). Some examples servers can be found in the [server-examples repository](https://github.com/FineUploader/server-examples).
+
+##### `constructor({ options })`
+
+When creating a new instance of the traditional endpoint wrapper class, pass in an object that mirrors the format of the [Fine Uploader Core options object](http://docs.fineuploader.com/branch/master/api/options.html). You may also include a `callbacks` property to include any initial [core callback handlers](http://docs.fineuploader.com/branch/master/api/events.html) that you might need. This options property is entirely optional.
 
 ```javascript
 import FineUploaderTraditional from 'react-fine-uploader'
 
 const uploader = new FineUploaderTraditional({
    options: {
-      autoUpload: false,
       request: {
          endpoint: 'my/upload/endpoint'
       },

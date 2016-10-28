@@ -5,7 +5,7 @@ import FineUploaderTraditional from 'src/wrappers/traditional'
 const sampleBlob = new Blob(['hi!'], { type : 'text/plain' })
 const sampleBlobWrapper = { blob: sampleBlob, name: 'test' }
 
-describe('FineUploaderTraditional', () => {
+describe('Fine Uploader wrapper classes', () => {
     describe('new instance consruction', () => {
         it('provides access to its API', () => {
             const wrapper = new FineUploaderTraditional({

@@ -1,0 +1,6 @@
+{
+  "require": {
+    "fineuploader/php-traditional-server": "1.2.0",
+    "fineuploader/php-s3-server": "1.1.0"
+  }
+}
