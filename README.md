@@ -63,7 +63,7 @@ These wrap a Fine Uploader instance for use in React Fine Uploader. They provide
 
 #### S3
 
-Use the traditional endpoint wrapper class if you would like to upload files directly to an Amazon Simple Storage Service (S3 bucket). Your server must be able to sign requests sent by Fine Uploader. If you enable the delete file feature, your server must handle these as well. You can read more about [S3 server requests in the documentation](http://docs.fineuploader.com/branch/master/endpoint_handlers/s3.html). The S3 uploading workflow is documented on the [S3 feature page](http://docs.fineuploader.com/branch/master/features/s3.html). Some examples servers can be found in the [server-examples repository](https://github.com/FineUploader/server-examples).
+Use the traditional endpoint wrapper class if you would like to upload files directly to an Amazon Simple Storage Service (S3 bucket). Your server must be able to sign requests sent by Fine Uploader. If you enable the delete file feature, your server must handle these as well. You can read more about [S3 server requests in the documentation](http://docs.fineuploader.com/branch/master/endpoint_handlers/amazon-s3.html). The S3 uploading workflow is documented on the [S3 feature page](http://docs.fineuploader.com/branch/master/features/s3.html). Some examples servers can be found in the [server-examples repository](https://github.com/FineUploader/server-examples).
 
 ##### `constructor({ options })`
 
