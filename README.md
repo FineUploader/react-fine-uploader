@@ -116,7 +116,7 @@ The `options` property you used when constructing a new instance, sans any `call
 
 ##### `methods`
 
-Use this property to access any [core API methods exposed by Fine Uploader](http://docs.fineuploader.com/branch/master/api/methods-s3.html).
+Use this property to access any [core API methods exposed by Fine Uploader S3](http://docs.fineuploader.com/branch/master/api/methods-s3.html).
 
 ```javascript
 uploader.methods.addFiles(myFiles)
