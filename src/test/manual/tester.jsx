@@ -56,10 +56,10 @@ class Tester extends Component {
     render() {
         return (
             <div>
-                <div>Traditional</div>
+                <h2>Traditional</h2>
                 <Gallery uploader={ traditionalUploader } />
 
-                <div>S3</div>
+                <h2>S3</h2>
                 <Gallery uploader={ s3Uploader } />
             </div>
         )
