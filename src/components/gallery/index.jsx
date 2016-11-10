@@ -52,10 +52,8 @@ class Gallery extends Component {
         this.state = {
             visibleFiles: []
         }
-    }
 
-    componentDidMount() {
-        this.props.uploader.on('statusChange', (id, oldStatus, status) => {
+        this._onStatusChange = (id, oldStatus, status) => {
             if (status === 'submitted') {
                 const visibleFiles = this.state.visibleFiles
 
@@ -68,7 +66,15 @@ class Gallery extends Component {
             else if (status === 'upload successful' || status === 'upload failed') {
                 this._updateVisibleFileStatus(id, status)
             }
-        })
+        }
+    }
+
+    componentDidMount() {
+        this.props.uploader.on('statusChange', this._onStatusChange);
+    }
+
+    componentWillUnmount() {
+        this.props.uploader.off('statusChange', this._onStatusChange);
     }
 
     render() {
