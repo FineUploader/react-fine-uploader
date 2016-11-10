@@ -70,11 +70,11 @@ class Gallery extends Component {
     }
 
     componentDidMount() {
-        this.props.uploader.on('statusChange', this._onStatusChange);
+        this.props.uploader.on('statusChange', this._onStatusChange)
     }
 
     componentWillUnmount() {
-        this.props.uploader.off('statusChange', this._onStatusChange);
+        this.props.uploader.off('statusChange', this._onStatusChange)
     }
 
     render() {
