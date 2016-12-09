@@ -17,20 +17,20 @@ Makes using [Fine Uploader](http://fineuploader.com) in a React app simple. Drop
 
 ## Docs
 
-### Overview 
+### Overview
 
 React Fine Uploader makes using Fine Uploader and all of its unique features very simple in a React-based project. Thie library provides useful resources that can be divided into three sections:
 
-#### Individual focused components (like `<Thumbnail>` and `<ProgressBar>`). 
+#### Individual focused components (like `<Thumbnail>` and `<ProgressBar>`).
 
 These allow you to easily build a highly customizable and powerful UI for your upload widget, backed by Fine Uploader's core feature set. Most of these components are unstyled (i.e. ready to be styled by you). Focused component-specific stylesheets may be provided at a later date.
 
 
-#### Higher-order components (like `<Gallery>`) 
+#### Higher-order components (like `<Gallery>`)
 
 These combine many focused components that provide style (which can be adjusted via your own stylesheet) and enhanced UI-specific features. These components are essentially "turn-key", which means that you can get a fully functional upload widget up and running in your project with a few lines of code. Keep in mind that you of course still need a server to handle the requests sent by Fine Uploader and to server up the JavaScript and CSS files.
 
-#### Wrapper classes 
+#### Wrapper classes
 
 These wrap a Fine Uploader instance for use in React Fine Uploader. They provide additional features such as the ability to dynamically register multiple event/callback listeners. All individual and higher-order/focused components require you to pass a constructed wrapper class instance.
 
@@ -39,6 +39,7 @@ These wrap a Fine Uploader instance for use in React Fine Uploader. They provide
 - [Installing](#installing)
 - [Wrapper Classes](#wrapper-classes)
    - [S3](#s3) - upload files to directly to an Amazon Simple Storage Service (S3) bucket. Your server must sign requests using a private key.
+   - [Azure](#azure) - upload files directly to Azure storage
    - [Traditional](#traditional) - upload files to a server you created and control.
 - [High-level Components](#high-level-components)
    - [`<Gallery />`](#gallery-)
@@ -87,7 +88,7 @@ const uploader = new FineUploaderS3({
 
 ##### `on(eventName, handlerFunction)`
 
-Register a new callback/event handler. The `eventName` can be formatted with _or_ without the 'on' prefix. If you do use the 'on', prefix, be sure to follow lower-camel-case exactly ('onSubmit', not 'onsubmit'). If a handler has already been registered for this event, yours will be added to the "pipeline" for this event. If a previously registered handler for this event fails for some reason or returns `false`, you handler will _not_ be called. Your handler function may return a `Promise` iff it is [listed as an event type that supports promissory/thenable return values](http://docs.fineuploader.com/branch/master/features/async-tasks-and-promises.html#promissory-callbacks).
+Register a new callback/event handler. The `eventName` can be formatted with _or_ without the 'on' prefix. If you do use the 'on', prefix, be sure to follow lower-camel-case exactly ('onSubmit', not 'onsubmit'). If a handler has already been registered for this event, yours will be added to the "pipeline" for this event. If a previously registered handler for this event fails for some reason or returns `false`, you handler will _not_ be called. Your handler function may return a `Promise` if it is [listed as an event type that supports promissory/thenable return values](http://docs.fineuploader.com/branch/master/features/async-tasks-and-promises.html#promissory-callbacks).
 
 ```javascript
 uploader.on('complete', (id, name, response) => {
@@ -123,6 +124,66 @@ uploader.methods.addFiles(myFiles)
 uploader.methods.deleteFile(3)
 ```
 
+#### Azure
+
+This enables you to upload to Azure directly. Your server must provide signature and done endpoints.
+
+##### `constructor({ options })`
+
+When creating a new instance of the Azure endpoint wrapper class, pass in an object that mirrors the format of the [Fine Uploader Azure Core options object](http://docs.fineuploader.com/branch/master/api/options-azure.html). This options property is entirely optional.
+
+```javascript
+import FineUploaderAzure from 'react-fine-uploader/wrappers/azure'
+
+const uploader = new FineUploaderAzure({
+    options: {
+      signature: {
+        endpoint: '/upload/signature',
+      },
+      uploadSuccess: {
+        endpoint: '/upload/done',
+      }
+    }
+})
+```
+
+##### `on(eventName, handlerFunction)`
+
+Register a new callback/event handler. The `eventName` can be formatted with _or_ without the 'on' prefix. If you do use the 'on', prefix, be sure to follow lower-camel-case exactly ('onSubmit', not 'onsubmit'). If a handler has already been registered for this event, yours will be added to the "pipeline" for this event. If a previously registered handler for this event fails for some reason or returns `false`, you handler will _not_ be called. Your handler function may return a `Promise` if it is [listed as an event type that supports promissory/thenable return values](http://docs.fineuploader.com/branch/master/features/async-tasks-and-promises.html#promissory-callbacks).
+
+```javascript
+uploader.on('complete', (id, name, response) => {
+   // handle completed upload
+})
+```
+
+##### `off(eventName, handlerFunction)`
+
+Unregister a previously registered callback/event handler. Same rules for `eventName` as  the `on` method apply here. The `handlerFunction` _must_ be the _exact_ `handlerFunction` passed to the `on` method when you initially registered said function.
+
+```javascript
+const completeHandler = (id, name, response) => {
+   // handle completed upload
+})
+
+uploader.on('complete', completeHandler)
+
+// ...later
+uploader.off('complete', completeHandler)
+```
+
+##### `options`
+
+The `options` property you used when constructing a new instance, sans any `callbacks`.
+
+##### `methods`
+
+Use this property to access any [core API methods exposed by Fine Uploader Azure](http://docs.fineuploader.com/branch/master/api/methods-azure.html).
+
+```javascript
+uploader.methods.getResumableFilesData(myFiles)
+```
+
 #### Traditional
 
 Use the traditional endpoint wrapper class if you would like to upload files to a server you control. Your server must handle _all_ requests sent by Fine Uploader, such as upload, delete file (optional), and chunking success (optional). You can read more about [traditional server requests in the documentation](http://docs.fineuploader.com/branch/master/endpoint_handlers/traditional.html). Some examples servers can be found in the [server-examples repository](https://github.com/FineUploader/server-examples).
@@ -150,7 +211,7 @@ const uploader = new FineUploaderTraditional({
 
 ##### `on(eventName, handlerFunction)`
 
-Register a new callback/event handler. The `eventName` can be formatted with _or_ without the 'on' prefix. If you do use the 'on', prefix, be sure to follow lower-camel-case exactly ('onSubmit', not 'onsubmit'). If a handler has already been registered for this event, yours will be added to the "pipeline" for this event. If a previously registered handler for this event fails for some reason or returns `false`, you handler will _not_ be called. Your handler function may return a `Promise` iff it is [listed as an event type that supports promissory/thenable return values](http://docs.fineuploader.com/branch/master/features/async-tasks-and-promises.html#promissory-callbacks). 
+Register a new callback/event handler. The `eventName` can be formatted with _or_ without the 'on' prefix. If you do use the 'on', prefix, be sure to follow lower-camel-case exactly ('onSubmit', not 'onsubmit'). If a handler has already been registered for this event, yours will be added to the "pipeline" for this event. If a previously registered handler for this event fails for some reason or returns `false`, you handler will _not_ be called. Your handler function may return a `Promise` iff it is [listed as an event type that supports promissory/thenable return values](http://docs.fineuploader.com/branch/master/features/async-tasks-and-promises.html#promissory-callbacks).
 
 ```javascript
 uploader.on('complete', (id, name, response) => {
@@ -463,11 +524,11 @@ You may pass _any_ standard [`<button>` attributes](https://developer.mozilla.or
 
 #### `<Dropzone />`
 
-This component provides an element that will accept dropped files or directories to be passed on to an underlying Fine Uploader instance. By default, the rendered component itself will accept these files, but you can also register another element in the DOM (such as `document.body`) to receive dropped files instead. 
+This component provides an element that will accept dropped files or directories to be passed on to an underlying Fine Uploader instance. By default, the rendered component itself will accept these files, but you can also register another element in the DOM (such as `document.body`) to receive dropped files instead.
 
 ##### Properties
 
-- `dropActiveClassName` - Directly maps to the [`classes.dropActive property` on Fine Uploader's standalone drag-and-drop module](http://docs.fineuploader.com/branch/master/features/drag-and-drop.html#classes.dropActive). 
+- `dropActiveClassName` - Directly maps to the [`classes.dropActive property` on Fine Uploader's standalone drag-and-drop module](http://docs.fineuploader.com/branch/master/features/drag-and-drop.html#classes.dropActive).
 
 - `element` - The DOM element to register as a drop zone. If omitted, the rendered `<Dropzone />` element will become the drop zone.
 
@@ -475,7 +536,7 @@ This component provides an element that will accept dropped files or directories
 
 - `onDropError` - Directly maps to the [`callbacks.dropError` option on Fine Uploader's standalone drag-and-drop module](http://docs.fineuploader.com/branch/master/features/drag-and-drop.html#dropError). React Fine Uploader will log any errors when the underlying DnD instance invokes the `dropError` callback, but you can specify additional behavior as well.
 
-- `onProcesssingDroppedFiles` - Directly maps to the [`callbacks.processingDroppedFiles` option on Fine Uploader's standalone drag-and-drop module](http://docs.fineuploader.com/branch/master/features/drag-and-drop.html#processingDroppedFiles). 
+- `onProcesssingDroppedFiles` - Directly maps to the [`callbacks.processingDroppedFiles` option on Fine Uploader's standalone drag-and-drop module](http://docs.fineuploader.com/branch/master/features/drag-and-drop.html#processingDroppedFiles).
 
 - `onProcessingDroppedFilesComplete` - Directly maps to the [`callbacks.processingDroppedFilesComplete` option on Fine Uploader's standalone drag-and-drop module](http://docs.fineuploader.com/branch/master/features/drag-and-drop.html#processingDroppedFilesComplete). React Fine Uploader will send all files to the underlying Fine Uploader instance when this callback is invoked, but you may specify additional logic as well.
 
@@ -776,7 +837,7 @@ You may pass _any_ standard [`<button>` attributes](https://developer.mozilla.or
 #### `<ProgressBar />`
 
 The ProgressBar component allows for a per-file _or_ a total progress bar to be rendered and automatically updated
-by the underlying upload wrapper instance. This covers the per-file and total progress bar elements found in Fine Uploader UI. This progress bar itself is made up of a container element and a child element that marks the file progress. 
+by the underlying upload wrapper instance. This covers the per-file and total progress bar elements found in Fine Uploader UI. This progress bar itself is made up of a container element and a child element that marks the file progress.
 
 ##### Properties
 
@@ -792,7 +853,7 @@ has completed uploading. For total progress bars, the bar is hidden once _all_ f
 - `uploader` - The only required option - a Fine Uploader [wrapper class](#wrapper-classes).
 
 Consider embedding a per-file `<ProgressBar />`, such as `<ProgressBar id={ 3 } uploader={ uploader } />`, alongside
-a [`<Thumbnail />` component](#thumbnail-) for the same file. A total progress bar - `<ProgressBar uploader={ uploader } />` - should probably be included before the container element that holds all file 
+a [`<Thumbnail />` component](#thumbnail-) for the same file. A total progress bar - `<ProgressBar uploader={ uploader } />` - should probably be included before the container element that holds all file
 `<Thumbnail />` elements, such as at the top of a [`<Dropzone />`](#dropzone-).
 
 #### `<RetryButton />`
