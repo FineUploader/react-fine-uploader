@@ -38,8 +38,8 @@ These wrap a Fine Uploader instance for use in React Fine Uploader. They provide
 
 - [Installing](#installing)
 - [Wrapper Classes](#wrapper-classes)
-   - [S3](#s3) - upload files to directly to an Amazon Simple Storage Service (S3) bucket. Your server must sign requests using a private key.
    - [Azure](#azure) - upload files directly to Azure storage
+   - [S3](#s3) - upload files to directly to an Amazon Simple Storage Service (S3) bucket. Your server must sign requests using a private key.
    - [Traditional](#traditional) - upload files to a server you created and control.
 - [High-level Components](#high-level-components)
    - [`<Gallery />`](#gallery-)
@@ -61,6 +61,67 @@ These wrap a Fine Uploader instance for use in React Fine Uploader. They provide
 0.1.0 is the first version of react-fine-uploader published on npm. Two dependencies that you will need to install yourself: an A+/Promise spec compliant polyfill (for IE11) and React (which is a peer dependency). Simply `npm install react-fine-uploader` and see the documentation for your specific integration instructions (based on your needs).
 
 ### Wrapper Classes
+
+#### Azure
+
+This enables you to upload to Azure directly. Your server must provide signature and done endpoints.
+
+##### `constructor({ options })`
+
+When creating a new instance of the Azure endpoint wrapper class, pass in an object that mirrors the format of the [Fine Uploader Azure Core options object](http://docs.fineuploader.com/branch/master/api/options-azure.html). This options property is entirely optional.
+
+```javascript
+import FineUploaderAzure from 'react-fine-uploader/wrappers/azure'
+
+const uploader = new FineUploaderAzure({
+    options: {
+      signature: {
+        endpoint: '/upload/signature',
+      },
+      uploadSuccess: {
+        endpoint: '/upload/done',
+      }
+    }
+})
+```
+
+##### `on(eventName, handlerFunction)`
+
+Register a new callback/event handler. The `eventName` can be formatted with _or_ without the 'on' prefix. If you do use the 'on', prefix, be sure to follow lower-camel-case exactly ('onSubmit', not 'onsubmit'). If a handler has already been registered for this event, yours will be added to the "pipeline" for this event. If a previously registered handler for this event fails for some reason or returns `false`, you handler will _not_ be called. Your handler function may return a `Promise` if it is [listed as an event type that supports promissory/thenable return values](http://docs.fineuploader.com/branch/master/features/async-tasks-and-promises.html#promissory-callbacks).
+
+```javascript
+uploader.on('complete', (id, name, response) => {
+   // handle completed upload
+})
+```
+
+##### `off(eventName, handlerFunction)`
+
+Unregister a previously registered callback/event handler. Same rules for `eventName` as  the `on` method apply here. The `handlerFunction` _must_ be the _exact_ `handlerFunction` passed to the `on` method when you initially registered said function.
+
+```javascript
+const completeHandler = (id, name, response) => {
+   // handle completed upload
+})
+
+uploader.on('complete', completeHandler)
+
+// ...later
+uploader.off('complete', completeHandler)
+```
+
+##### `options`
+
+The `options` property you used when constructing a new instance, sans any `callbacks`.
+
+##### `methods`
+
+Use this property to access any [core API methods exposed by Fine Uploader Azure](http://docs.fineuploader.com/branch/master/api/methods-azure.html).
+
+```javascript
+uploader.methods.getResumableFilesData(myFiles)
+```
+
 
 #### S3
 
@@ -122,66 +183,6 @@ Use this property to access any [core API methods exposed by Fine Uploader S3](h
 ```javascript
 uploader.methods.addFiles(myFiles)
 uploader.methods.deleteFile(3)
-```
-
-#### Azure
-
-This enables you to upload to Azure directly. Your server must provide signature and done endpoints.
-
-##### `constructor({ options })`
-
-When creating a new instance of the Azure endpoint wrapper class, pass in an object that mirrors the format of the [Fine Uploader Azure Core options object](http://docs.fineuploader.com/branch/master/api/options-azure.html). This options property is entirely optional.
-
-```javascript
-import FineUploaderAzure from 'react-fine-uploader/wrappers/azure'
-
-const uploader = new FineUploaderAzure({
-    options: {
-      signature: {
-        endpoint: '/upload/signature',
-      },
-      uploadSuccess: {
-        endpoint: '/upload/done',
-      }
-    }
-})
-```
-
-##### `on(eventName, handlerFunction)`
-
-Register a new callback/event handler. The `eventName` can be formatted with _or_ without the 'on' prefix. If you do use the 'on', prefix, be sure to follow lower-camel-case exactly ('onSubmit', not 'onsubmit'). If a handler has already been registered for this event, yours will be added to the "pipeline" for this event. If a previously registered handler for this event fails for some reason or returns `false`, you handler will _not_ be called. Your handler function may return a `Promise` if it is [listed as an event type that supports promissory/thenable return values](http://docs.fineuploader.com/branch/master/features/async-tasks-and-promises.html#promissory-callbacks).
-
-```javascript
-uploader.on('complete', (id, name, response) => {
-   // handle completed upload
-})
-```
-
-##### `off(eventName, handlerFunction)`
-
-Unregister a previously registered callback/event handler. Same rules for `eventName` as  the `on` method apply here. The `handlerFunction` _must_ be the _exact_ `handlerFunction` passed to the `on` method when you initially registered said function.
-
-```javascript
-const completeHandler = (id, name, response) => {
-   // handle completed upload
-})
-
-uploader.on('complete', completeHandler)
-
-// ...later
-uploader.off('complete', completeHandler)
-```
-
-##### `options`
-
-The `options` property you used when constructing a new instance, sans any `callbacks`.
-
-##### `methods`
-
-Use this property to access any [core API methods exposed by Fine Uploader Azure](http://docs.fineuploader.com/branch/master/api/methods-azure.html).
-
-```javascript
-uploader.methods.getResumableFilesData(myFiles)
 ```
 
 #### Traditional
