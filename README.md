@@ -64,7 +64,7 @@ These wrap a Fine Uploader instance for use in React Fine Uploader. They provide
 
 #### Azure
 
-This enables you to upload to Azure directly. Your server must provide signature and done endpoints.
+This enables you to upload to Azure directly. Your server must provide signature and done endpoints. The Azure uploading workflow is documented on the [Azure feature page](http://docs.fineuploader.com/branch/master/features/azure.html). Some examples servers can be found in the [server-examples repository](https://github.com/FineUploader/server-examples).
 
 ##### `constructor({ options })`
 
