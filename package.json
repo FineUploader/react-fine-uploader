@@ -1,6 +1,6 @@
 {
   "name": "react-fine-uploader",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "license": "MIT",
   "description": "React UI components for using Fine Uploader in a React-based project.",
   "author":     {
@@ -25,7 +25,7 @@
     "react-addons-css-transition-group": "0.14.x || 15.x.x"
   },
   "dependencies": {
-    "fine-uploader": ">=5.11.5 <6.0.0",
+    "fine-uploader": ">=5.11.10 <6.0.0",
     "object-assign": "4.1.0"
   },
   "devDependencies": {
