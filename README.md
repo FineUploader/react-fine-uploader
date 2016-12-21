@@ -368,9 +368,9 @@ The example below will include a cancel button for each submitted file along wit
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-import CancelButton 'react-fine-uploader/components/cancel-button'
+import CancelButton from 'react-fine-uploader/components/cancel-button'
 import FineUploaderTraditional from 'react-fine-uploader'
-import Thumbnail 'react-fine-uploader/components/thumbnail'
+import Thumbnail from 'react-fine-uploader/components/thumbnail'
 
 const uploader = new FineUploader({
    options: {
@@ -416,7 +416,7 @@ export default class FileListener extends Component {
                            <Thumbnail id={ id } uploader={ uploader } />
                            <CancelButton id={ id } uploader={ uploader } />
                         </div>
-                    ))
+                    })
                 }
             </div>
         )
@@ -454,9 +454,9 @@ The example below will include a delete button for each submitted file along wit
 ```javascript
 import React, { Component } from 'react'
 
-import DeleteButton 'react-fine-uploader/components/delete-button'
+import DeleteButton from 'react-fine-uploader/components/delete-button'
 import FineUploaderTraditional from 'react-fine-uploader'
-import Thumbnail 'react-fine-uploader/components/thumbnail'
+import Thumbnail from 'react-fine-uploader/components/thumbnail'
 
 const uploader = new FineUploader({
    options: {
@@ -549,7 +549,7 @@ A _very_ simple but completely functional and effective use of the `<Dropzone />
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import FileInput 'react-fine-uploader/components/dropzone'
+import FileInput from 'react-fine-uploader/components/dropzone'
 import FineUploaderTraditional from 'react-fine-uploader'
 
 const uploader = new FineUploaderTraditional({
@@ -592,7 +592,7 @@ Note: This assumes you have [the Ionicons CSS file](http://ionicons.com/#cdn) lo
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import FileInput 'react-fine-uploader/components/file-input'
+import FileInput from 'react-fine-uploader/components/file-input'
 import FineUploaderTraditional from 'react-fine-uploader'
 
 const uploader = new FineUploaderTraditional({
@@ -635,7 +635,7 @@ Note: This assumes you have additional components or code to allow files to actu
 import React, { Component } from 'react'
 
 import FineUploaderTraditional from 'react-fine-uploader'
-import Filename 'react-fine-uploader/components/filename'
+import Filename from 'react-fine-uploader/components/filename'
 
 const uploader = new FineUploader({
    options: {
@@ -704,7 +704,7 @@ Note: This assumes you have additional components or code to allow files to actu
 import React, { Component } from 'react'
 
 import FineUploaderTraditional from 'react-fine-uploader'
-import Filesize 'react-fine-uploader/components/filesize'
+import Filesize from 'react-fine-uploader/components/filesize'
 
 const uploader = new FineUploader({
    options: {
@@ -785,8 +785,8 @@ The example below will include a pause/resume button for each submitted file alo
 import React, { Component } from 'react'
 
 import FineUploaderTraditional from 'react-fine-uploader'
-import PauseResumeButton 'react-fine-uploader/components/PauseResume-button'
-import Thumbnail 'react-fine-uploader/components/thumbnail'
+import PauseResumeButton from 'react-fine-uploader/components/PauseResume-button'
+import Thumbnail from 'react-fine-uploader/components/thumbnail'
 
 const uploader = new FineUploader({
    options: {
@@ -879,8 +879,8 @@ The example below will include a retry button for each submitted file along with
 import React, { Component } from 'react'
 
 import FineUploaderTraditional from 'react-fine-uploader'
-import RetryButton 'react-fine-uploader/components/retry-button'
-import Thumbnail 'react-fine-uploader/components/thumbnail'
+import RetryButton from 'react-fine-uploader/components/retry-button'
+import Thumbnail from 'react-fine-uploader/components/thumbnail'
 
 const uploader = new FineUploader({
    options: {
@@ -957,8 +957,8 @@ Note: This assumes you have additional components or code to allow files to actu
 import React, { Component } from 'react'
 
 import FineUploaderTraditional from 'react-fine-uploader'
-import Status 'react-fine-uploader/components/filesize'
-import Thumbnail 'react-fine-uploader/components/thumbnail'
+import Status from 'react-fine-uploader/components/filesize'
+import Thumbnail from 'react-fine-uploader/components/thumbnail'
 
 const uploader = new FineUploader({
    options: {
@@ -1025,7 +1025,7 @@ Note: This assumes you have additional components or code to allow files to actu
 import React, { Component } from 'react'
 
 import FineUploaderTraditional from 'react-fine-uploader'
-import Thumbnail 'react-fine-uploader/components/thumbnail'
+import Thumbnail from 'react-fine-uploader/components/thumbnail'
 
 const uploader = new FineUploader({
    options: {
