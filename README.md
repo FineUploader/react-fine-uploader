@@ -368,9 +368,9 @@ The example below will include a cancel button for each submitted file along wit
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-import CancelButton 'react-fine-uploader/components/cancel-button'
+import CancelButton from 'react-fine-uploader/components/cancel-button'
 import FineUploaderTraditional from 'react-fine-uploader'
-import Thumbnail 'react-fine-uploader/components/thumbnail'
+import Thumbnail from 'react-fine-uploader/components/thumbnail'
 
 const uploader = new FineUploader({
    options: {
