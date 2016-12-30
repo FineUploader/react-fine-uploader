@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 
 class DropzoneElement extends Component {
     static propTypes = {
-        children: PropTypes.array,
+        children: PropTypes.node,
         dropActiveClassName: PropTypes.string,
         element: PropTypes.string,
         multiple: PropTypes.bool,
