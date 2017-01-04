@@ -307,6 +307,9 @@ import React, { Component } from 'react'
 import FineUploaderTraditional from 'react-fine-uploader'
 import Gallery from 'react-fine-uploader/components/gallery'
 
+// ...or load this specific CSS file using a <link> tag in your document
+import 'react-fine-uploader/components/gallery/gallery.css'
+
 const uploader = new FineUploaderTraditional({
     options: {
         chunking: {

@@ -13,7 +13,6 @@ import ProgressBar from '../progress-bar'
 import Status from '../status'
 import Thumbnail from '../thumbnail'
 
-import './gallery.css'
 import PauseIcon from './pause-icon'
 import PlayIcon from './play-icon'
 import UploadIcon from './upload-icon'

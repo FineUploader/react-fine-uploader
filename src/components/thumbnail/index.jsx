@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 
 import Placeholder from './placeholder'
 
-import './thumbnail.css'
 import NotAvailablePlaceholder from './not-available-placeholder'
 import WaitingPlaceholder from './waiting-placeholder'
 

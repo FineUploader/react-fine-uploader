@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 
 const Placeholder = ({ className, image, size, status }) => {
     const style = {
+        display: 'inline-block',
         maxHeight: size,
         maxWidth: size
     }
