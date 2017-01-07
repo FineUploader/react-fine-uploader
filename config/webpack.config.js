@@ -13,6 +13,7 @@ module.exports = {
     },
     resolve: {
         alias: {
+            lib: path.resolve('lib'),
             src: path.resolve('src'),
             test: path.resolve('src/test/unit')
         },

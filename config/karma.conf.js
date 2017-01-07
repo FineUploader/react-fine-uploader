@@ -15,9 +15,12 @@ var path = require('path'),
         },
         sl_ios_safari: {
             base: 'SauceLabs',
-            browserName: 'iphone',
-            platform: 'OS X 10.11',
-            version: '9.0'
+            appiumVersion: '1.5.2',
+            browserName: 'Safari',
+            deviceName: "iPhone 6",
+            platformName: 'iOS',
+            platformVersion: '9.2',
+            name: 'iPhone 6'
         },
         sl_osx_safari: {
             base: 'SauceLabs',
@@ -35,7 +38,7 @@ var path = require('path'),
             base: 'SauceLabs',
             browserName: 'MicrosoftEdge',
             platform: 'Windows 10',
-            version: '13'
+            version: '13.10586'
         }
     }
 

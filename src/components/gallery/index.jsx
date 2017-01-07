@@ -13,10 +13,11 @@ import ProgressBar from '../progress-bar'
 import Status from '../status'
 import Thumbnail from '../thumbnail'
 
-import './gallery.css'
 import PauseIcon from './pause-icon'
 import PlayIcon from './play-icon'
 import UploadIcon from './upload-icon'
+import UploadFailedIcon from './upload-failed-icon'
+import UploadSuccessIcon from './upload-success-icon'
 import XIcon from './x-icon'
 
 // Replace with qq drop feature detection once #27 is done or have <Dropzone /> handle this instead (?)
@@ -50,24 +51,29 @@ class Gallery extends Component {
         this.state = {
             visibleFiles: []
         }
+
+        this._onStatusChange = (id, oldStatus, status) => {
+            if (status === 'submitted') {
+                const visibleFiles = this.state.visibleFiles
+
+                visibleFiles.push({ id })
+                this.setState({ visibleFiles })
+            }
+            else if (isFileGone(status)) {
+                this._removeVisibleFile(id)
+            }
+            else if (status === 'upload successful' || status === 'upload failed') {
+                this._updateVisibleFileStatus(id, status)
+            }
+        }
     }
 
     componentDidMount() {
-        this.props.uploader.on('statusChange', (id, oldStatus, newStatus) => {
-            if (newStatus === 'submitted') {
-                const visibleFiles = this.state.visibleFiles
+        this.props.uploader.on('statusChange', this._onStatusChange)
+    }
 
-                visibleFiles.push(id)
-                this.setState({ visibleFiles })
-            }
-            else if (isFileGone(newStatus)) {
-                const visibleFiles = this.state.visibleFiles
-                const indexToRemove = visibleFiles.indexOf(id)
-
-                visibleFiles.splice(indexToRemove, 1)
-                this.setState({ visibleFiles })
-            }
-        })
+    componentWillUnmount() {
+        this.props.uploader.off('statusChange', this._onStatusChange)
     }
 
     render() {
@@ -103,12 +109,14 @@ class Gallery extends Component {
                 />
                 <ReactCssTransitionGroup className='react-fine-uploader-gallery-files'
                                          component='ul'
+                                         transitionEnter={ !this.props.animationsDisabled }
                                          transitionEnterTimeout={ 500 }
+                                         transitionLeave={ !this.props.animationsDisabled }
                                          transitionLeaveTimeout={ 300 }
                                          transitionName='react-fine-uploader-gallery-files'
                 >
                 {
-                    this.state.visibleFiles.map(id => (
+                    this.state.visibleFiles.map(({ id, status }) => (
                         <li key={ id }
                              className='react-fine-uploader-gallery-file'
                         >
@@ -122,6 +130,20 @@ class Gallery extends Component {
                                        uploader={ uploader }
                                        { ...thumbnailProps }
                             />
+                            {
+                                status === 'upload successful' &&
+                                    <span>
+                                        <UploadSuccessIcon className='react-fine-uploader-gallery-upload-success-icon' />
+                                        <div className='react-fine-uploader-gallery-thumbnail-icon-backdrop' />
+                                    </span>
+                            }
+                            {
+                                status === 'upload failed' &&
+                                    <span>
+                                        <UploadFailedIcon className='react-fine-uploader-gallery-upload-failed-icon' />
+                                        <div className='react-fine-uploader-gallery-thumbnail-icon-backdrop' />
+                                    </span>
+                            }
                             <div className='react-fine-uploader-gallery-file-footer'>
                                 <Filename className='react-fine-uploader-gallery-filename'
                                           id={ id }
@@ -171,6 +193,34 @@ class Gallery extends Component {
                 </ReactCssTransitionGroup>
             </MaybeDropzone>
         )
+    }
+
+    _removeVisibleFile(id) {
+        let visibleFileIndex = -1
+
+        this.state.visibleFiles.some((file, index) => {
+            if (file.id === id) {
+                visibleFileIndex = index
+                return true
+            }
+        })
+
+        if (visibleFileIndex >= 0) {
+            const visibleFiles = this.state.visibleFiles
+
+            visibleFiles.splice(visibleFileIndex, 1)
+            this.setState({ visibleFiles })
+        }
+    }
+
+    _updateVisibleFileStatus(id, status) {
+        this.state.visibleFiles.some(file => {
+            if (file.id === id) {
+                file.status = status
+                this.setState({ visibleFiles: this.state.visibleFiles })
+                return true
+            }
+        })
     }
 }
 

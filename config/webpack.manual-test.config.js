@@ -8,5 +8,6 @@ module.exports = Object.assign({}, webpackConfig, {
     output: {
         path: path.resolve('src/test/manual/bundle'),
         filename: '[name].js'
-    }
+    },
+    devtool: 'source-map'
 })
