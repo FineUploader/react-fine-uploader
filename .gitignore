@@ -5,4 +5,5 @@ lib
 node_modules
 s3keys.sh
 src/test/manual/bundle
+uploads/
 vendor/
