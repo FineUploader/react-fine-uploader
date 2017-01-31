@@ -2,8 +2,8 @@ import qq from 'fine-uploader/lib/core/all'
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 
-import FineUploaderTraditional from 'src/wrappers/traditional'
-import ProgressBar from 'src/components/progress-bar'
+import FineUploaderTraditional from 'fine-uploader-wrappers'
+import ProgressBar from 'src//progress-bar'
 
 describe('<ProgressBar />', () => {
     it('renders total progress bar when a file ID is not supplied & updates progress appropriately', () => {

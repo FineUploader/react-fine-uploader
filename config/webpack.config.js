@@ -3,10 +3,6 @@ const isProduction = process.env.NODE_ENV === 'production';
 const path = require('path')
 
 module.exports = {
-    entry: {
-        'traditional-wrapper': [path.resolve('src/wrappers/traditional.js')],
-        'file-input': [path.resolve('src/components/file-input/styleable-element.jsx')]
-    },
     output: {
         path: path.resolve('lib'),
         filename: `[name].${isProduction ? 'min.js' : '.js'}`

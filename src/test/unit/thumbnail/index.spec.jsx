@@ -2,7 +2,7 @@ import qq from 'fine-uploader/lib/core/all'
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 
-import Thumbnail, { defaultMaxSize, notAvailableStatus, waitingStatus } from 'src/components/thumbnail'
+import Thumbnail, { defaultMaxSize, notAvailableStatus, waitingStatus } from 'src//thumbnail'
 
 describe('<Thumbnail />', () => {
     let drawThumbnail, qqPromise, uploader

@@ -1,8 +1,8 @@
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 
-import FineUploaderTraditional from 'src/wrappers/traditional'
-import Filesize from 'src/components/filesize'
+import FineUploaderTraditional from 'fine-uploader-wrappers'
+import Filesize from 'src//filesize'
 
 const sampleBlob = new Blob(['hi!'], { type : 'text/plain' })
 const sampleBlobWrapper = { blob: sampleBlob, name: 'test' }

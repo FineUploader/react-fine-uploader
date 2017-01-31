@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-import Gallery from 'lib/components/gallery'
-import S3FineUploader from 'lib/wrappers/s3'
-import TraditionalFineUploader from 'lib/wrappers/traditional'
+import Gallery from 'lib/gallery'
+import S3FineUploader from 'fine-uploader-wrappers/s3'
+import TraditionalFineUploader from 'fine-uploader-wrappers'
 
-import 'lib/components/gallery/gallery.css'
+import 'lib/gallery/gallery.css'
 
 const traditionalUploader = new TraditionalFineUploader({
     options: {
