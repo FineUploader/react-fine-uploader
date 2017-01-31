@@ -1,8 +1,8 @@
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 
-import Dropzone from 'src//dropzone'
-import FileInput from 'src//file-input'
+import Dropzone from 'src/dropzone'
+import FileInput from 'src/file-input'
 import FineUploaderTraditional from 'fine-uploader-wrappers'
 import Gallery from 'src/gallery'
 

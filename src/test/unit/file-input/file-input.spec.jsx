@@ -1,7 +1,7 @@
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 
-import FileInput from 'src//file-input'
+import FileInput from 'src/file-input'
 
 class DummyStylableElement extends React.Component {
     render() {

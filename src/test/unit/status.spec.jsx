@@ -1,7 +1,7 @@
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 
-import Status from 'src//status'
+import Status from 'src/status'
 import FineUploaderTraditional from 'fine-uploader-wrappers'
 
 describe('<Status />', () => {

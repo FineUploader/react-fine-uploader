@@ -2,7 +2,7 @@ import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 
 import FineUploaderTraditional from 'fine-uploader-wrappers'
-import PauseResumeButton from 'src//pause-resume-button'
+import PauseResumeButton from 'src/pause-resume-button'
 
 describe('<PauseResumeButton />', () => {
     let statusChangeCallback, uploadChunkCallback, uploader

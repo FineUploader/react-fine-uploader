@@ -1,7 +1,7 @@
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 
-import DeleteButton from 'src//delete-button'
+import DeleteButton from 'src/delete-button'
 import FineUploaderTraditional from 'fine-uploader-wrappers'
 
 describe('<DeleteButton />', () => {

@@ -2,7 +2,7 @@ import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 
 import { wrapStatelessComponent } from 'test/utils'
-import StyleableElement from 'src//file-input/styleable-element'
+import StyleableElement from 'src/file-input/styleable-element'
 
 describe('<StylableElement />', () => {
     const WrappedStyleableElement = wrapStatelessComponent(StyleableElement)

@@ -2,7 +2,7 @@ import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 
 import FineUploaderTraditional from 'fine-uploader-wrappers'
-import CancelButton from 'src//cancel-button'
+import CancelButton from 'src/cancel-button'
 
 const sampleBlob = new Blob(['hi!'], { type : 'text/plain' })
 

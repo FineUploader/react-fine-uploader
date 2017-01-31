@@ -1,7 +1,7 @@
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 
-import RetryButton from 'src//retry-button'
+import RetryButton from 'src/retry-button'
 import FineUploaderTraditional from 'fine-uploader-wrappers'
 
 describe('<RetryButton />', () => {

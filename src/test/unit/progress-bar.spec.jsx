@@ -3,7 +3,7 @@ import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 
 import FineUploaderTraditional from 'fine-uploader-wrappers'
-import ProgressBar from 'src//progress-bar'
+import ProgressBar from 'src/progress-bar'
 
 describe('<ProgressBar />', () => {
     it('renders total progress bar when a file ID is not supplied & updates progress appropriately', () => {
