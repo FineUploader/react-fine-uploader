@@ -66,7 +66,7 @@
     "node": ">=5.0.0"
   },
   "scripts": {
-    "build": "rm -rf lib && mkdir -p lib && cp -pR src/ lib && babel lib --out-dir lib && find lib -type f -name '*.jsx' -delete",
+    "build": "rm -rf lib && mkdir -p lib && rsync -av --exclude='test' src/ lib && babel lib --out-dir lib && find lib -type f -name '*.jsx' -delete",
     "lint": "eslint src/. --ext .js,.jsx --cache",
     "manual-test": "webpack --config config/webpack.manual-test.config.js --watch --display-error-details",
     "push-to-npm": "cp package.json README.md LICENSE lib && (cd lib ; npm publish)",
