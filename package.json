@@ -1,6 +1,6 @@
 {
   "name": "react-fine-uploader",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "license": "MIT",
   "description": "React UI components for using Fine Uploader in a React-based project.",
   "author":     {
@@ -19,13 +19,14 @@
     "upload",
     "widget"
   ],
-  "main": "wrappers/traditional.js",
+  "main": "gallery/index.js",
   "peerDependencies": {
     "react": "0.14.x || 15.x.x",
     "react-addons-css-transition-group": "0.14.x || 15.x.x"
   },
   "dependencies": {
     "fine-uploader": ">=5.11.10 <6.0.0",
+    "fine-uploader-wrappers": "0.1.1",
     "object-assign": "4.1.1"
   },
   "devDependencies": {
@@ -58,19 +59,19 @@
     "react-addons-test-utils": "latest",
     "react-dom": "latest",
     "style-loader": "latest",
-    "webpack": "latest",
+    "webpack": "1.14.0",
     "webpack-node-externals": "latest"
   },
   "engines": {
     "node": ">=5.0.0"
   },
   "scripts": {
-    "build": "rm -rf lib && mkdir -p lib && cp -pR src/components lib && cp -pR src/wrappers lib && babel lib --out-dir lib && find lib -type f -name '*.jsx' -delete",
+    "build": "rm -rf lib && mkdir -p lib && cp -pR src/ lib && babel lib --out-dir lib && find lib -type f -name '*.jsx' -delete",
     "lint": "eslint src/. --ext .js,.jsx --cache",
     "manual-test": "webpack --config config/webpack.manual-test.config.js --watch --display-error-details",
     "push-to-npm": "cp package.json README.md LICENSE lib && (cd lib ; npm publish)",
     "release": "npm run test && npm run build && npm run push-to-npm",
-    "start": "(. src/test/manual/s3keys.sh; php -S 0.0.0.0:9090 -t src/test/manual -c src/test/manual/php.ini)",
+    "start": "(php -S 0.0.0.0:9090 -t src/test/manual -c src/test/manual/php.ini)",
     "start-no-s3": "php -S 0.0.0.0:9090 -t src/test/manual -c src/test/manual/php.ini",
     "test": "npm run lint && if [ $CI ]; then karma start config/karma.conf; else karma start config/karma.dev.conf; fi"
   }

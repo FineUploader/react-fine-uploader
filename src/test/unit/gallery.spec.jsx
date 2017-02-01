@@ -1,10 +1,10 @@
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 
-import Dropzone from 'src/components/dropzone'
-import FileInput from 'src/components/file-input'
-import FineUploaderTraditional from 'src/wrappers/traditional'
-import Gallery from 'src/components/gallery'
+import Dropzone from 'src/dropzone'
+import FileInput from 'src/file-input'
+import FineUploaderTraditional from 'fine-uploader-wrappers'
+import Gallery from 'src/gallery'
 
 const isMobile = !!('ontouchstart' in window)
 const sampleBlob = new Blob(['hi!'], { type : 'text/plain' })

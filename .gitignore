@@ -1,5 +1,6 @@
 .eslintcache
 .idea
+composer.phar
 dist
 lib
 node_modules

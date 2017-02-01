@@ -34,13 +34,11 @@ These combine many focused components that provide style (which can be adjusted 
 
 These wrap a Fine Uploader instance for use in React Fine Uploader. They provide additional features such as the ability to dynamically register multiple event/callback listeners. All individual and higher-order/focused components require you to pass a constructed wrapper class instance.
 
+More information, such as examples and API documentation, can be found in the README of the [fine-uploader-wrappers project](https://github.com/FineUploader/fine-uploader-wrappers).
+
 ### Quick Reference
 
 - [Installing](#installing)
-- [Wrapper Classes](#wrapper-classes)
-   - [Azure](#azure) - upload files directly to Azure storage
-   - [S3](#s3) - upload files to directly to an Amazon Simple Storage Service (S3) bucket. Your server must sign requests using a private key.
-   - [Traditional](#traditional) - upload files to a server you created and control.
 - [High-level Components](#high-level-components)
    - [`<Gallery />`](#gallery-)
 - [Low-level Components](#low-level-components)
@@ -59,195 +57,6 @@ These wrap a Fine Uploader instance for use in React Fine Uploader. They provide
 ### Installing
 
 0.1.0 is the first version of react-fine-uploader published on npm. Two dependencies that you will need to install yourself: an A+/Promise spec compliant polyfill (for IE11) and React (which is a peer dependency). Simply `npm install react-fine-uploader` and see the documentation for your specific integration instructions (based on your needs).
-
-### Wrapper Classes
-
-#### Azure
-
-This enables you to upload to Azure directly. Your server must provide signature and done endpoints. The Azure uploading workflow is documented on the [Azure feature page](http://docs.fineuploader.com/branch/master/features/azure.html). Some examples servers can be found in the [server-examples repository](https://github.com/FineUploader/server-examples).
-
-##### `constructor({ options })`
-
-When creating a new instance of the Azure endpoint wrapper class, pass in an object that mirrors the format of the [Fine Uploader Azure Core options object](http://docs.fineuploader.com/branch/master/api/options-azure.html). This options property is entirely optional.
-
-```javascript
-import FineUploaderAzure from 'react-fine-uploader/wrappers/azure'
-
-const uploader = new FineUploaderAzure({
-    options: {
-      signature: {
-        endpoint: '/upload/signature',
-      },
-      uploadSuccess: {
-        endpoint: '/upload/done',
-      }
-    }
-})
-```
-
-##### `on(eventName, handlerFunction)`
-
-Register a new callback/event handler. The `eventName` can be formatted with _or_ without the 'on' prefix. If you do use the 'on', prefix, be sure to follow lower-camel-case exactly ('onSubmit', not 'onsubmit'). If a handler has already been registered for this event, yours will be added to the "pipeline" for this event. If a previously registered handler for this event fails for some reason or returns `false`, you handler will _not_ be called. Your handler function may return a `Promise` if it is [listed as an event type that supports promissory/thenable return values](http://docs.fineuploader.com/branch/master/features/async-tasks-and-promises.html#promissory-callbacks).
-
-```javascript
-uploader.on('complete', (id, name, response) => {
-   // handle completed upload
-})
-```
-
-##### `off(eventName, handlerFunction)`
-
-Unregister a previously registered callback/event handler. Same rules for `eventName` as  the `on` method apply here. The `handlerFunction` _must_ be the _exact_ `handlerFunction` passed to the `on` method when you initially registered said function.
-
-```javascript
-const completeHandler = (id, name, response) => {
-   // handle completed upload
-})
-
-uploader.on('complete', completeHandler)
-
-// ...later
-uploader.off('complete', completeHandler)
-```
-
-##### `options`
-
-The `options` property you used when constructing a new instance, sans any `callbacks`.
-
-##### `methods`
-
-Use this property to access any [core API methods exposed by Fine Uploader Azure](http://docs.fineuploader.com/branch/master/api/methods-azure.html).
-
-```javascript
-uploader.methods.getResumableFilesData(myFiles)
-```
-
-
-#### S3
-
-Use the traditional endpoint wrapper class if you would like to upload files directly to an Amazon Simple Storage Service (S3 bucket). Your server must be able to sign requests sent by Fine Uploader. If you enable the delete file feature, your server must handle these as well. You can read more about [S3 server requests in the documentation](http://docs.fineuploader.com/branch/master/endpoint_handlers/amazon-s3.html). The S3 uploading workflow is documented on the [S3 feature page](http://docs.fineuploader.com/branch/master/features/s3.html). Some examples servers can be found in the [server-examples repository](https://github.com/FineUploader/server-examples).
-
-##### `constructor({ options })`
-
-When creating a new instance of the S3 endpoint wrapper class, pass in an object that mirrors the format of the [Fine Uploader S3 Core options object](http://docs.fineuploader.com/branch/master/api/options-s3.html). You may also include a `callbacks` property to include any initial [core callback handlers](http://docs.fineuploader.com/branch/master/api/events-s3.html) that you might need. This options property is entirely optional though :laughing:.
-
-```javascript
-import FineUploaderS3 from 'react-fine-uploader/wrappers/s3'
-
-const uploader = new FineUploaderS3({
-    options: {
-        request: {
-            endpoint: "http://fineuploadertest.s3.amazonaws.com",
-            accessKey: "AKIAIXVR6TANOGNBGANQ"
-        },
-        signature: {
-            endpoint: "/vendor/fineuploader/php-s3-server/endpoint.php"
-        }
-    }
-})
-```
-
-##### `on(eventName, handlerFunction)`
-
-Register a new callback/event handler. The `eventName` can be formatted with _or_ without the 'on' prefix. If you do use the 'on', prefix, be sure to follow lower-camel-case exactly ('onSubmit', not 'onsubmit'). If a handler has already been registered for this event, yours will be added to the "pipeline" for this event. If a previously registered handler for this event fails for some reason or returns `false`, you handler will _not_ be called. Your handler function may return a `Promise` if it is [listed as an event type that supports promissory/thenable return values](http://docs.fineuploader.com/branch/master/features/async-tasks-and-promises.html#promissory-callbacks).
-
-```javascript
-uploader.on('complete', (id, name, response) => {
-   // handle completed upload
-})
-```
-
-##### `off(eventName, handlerFunction)`
-
-Unregister a previously registered callback/event handler. Same rules for `eventName` as  the `on` method apply here. The `handlerFunction` _must_ be the _exact_ `handlerFunction` passed to the `on` method when you initially registered said function.
-
-```javascript
-const completeHandler = (id, name, response) => {
-   // handle completed upload
-})
-
-uploader.on('complete', completeHandler)
-
-// ...later
-uploader.off('complete', completeHandler)
-```
-
-##### `options`
-
-The `options` property you used when constructing a new instance, sans any `callbacks`.
-
-##### `methods`
-
-Use this property to access any [core API methods exposed by Fine Uploader S3](http://docs.fineuploader.com/branch/master/api/methods-s3.html).
-
-```javascript
-uploader.methods.addFiles(myFiles)
-uploader.methods.deleteFile(3)
-```
-
-#### Traditional
-
-Use the traditional endpoint wrapper class if you would like to upload files to a server you control. Your server must handle _all_ requests sent by Fine Uploader, such as upload, delete file (optional), and chunking success (optional). You can read more about [traditional server requests in the documentation](http://docs.fineuploader.com/branch/master/endpoint_handlers/traditional.html). Some examples servers can be found in the [server-examples repository](https://github.com/FineUploader/server-examples).
-
-##### `constructor({ options })`
-
-When creating a new instance of the traditional endpoint wrapper class, pass in an object that mirrors the format of the [Fine Uploader Core options object](http://docs.fineuploader.com/branch/master/api/options.html). You may also include a `callbacks` property to include any initial [core callback handlers](http://docs.fineuploader.com/branch/master/api/events.html) that you might need. This options property is entirely optional.
-
-```javascript
-import FineUploaderTraditional from 'react-fine-uploader'
-
-const uploader = new FineUploaderTraditional({
-   options: {
-      request: {
-         endpoint: 'my/upload/endpoint'
-      },
-      callbacks: {
-         onComplete: (id, name, response) => {
-            // handle completed upload
-         }
-      }
-   }
-})
-```
-
-##### `on(eventName, handlerFunction)`
-
-Register a new callback/event handler. The `eventName` can be formatted with _or_ without the 'on' prefix. If you do use the 'on', prefix, be sure to follow lower-camel-case exactly ('onSubmit', not 'onsubmit'). If a handler has already been registered for this event, yours will be added to the "pipeline" for this event. If a previously registered handler for this event fails for some reason or returns `false`, you handler will _not_ be called. Your handler function may return a `Promise` iff it is [listed as an event type that supports promissory/thenable return values](http://docs.fineuploader.com/branch/master/features/async-tasks-and-promises.html#promissory-callbacks).
-
-```javascript
-uploader.on('complete', (id, name, response) => {
-   // handle completed upload
-})
-```
-
-##### `off(eventName, handlerFunction)`
-
-Unregister a previously registered callback/event handler. Same rules for `eventName` as  the `on` method apply here. The `handlerFunction` _must_ be the _exact_ `handlerFunction` passed to the `on` method when you initially registered said function.
-
-```javascript
-const completeHandler = (id, name, response) => {
-   // handle completed upload
-})
-
-uploader.on('complete', completeHandler)
-
-// ...later
-uploader.off('complete', completeHandler)
-```
-
-##### `options`
-
-The `options` property you used when constructing a new instance, sans any `callbacks`.
-
-##### `methods`
-
-Use this property to access any [core API methods exposed by Fine Uploader](http://docs.fineuploader.com/branch/master/api/methods.html).
-
-```javascript
-uploader.methods.addFiles(myFiles)
-uploader.methods.deleteFile(3)
-```
-
 
 ### High-level Components
 
@@ -304,11 +113,11 @@ For example, if you render a `<Gallery />` component using the following code:
 ```js
 import React, { Component } from 'react'
 
-import FineUploaderTraditional from 'react-fine-uploader'
-import Gallery from 'react-fine-uploader/components/gallery'
+import FineUploaderTraditional from 'fine-uploader-wrappers'
+import Gallery from 'react-fine-uploader'
 
 // ...or load this specific CSS file using a <link> tag in your document
-import 'react-fine-uploader/components/gallery/gallery.css'
+import 'react-fine-uploader/gallery/gallery.css'
 
 const uploader = new FineUploaderTraditional({
     options: {
@@ -371,9 +180,9 @@ The example below will include a cancel button for each submitted file along wit
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-import CancelButton from 'react-fine-uploader/components/cancel-button'
-import FineUploaderTraditional from 'react-fine-uploader'
-import Thumbnail from 'react-fine-uploader/components/thumbnail'
+import CancelButton from 'react-fine-uploader/cancel-button'
+import FineUploaderTraditional from 'fine-uploader-wrappers'
+import Thumbnail from 'react-fine-uploader/thumbnail'
 
 const uploader = new FineUploader({
    options: {
@@ -457,9 +266,9 @@ The example below will include a delete button for each submitted file along wit
 ```javascript
 import React, { Component } from 'react'
 
-import DeleteButton from 'react-fine-uploader/components/delete-button'
-import FineUploaderTraditional from 'react-fine-uploader'
-import Thumbnail from 'react-fine-uploader/components/thumbnail'
+import DeleteButton from 'react-fine-uploader/delete-button'
+import FineUploaderTraditional from 'fine-uploader-wrappers'
+import Thumbnail from 'react-fine-uploader/thumbnail'
 
 const uploader = new FineUploader({
    options: {
@@ -552,8 +361,8 @@ A _very_ simple but completely functional and effective use of the `<Dropzone />
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import FileInput from 'react-fine-uploader/components/dropzone'
-import FineUploaderTraditional from 'react-fine-uploader'
+import FileInput from 'react-fine-uploader/dropzone'
+import FineUploaderTraditional from 'fine-uploader-wrappers'
 
 const uploader = new FineUploaderTraditional({
    options: {
@@ -595,8 +404,8 @@ Note: This assumes you have [the Ionicons CSS file](http://ionicons.com/#cdn) lo
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import FileInput from 'react-fine-uploader/components/file-input'
-import FineUploaderTraditional from 'react-fine-uploader'
+import FileInput from 'react-fine-uploader/file-input'
+import FineUploaderTraditional from 'fine-uploader-wrappers'
 
 const uploader = new FineUploaderTraditional({
    options: {
@@ -637,8 +446,8 @@ Note: This assumes you have additional components or code to allow files to actu
 ```javascript
 import React, { Component } from 'react'
 
-import FineUploaderTraditional from 'react-fine-uploader'
-import Filename from 'react-fine-uploader/components/filename'
+import FineUploaderTraditional from 'fine-uploader-wrappers'
+import Filename from 'react-fine-uploader/filename'
 
 const uploader = new FineUploader({
    options: {
@@ -706,8 +515,8 @@ Note: This assumes you have additional components or code to allow files to actu
 ```javascript
 import React, { Component } from 'react'
 
-import FineUploaderTraditional from 'react-fine-uploader'
-import Filesize from 'react-fine-uploader/components/filesize'
+import FineUploaderTraditional from 'fine-uploader-wrappers'
+import Filesize from 'react-fine-uploader/filesize'
 
 const uploader = new FineUploader({
    options: {
@@ -787,9 +596,9 @@ The example below will include a pause/resume button for each submitted file alo
 ```javascript
 import React, { Component } from 'react'
 
-import FineUploaderTraditional from 'react-fine-uploader'
-import PauseResumeButton from 'react-fine-uploader/components/PauseResume-button'
-import Thumbnail from 'react-fine-uploader/components/thumbnail'
+import FineUploaderTraditional from 'fine-uploader-wrappers'
+import PauseResumeButton from 'react-fine-uploader/pause-resume-button'
+import Thumbnail from 'react-fine-uploader/thumbnail'
 
 const uploader = new FineUploader({
    options: {
@@ -881,9 +690,9 @@ The example below will include a retry button for each submitted file along with
 ```javascript
 import React, { Component } from 'react'
 
-import FineUploaderTraditional from 'react-fine-uploader'
-import RetryButton from 'react-fine-uploader/components/retry-button'
-import Thumbnail from 'react-fine-uploader/components/thumbnail'
+import FineUploaderTraditional from 'fine-uploader-wrappers'
+import RetryButton from 'react-fine-uploader/retry-button'
+import Thumbnail from 'react-fine-uploader/thumbnail'
 
 const uploader = new FineUploader({
    options: {
@@ -959,9 +768,9 @@ Note: This assumes you have additional components or code to allow files to actu
 ```javascript
 import React, { Component } from 'react'
 
-import FineUploaderTraditional from 'react-fine-uploader'
-import Status from 'react-fine-uploader/components/filesize'
-import Thumbnail from 'react-fine-uploader/components/thumbnail'
+import FineUploaderTraditional from 'fine-uploader-wrappers'
+import Status from 'react-fine-uploader/filesize'
+import Thumbnail from 'react-fine-uploader/thumbnail'
 
 const uploader = new FineUploader({
    options: {
@@ -1027,8 +836,8 @@ Note: This assumes you have additional components or code to allow files to actu
 ```javascript
 import React, { Component } from 'react'
 
-import FineUploaderTraditional from 'react-fine-uploader'
-import Thumbnail from 'react-fine-uploader/components/thumbnail'
+import FineUploaderTraditional from 'fine-uploader-wrappers'
+import Thumbnail from 'react-fine-uploader/thumbnail'
 
 const uploader = new FineUploader({
    options: {
