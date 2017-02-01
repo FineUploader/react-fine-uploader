@@ -27,7 +27,7 @@
   "dependencies": {
     "fine-uploader": ">=5.11.10 <6.0.0",
     "fine-uploader-wrappers": "0.1.1",
-    "object-assign": "4.1.0"
+    "object-assign": "4.1.1"
   },
   "devDependencies": {
     "babel-cli": "latest",
