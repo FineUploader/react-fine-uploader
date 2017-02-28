@@ -318,7 +318,7 @@ export default class FileListener extends Component {
                            <Thumbnail id={ id } uploader={ uploader } />
                            <DeleteButton id={ id } uploader={ uploader } />
                         </div>
-                    ))
+                    })
                 }
             </div>
         )
