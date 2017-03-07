@@ -41,7 +41,7 @@
     "babel-plugin-transform-class-properties": "6.23.0",
     "babel-plugin-transform-object-rest-spread": "6.23.0",
     "css-loader": "0.26.2",
-    "es6-promise": "4.0.5",
+    "es6-promise": "4.1.0",
     "eslint": "3.16.1",
     "eslint-plugin-react": "6.10.0",
     "extract-text-webpack-plugin": "1.0.1",
