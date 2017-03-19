@@ -65,7 +65,6 @@ class Gallery extends Component {
             else if (status === 'upload successful' || status === 'upload failed') {
                 if (status === 'upload successful') {
                     const visibleFileIndex = this._findFileIndex(id)
-                    console.log(visibleFileIndex)
                     if (visibleFileIndex < 0) {
                         visibleFiles.push({ id, fromServer: true })
                     } 
