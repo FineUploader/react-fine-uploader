@@ -53,9 +53,9 @@ class Gallery extends Component {
         }
 
         this._onStatusChange = (id, oldStatus, status) => {
-            if (status === 'submitted') {
-                const visibleFiles = this.state.visibleFiles
+            const visibleFiles = this.state.visibleFiles
 
+            if (status === 'submitted') {
                 visibleFiles.push({ id })
                 this.setState({ visibleFiles })
             }
@@ -63,6 +63,9 @@ class Gallery extends Component {
                 this._removeVisibleFile(id)
             }
             else if (status === 'upload successful' || status === 'upload failed') {
+                if (visibleFiles.findIndex(file => file.id === id ) < 0) {
+                    visibleFiles.push({ id, fromServer: true })
+                }
                 this._updateVisibleFileStatus(id, status)
             }
         }
@@ -116,7 +119,7 @@ class Gallery extends Component {
                                          transitionName='react-fine-uploader-gallery-files'
                 >
                 {
-                    this.state.visibleFiles.map(({ id, status }) => (
+                    this.state.visibleFiles.map(({ id, status, fromServer }) => (
                         <li key={ id }
                              className='react-fine-uploader-gallery-file'
                         >
@@ -127,6 +130,7 @@ class Gallery extends Component {
                             />
                             <Thumbnail className='react-fine-uploader-gallery-thumbnail'
                                        id={ id }
+                                       fromServer={ fromServer }
                                        uploader={ uploader }
                                        { ...thumbnailProps }
                             />
