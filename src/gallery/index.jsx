@@ -63,8 +63,12 @@ class Gallery extends Component {
                 this._removeVisibleFile(id)
             }
             else if (status === 'upload successful' || status === 'upload failed') {
-                if (visibleFiles.findIndex(file => file.id === id ) < 0) {
-                    visibleFiles.push({ id, fromServer: true })
+                if (status === 'upload successful') {
+                    const visibleFileIndex = this._findFileIndex(id)
+                    console.log(visibleFileIndex)
+                    if (visibleFileIndex < 0) {
+                        visibleFiles.push({ id, fromServer: true })
+                    } 
                 }
                 this._updateVisibleFileStatus(id, status)
             }
@@ -200,14 +204,7 @@ class Gallery extends Component {
     }
 
     _removeVisibleFile(id) {
-        let visibleFileIndex = -1
-
-        this.state.visibleFiles.some((file, index) => {
-            if (file.id === id) {
-                visibleFileIndex = index
-                return true
-            }
-        })
+        const visibleFileIndex = this._findFileIndex(id)
 
         if (visibleFileIndex >= 0) {
             const visibleFiles = this.state.visibleFiles
@@ -225,6 +222,19 @@ class Gallery extends Component {
                 return true
             }
         })
+    }
+
+    _findFileIndex(id) {
+        let visibleFileIndex = -1
+
+        this.state.visibleFiles.some((file, index) => {
+            if (file.id === id) {
+                visibleFileIndex = index
+                return true
+            }
+        })
+
+        return visibleFileIndex
     }
 }
 
