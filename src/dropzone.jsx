@@ -5,7 +5,7 @@ class DropzoneElement extends Component {
     static propTypes = {
         children: PropTypes.node,
         dropActiveClassName: PropTypes.string,
-        element: PropTypes.string,
+        element: PropTypes.object,
         multiple: PropTypes.bool,
         onDropError: PropTypes.func,
         onProcessingDroppedFiles: PropTypes.func,
