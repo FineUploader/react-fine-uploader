@@ -26,7 +26,7 @@ describe('<Thumbnail />', () => {
         )
 
         expect(ThumbnailComponent.refs.canvas.hasAttribute('hidden')).toBeFalsy()
-        expect(drawThumbnail).toHaveBeenCalledWith(3, ThumbnailComponent.refs.canvas, defaultMaxSize)
+        expect(drawThumbnail).toHaveBeenCalledWith(3, ThumbnailComponent.refs.canvas, defaultMaxSize, undefined)
     })
 
     it('renders thumbnail as canvas using passed size', () => {
@@ -38,7 +38,19 @@ describe('<Thumbnail />', () => {
         )
 
         expect(ThumbnailComponent.refs.canvas.hasAttribute('hidden')).toBeFalsy()
-        expect(drawThumbnail).toHaveBeenCalledWith(3, ThumbnailComponent.refs.canvas, 333)
+        expect(drawThumbnail).toHaveBeenCalledWith(3, ThumbnailComponent.refs.canvas, 333, undefined)
+    })
+
+    it('renders thumbnail as canvas using passed thumbnail origin', () => {
+        qqPromise.success()
+        drawThumbnail.and.returnValue(qqPromise)
+
+        const ThumbnailComponent = TestUtils.renderIntoDocument(
+            <Thumbnail id={ 3 } maxSize={ 333 } uploader={ uploader } fromServer={ true }/>
+        )
+
+        expect(ThumbnailComponent.refs.canvas.hasAttribute('hidden')).toBeFalsy()
+        expect(drawThumbnail).toHaveBeenCalledWith(3, ThumbnailComponent.refs.canvas, 333, true)
     })
 
     it('renders default waiting placeholder until thumbnail generation is complete', () => {

@@ -34,7 +34,8 @@ class Thumbnail extends Component {
         this.props.uploader.methods.drawThumbnail(
             this.props.id,
             this.refs.canvas,
-            this.props.maxSize
+            this.props.maxSize,
+            this.props.fromServer
         )
             .then(
                 () => {
