@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "babel-cli": "6.23.0",
-    "babel-core": "6.23.1",
+    "babel-core": "6.24.0",
     "babel-eslint": "7.2.0",
     "babel-loader": "6.3.2",
     "babel-plugin-rewire": "1.0.0",
@@ -40,7 +40,7 @@
     "babel-plugin-syntax-class-properties": "6.13.0",
     "babel-plugin-transform-class-properties": "6.23.0",
     "babel-plugin-transform-object-rest-spread": "6.23.0",
-    "css-loader": "0.26.2",
+    "css-loader": "0.27.3",
     "es6-promise": "4.1.0",
     "eslint": "3.18.0",
     "eslint-plugin-react": "6.10.3",
