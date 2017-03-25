@@ -53,9 +53,9 @@ class Gallery extends Component {
         }
 
         this._onStatusChange = (id, oldStatus, status) => {
-            if (status === 'submitted') {
-                const visibleFiles = this.state.visibleFiles
+            const visibleFiles = this.state.visibleFiles
 
+            if (status === 'submitted') {
                 visibleFiles.push({ id })
                 this.setState({ visibleFiles })
             }
@@ -63,6 +63,12 @@ class Gallery extends Component {
                 this._removeVisibleFile(id)
             }
             else if (status === 'upload successful' || status === 'upload failed') {
+                if (status === 'upload successful') {
+                    const visibleFileIndex = this._findFileIndex(id)
+                    if (visibleFileIndex < 0) {
+                        visibleFiles.push({ id, fromServer: true })
+                    } 
+                }
                 this._updateVisibleFileStatus(id, status)
             }
         }
@@ -116,7 +122,7 @@ class Gallery extends Component {
                                          transitionName='react-fine-uploader-gallery-files'
                 >
                 {
-                    this.state.visibleFiles.map(({ id, status }) => (
+                    this.state.visibleFiles.map(({ id, status, fromServer }) => (
                         <li key={ id }
                              className='react-fine-uploader-gallery-file'
                         >
@@ -127,6 +133,7 @@ class Gallery extends Component {
                             />
                             <Thumbnail className='react-fine-uploader-gallery-thumbnail'
                                        id={ id }
+                                       fromServer={ fromServer }
                                        uploader={ uploader }
                                        { ...thumbnailProps }
                             />
@@ -196,14 +203,7 @@ class Gallery extends Component {
     }
 
     _removeVisibleFile(id) {
-        let visibleFileIndex = -1
-
-        this.state.visibleFiles.some((file, index) => {
-            if (file.id === id) {
-                visibleFileIndex = index
-                return true
-            }
-        })
+        const visibleFileIndex = this._findFileIndex(id)
 
         if (visibleFileIndex >= 0) {
             const visibleFiles = this.state.visibleFiles
@@ -221,6 +221,19 @@ class Gallery extends Component {
                 return true
             }
         })
+    }
+
+    _findFileIndex(id) {
+        let visibleFileIndex = -1
+
+        this.state.visibleFiles.some((file, index) => {
+            if (file.id === id) {
+                visibleFileIndex = index
+                return true
+            }
+        })
+
+        return visibleFileIndex
     }
 }
 
