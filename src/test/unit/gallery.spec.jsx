@@ -9,6 +9,7 @@ import Gallery from 'src/gallery'
 const isMobile = !!('ontouchstart' in window)
 const sampleBlob = new Blob(['hi!'], { type : 'text/plain' })
 const sampleBlobWrapper = { blob: sampleBlob, name: 'test' }
+const sampleCannedFile = { name: 'test', uuid: 'test uuid', thumbnailUrl: 'http://localhost/images/test.jpg' }
 
 describe('<Gallery />', () => {
     let uploader
@@ -104,6 +105,19 @@ describe('<Gallery />', () => {
                 expect(tiles.length).toBe(1)
                 done()
             }, 100)
+        }, 100)
+    })
+
+    it('renders a tile for each initial file', done => {
+        const GalleryComponent = TestUtils.renderIntoDocument(<Gallery uploader={ uploader } />)        
+        
+        uploader.methods.addInitialFiles([sampleCannedFile])
+
+        setTimeout(() => {
+            const tiles = TestUtils.scryRenderedDOMComponentsWithClass(GalleryComponent, 'react-fine-uploader-gallery-file')
+
+            expect(tiles.length).toBe(1)
+            done()
         }, 100)
     })
 })
