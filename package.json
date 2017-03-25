@@ -42,7 +42,7 @@
     "babel-plugin-transform-object-rest-spread": "6.23.0",
     "css-loader": "0.26.2",
     "es6-promise": "4.1.0",
-    "eslint": "3.17.0",
+    "eslint": "3.18.0",
     "eslint-plugin-react": "6.10.1",
     "extract-text-webpack-plugin": "1.0.1",
     "jasmine": "2.5.3",
