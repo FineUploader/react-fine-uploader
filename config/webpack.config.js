@@ -13,18 +13,18 @@ module.exports = {
             src: path.resolve('src'),
             test: path.resolve('src/test/unit')
         },
-        extensions: ['', '.js', '.jsx']
+        extensions: ['.js', '.jsx']
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js/,
-                loader: 'babel',
+                loader: 'babel-loader',
                 exclude: /node_modules/
             },
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+                loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
             }
         ]
     },
