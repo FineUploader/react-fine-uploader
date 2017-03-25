@@ -44,7 +44,7 @@
     "es6-promise": "4.1.0",
     "eslint": "3.18.0",
     "eslint-plugin-react": "6.10.3",
-    "extract-text-webpack-plugin": "1.0.1",
+    "extract-text-webpack-plugin": "2.1.0",
     "jasmine": "2.5.3",
     "jasmine-core": "2.5.2",
     "karma": "1.5.0",
@@ -59,7 +59,7 @@
     "react-addons-test-utils": "15.4.2",
     "react-dom": "15.4.2",
     "style-loader": "0.16.0",
-    "webpack": "1.14.0",
+    "webpack": "2.3.2",
     "webpack-node-externals": "1.5.4"
   },
   "engines": {
