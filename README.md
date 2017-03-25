@@ -829,6 +829,8 @@ The `<Thumbnail />` component allows you to easily render Fine Uploader generate
 
 - `waitingPlaceholder` - A custom element to display while waiting for the thumbnail.
 
+- `fromServer` - Specify whether the current file was set from [initial file](https://docs.fineuploader.com/branch/master/features/session.html)
+
 Suppose you wanted to render a thumbnail for each file as new files are submitted to Fine Uploader. Your React component may look like this:
 
 Note: This assumes you have additional components or code to allow files to actually be submitted to Fine Uploader.
