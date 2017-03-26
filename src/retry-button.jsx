@@ -12,8 +12,8 @@ class RetryButton extends Component {
         onlyRenderIfRetryable: true
     };
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = { retryable: false }
 
@@ -35,7 +35,11 @@ class RetryButton extends Component {
         }
 
         this._onStatusChange = (id, oldStatus, newStatus) => {
-            if (id === this.props.id && !this._unmounted && newStatus === 'retrying upload') {
+            if (
+                id === this.props.id
+                && !this._unmounted
+                && newStatus === props.uploader.qq.status.UPLOAD_RETRYING
+            ) {
                 this.setState({ retryable: false })
             }
         }

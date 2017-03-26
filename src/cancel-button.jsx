@@ -12,20 +12,22 @@ class CancelButton extends Component {
         onlyRenderIfCancelable: true
     };
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = { cancelable: true }
 
+        const statusEnum = props.uploader.qq.status
+
         this._onStatusChange = (id, oldStatus, newStatus) => {
             if (id === this.props.id && !this._unmounted) {
-                if (!isCancelable(newStatus) && this.state.cancelable) {
+                if (!isCancelable(newStatus, statusEnum) && this.state.cancelable) {
                     this.setState({ cancelable: false })
                 }
-                else if (isCancelable(newStatus) && !this.state.cancelable) {
+                else if (isCancelable(newStatus, statusEnum) && !this.state.cancelable) {
                     this.setState({ cancelable: true })
                 }
-                else if (newStatus === 'deleted' || newStatus === 'canceled') {
+                else if (newStatus === statusEnum.DELETED || newStatus === statusEnum.CANCELED) {
                     this._unregisterStatusChangeHandler()
                 }
             }
@@ -68,16 +70,16 @@ class CancelButton extends Component {
     }
 }
 
-const isCancelable = status => {
+const isCancelable = (statusToCheck, statusEnum) => {
     return [
-        'delete failed',
-        'paused',
-        'queued',
-        'retrying upload',
-        'submitted',
-        'uploading',
-        'upload failed'
-    ].indexOf(status) >= 0
+        statusEnum.DELETE_FAILED,
+        statusEnum.PAUSED,
+        statusEnum.QUEUED,
+        statusEnum.UPLOAD_RETRYING,
+        statusEnum.SUBMITTED,
+        statusEnum.UPLOADING,
+        statusEnum.UPLOAD_FAILED
+    ].indexOf(statusToCheck) >= 0
 }
 
 export default CancelButton

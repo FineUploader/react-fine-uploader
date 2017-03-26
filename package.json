@@ -68,7 +68,7 @@
   "scripts": {
     "build": "rm -rf lib && mkdir -p lib && rsync -av --exclude='test' src/ lib && babel lib --out-dir lib && find lib -type f -name '*.jsx' -delete",
     "lint": "eslint src/. --ext .js,.jsx --cache",
-    "manual-test": "webpack --config config/webpack.manual-test.config.js --watch --display-error-details",
+    "manual-test": "webpack --config config/webpack.manual-test.config.js --watch",
     "push-to-npm": "cp package.json README.md LICENSE lib && (cd lib ; npm publish)",
     "release": "npm run test && npm run build && npm run push-to-npm",
     "start": "(php -S 0.0.0.0:9090 -t src/test/manual -c src/test/manual/php.ini)",

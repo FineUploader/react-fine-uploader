@@ -75,12 +75,14 @@ class ProgressBar extends Component {
             }
         }
 
+        const statusEnum = this.props.uploader.qq.status
+
         this._trackStatusEventHandler = (id, oldStatus, newStatus) => {
             if (!this._unmounted) {
                 if (this._isTotalProgress) {
                     if (!this.state.hidden
                         && this.props.hideOnComplete
-                        && isUploadComplete(newStatus)
+                        && isUploadComplete(newStatus, statusEnum)
                         && !this.props.uploader.methods.getInProgress()) {
 
                         this.setState({ hidden: true })
@@ -90,10 +92,10 @@ class ProgressBar extends Component {
                     }
                 }
                 else if (id === this.props.id) {
-                    if (this.state.hidden && newStatus === 'uploading') {
+                    if (this.state.hidden && newStatus === statusEnum.UPLOADING) {
                         this.setState({ hidden: false })
                     }
-                    else if (!this.state.hidden && this.props.hideOnComplete && isUploadComplete(newStatus)) {
+                    else if (!this.state.hidden && this.props.hideOnComplete && isUploadComplete(newStatus, statusEnum)) {
                         this.setState({ hidden: true })
                     }
                 }
@@ -117,8 +119,10 @@ class ProgressBar extends Component {
     }
 }
 
-const isUploadComplete = status => (
-    status === 'upload failed' || status === 'upload successful' || status === 'canceled'
+const isUploadComplete = (statusToCheck, statusEnum) => (
+    statusToCheck === statusEnum.UPLOAD_FAILED
+    || statusToCheck === statusEnum.UPLOAD_SUCCESSFUL
+    || statusToCheck === statusEnum.CANCELED
 )
 
 export default ProgressBar

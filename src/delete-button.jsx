@@ -12,30 +12,32 @@ class DeleteButton extends Component {
         onlyRenderIfDeletable: true
     };
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = {
             deletable: false,
             deleting: false
         }
 
+        const statusEnum =  props.uploader.qq.status
+
         this._onStatusChange = (id, oldStatus, newStatus) => {
             if (id === this.props.id && !this._unmounted) {
-                if (!isDeletable(newStatus) && newStatus !== 'deleting' && this.state.deletable) {
+                if (!isDeletable(newStatus, statusEnum) && newStatus !== statusEnum.DELETING && this.state.deletable) {
                     !this._unmounted && this.setState({
                         deletable: false,
                         deleting: false
                     })
                     this._unregisterStatusChangeHandler()
                 }
-                else if (isDeletable(newStatus) && !this.state.deletable) {
+                else if (isDeletable(newStatus, statusEnum) && !this.state.deletable) {
                     this.setState({
                         deletable: true,
                         deleting: false
                     })
                 }
-                else if (newStatus === 'deleting' && !this.state.deleting) {
+                else if (newStatus === statusEnum.DELETING && !this.state.deleting) {
                     this.setState({ deleting: true })
                 }
             }
@@ -78,11 +80,11 @@ class DeleteButton extends Component {
     }
 }
 
-const isDeletable = status => {
+const isDeletable = (statusToCheck, statusEnum) => {
     return [
-        'delete failed',
-        'upload successful'
-    ].indexOf(status) >= 0
+        statusEnum.DELETE_FAILED,
+        statusEnum.UPLOAD_SUCCESSFUL
+    ].indexOf(statusToCheck) >= 0
 }
 
 export default DeleteButton
