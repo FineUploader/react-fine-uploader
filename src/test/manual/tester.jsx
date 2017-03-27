@@ -1,3 +1,4 @@
+import pica from 'pica/dist/pica'
 import React, { Component } from 'react'
 
 import Gallery from 'lib/gallery'
@@ -59,13 +60,21 @@ class Tester extends Component {
         return (
             <div>
                 <h2>Traditional</h2>
-                <Gallery uploader={ traditionalUploader } />
+                <Gallery uploader={ traditionalUploader }
+                         thumbnail-customResizer={ !traditionalUploader.qq.ios() && customResizer }
+                />
 
                 <h2>S3</h2>
                 <Gallery uploader={ s3Uploader } />
             </div>
         )
     }
+}
+
+const customResizer = resizeInfo => {
+    return new Promise(resolve => {
+        pica.resizeCanvas(resizeInfo.sourceCanvas, resizeInfo.targetCanvas, {}, resolve)
+    })
 }
 
 export default Tester

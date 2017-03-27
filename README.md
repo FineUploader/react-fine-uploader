@@ -819,6 +819,10 @@ The `<Thumbnail />` component allows you to easily render Fine Uploader generate
 
 ##### Properties
 
+- `customResizer(resizeInfo)` - An optional function that allows you to use a custom/3rd-library to resize thumbnail images. Documented further in [Fine Uploader's `drawThumbnail` API method documentation](https://docs.fineuploader.com/api/methods.html#drawThumbnail). See the second code example below for details.
+
+- `fromServer` - Specify whether the current file was set from [initial file](https://docs.fineuploader.com/branch/master/features/session.html)
+
 - `id` - The Fine Uploader ID of the submitted file. (required)
 
 - `maxSize` - Maps directly to the [`maxSize` parameter](http://docs.fineuploader.com/branch/master/api/methods.html#drawThumbnail) of the Fine Uploader `drawThumbnail` API method. If not supplied a default value is used, which is exported as a named constant.
@@ -828,8 +832,6 @@ The `<Thumbnail />` component allows you to easily render Fine Uploader generate
 - `uploader` - A Fine Uploader [wrapper class](#wrapper-classes). (required)
 
 - `waitingPlaceholder` - A custom element to display while waiting for the thumbnail.
-
-- `fromServer` - Specify whether the current file was set from [initial file](https://docs.fineuploader.com/branch/master/features/session.html)
 
 Suppose you wanted to render a thumbnail for each file as new files are submitted to Fine Uploader. Your React component may look like this:
 
@@ -880,3 +882,62 @@ export default class FileListener extends Component {
     }
 }
 ```
+
+Suppose you want to override React Fine Uploader's thumbnail generation code (especially since it trades quality for speed). The below example uses the [Pica canvas resizing library](https://github.com/nodeca/pica) to generate much higher quality thumbnail images:
+
+```javascript
+import pica from 'pica/dist/pica'
+import React, { Component } from 'react'
+
+import FineUploaderTraditional from 'fine-uploader-wrappers'
+import Thumbnail from 'react-fine-uploader/thumbnail'
+
+const customResizer = resizeInfo => {
+    return new Promise(resolve => {
+        pica.resizeCanvas(resizeInfo.sourceCanvas, resizeInfo.targetCanvas, {}, resolve)
+    })
+}
+
+const uploader = new FineUploader({
+   options: {
+      request: {
+         endpoint: 'my/upload/endpoint'
+      }
+   }
+})
+
+export default class FileListener extends Component {
+    constructor() {
+        super()
+
+        this.state = {
+            submittedFiles: []
+        }
+    }
+
+    componentDidMount() {
+        uploader.on('submitted', id => {
+            const submittedFiles = this.state.submittedFiles
+
+            submittedFiles.push(id)
+            this.setState({ submittedFiles })
+        })
+    }
+
+    render() {
+        return (
+            <div>
+                {
+                    this.state.submittedFiles.map(id => (
+                        <Thumbnail customResizer={ !uploader.qq.ios() && customResizer }
+                                   id={ id }
+                                   uploader={ uploader }
+                        />
+                    ))
+                }
+            </div>
+        )
+    }
+}
+```
+

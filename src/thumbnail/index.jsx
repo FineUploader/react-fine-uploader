@@ -11,6 +11,8 @@ export const waitingStatus = 'waiting'
 
 class Thumbnail extends Component {
     static propTypes = {
+        customResizer: PropTypes.func,
+        fromServer: PropTypes.bool,
         id: PropTypes.number.isRequired,
         maxSize: PropTypes.number,
         notAvailablePlaceholder: PropTypes.element,
@@ -33,9 +35,10 @@ class Thumbnail extends Component {
     componentDidMount() {
         this.props.uploader.methods.drawThumbnail(
             this.props.id,
-            this.refs.canvas,
+            this._canvas,
             this.props.maxSize,
-            this.props.fromServer
+            this.props.fromServer,
+            this.props.customResizer
         )
             .then(
                 () => {
@@ -62,7 +65,7 @@ class Thumbnail extends Component {
             <span className={ `react-fine-uploader-thumbnail-container ${customContainerClassName || ''}` }>
                 <canvas className={ `react-fine-uploader-thumbnail ${this.props.className || ''}` }
                         hidden={ !this.state.drawComplete || this._failure }
-                        ref='canvas'
+                        ref={ component => this._canvas = component }
                 />
 
                 { this._maybePlaceholder }

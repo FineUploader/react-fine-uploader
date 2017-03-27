@@ -1,6 +1,6 @@
 {
   "name": "react-fine-uploader",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "license": "MIT",
   "description": "React UI components for using Fine Uploader in a React-based project.",
   "author":     {
@@ -54,6 +54,7 @@
     "karma-sourcemap-loader": "0.3.7",
     "karma-spec-reporter": "0.0.30",
     "karma-webpack": "2.0.3",
+    "pica": "2.0.8",
     "react": "15.4.2",
     "react-addons-css-transition-group": "15.4.2",
     "react-addons-test-utils": "15.4.2",

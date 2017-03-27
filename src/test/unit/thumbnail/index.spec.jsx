@@ -25,8 +25,8 @@ describe('<Thumbnail />', () => {
             <Thumbnail id={ 3 } uploader={ uploader } />
         )
 
-        expect(ThumbnailComponent.refs.canvas.hasAttribute('hidden')).toBeFalsy()
-        expect(drawThumbnail).toHaveBeenCalledWith(3, ThumbnailComponent.refs.canvas, defaultMaxSize, undefined)
+        expect(ThumbnailComponent._canvas.hasAttribute('hidden')).toBeFalsy()
+        expect(drawThumbnail).toHaveBeenCalledWith(3, ThumbnailComponent._canvas, defaultMaxSize, undefined, undefined)
     })
 
     it('renders thumbnail as canvas using passed size', () => {
@@ -37,8 +37,8 @@ describe('<Thumbnail />', () => {
             <Thumbnail id={ 3 } maxSize={ 333 } uploader={ uploader } />
         )
 
-        expect(ThumbnailComponent.refs.canvas.hasAttribute('hidden')).toBeFalsy()
-        expect(drawThumbnail).toHaveBeenCalledWith(3, ThumbnailComponent.refs.canvas, 333, undefined)
+        expect(ThumbnailComponent._canvas.hasAttribute('hidden')).toBeFalsy()
+        expect(drawThumbnail).toHaveBeenCalledWith(3, ThumbnailComponent._canvas, 333, undefined, undefined)
     })
 
     it('renders thumbnail as canvas using passed thumbnail origin', () => {
@@ -49,8 +49,8 @@ describe('<Thumbnail />', () => {
             <Thumbnail id={ 3 } maxSize={ 333 } uploader={ uploader } fromServer={ true }/>
         )
 
-        expect(ThumbnailComponent.refs.canvas.hasAttribute('hidden')).toBeFalsy()
-        expect(drawThumbnail).toHaveBeenCalledWith(3, ThumbnailComponent.refs.canvas, 333, true)
+        expect(ThumbnailComponent._canvas.hasAttribute('hidden')).toBeFalsy()
+        expect(drawThumbnail).toHaveBeenCalledWith(3, ThumbnailComponent._canvas, 333, true, undefined)
     })
 
     it('renders default waiting placeholder until thumbnail generation is complete', () => {
@@ -61,7 +61,7 @@ describe('<Thumbnail />', () => {
         )
         const placeholderEls = TestUtils.scryRenderedDOMComponentsWithClass(ThumbnailComponent, `react-fine-uploader-thumbnail-${waitingStatus}`)
 
-        expect(ThumbnailComponent.refs.canvas.hasAttribute('hidden')).toBeTruthy()
+        expect(ThumbnailComponent._canvas.hasAttribute('hidden')).toBeTruthy()
         expect(placeholderEls.length).toBe(1)
     })
 
@@ -86,7 +86,7 @@ describe('<Thumbnail />', () => {
         )
         const customWaitingThumbnailEl = TestUtils.findRenderedDOMComponentWithClass(ThumbnailComponent, 'custom-waiting-thumbnail')
 
-        expect(ThumbnailComponent.refs.canvas.hasAttribute('hidden')).toBeTruthy()
+        expect(ThumbnailComponent._canvas.hasAttribute('hidden')).toBeTruthy()
         expect(customWaitingThumbnailEl).toBeDefined()
     })
 
@@ -99,7 +99,7 @@ describe('<Thumbnail />', () => {
         )
         const placeholderEls = TestUtils.scryRenderedDOMComponentsWithClass(ThumbnailComponent, `react-fine-uploader-thumbnail-${notAvailableStatus}`)
 
-        expect(ThumbnailComponent.refs.canvas.hasAttribute('hidden')).toBeTruthy()
+        expect(ThumbnailComponent._canvas.hasAttribute('hidden')).toBeTruthy()
         expect(placeholderEls.length).toBe(1)
     })
 
@@ -133,7 +133,7 @@ describe('<Thumbnail />', () => {
         )
         const notAvailableSvgEl = TestUtils.findRenderedDOMComponentWithClass(ThumbnailComponent, 'not-available-svg')
 
-        expect(ThumbnailComponent.refs.canvas.hasAttribute('hidden')).toBeTruthy()
+        expect(ThumbnailComponent._canvas.hasAttribute('hidden')).toBeTruthy()
         expect(notAvailableSvgEl).toBeDefined()
     })
 })
