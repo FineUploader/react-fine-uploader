@@ -13,18 +13,20 @@ class PauseResumeButton extends Component {
         onlyRenderIfEnabled: true
     };
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = {
             pausable: false,
             resumable: false
         }
 
+        const statusEnum = props.uploader.qq.status
+
         this._onStatusChange = (id, oldStatus, newStatus) => {
             if (id === this.props.id && !this._unmounted) {
-                const pausable = isPausable(newStatus)
-                const resumable = !pausable && isResumable(newStatus)
+                const pausable = newStatus === statusEnum.UPLOADING
+                const resumable = !pausable && newStatus === statusEnum.PAUSED
 
                 if (!pausable && this.state.pausable) {
                     this.setState({ pausable, resumable })
@@ -35,7 +37,11 @@ class PauseResumeButton extends Component {
                 else if (!resumable && this.state.resumable) {
                     this.setState({ pausable, resumable })
                 }
-                else if (newStatus === 'deleted' || newStatus === 'canceled' || newStatus === 'upload successful') {
+                else if (
+                    newStatus === statusEnum.DELETED
+                    || newStatus === statusEnum.CANCELED
+                    || newStatus === statusEnum.UPLOAD_SUCCESSFUL
+                ) {
                     this._unregisterStatusChangeHandler()
                     this._unregisterOnUploadChunkHandler()
                 }
@@ -135,8 +141,5 @@ const getButtonLabel = state => {
 
     return resumable ? 'resume' : 'pause'
 }
-
-const isPausable = status => status === 'uploading'
-const isResumable = status => status === 'paused'
 
 export default PauseResumeButton

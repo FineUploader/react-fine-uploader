@@ -20,11 +20,6 @@ import UploadFailedIcon from './upload-failed-icon'
 import UploadSuccessIcon from './upload-success-icon'
 import XIcon from './x-icon'
 
-// Replace with qq drop feature detection once #27 is done or have <Dropzone /> handle this instead (?)
-const isTouchDevice = () => {
-    return (('ontouchstart' in window) || window.DocumentTouch && document instanceof window.DocumentTouch)
-}
-
 class Gallery extends Component {
     static propTypes = {
         className: PropTypes.string,
@@ -35,7 +30,7 @@ class Gallery extends Component {
         className: '',
         'cancelButton-children': <XIcon />,
         'deleteButton-children': <XIcon />,
-        'dropzone-disabled': isTouchDevice(),
+        'dropzone-disabled': false,
         'dropzone-dropActiveClassName': 'react-fine-uploader-gallery-dropzone-active',
         'dropzone-multiple': true,
         'fileInput-multiple': true,
@@ -45,25 +40,27 @@ class Gallery extends Component {
         'thumbnail-maxSize': 130
     }
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = {
             visibleFiles: []
         }
 
+        const statusEnum = props.uploader.qq.status
+
         this._onStatusChange = (id, oldStatus, status) => {
             const visibleFiles = this.state.visibleFiles
 
-            if (status === 'submitted') {
+            if (status === statusEnum.SUBMITTING) {
                 visibleFiles.push({ id })
                 this.setState({ visibleFiles })
             }
-            else if (isFileGone(status)) {
+            else if (isFileGone(status, statusEnum)) {
                 this._removeVisibleFile(id)
             }
-            else if (status === 'upload successful' || status === 'upload failed') {
-                if (status === 'upload successful') {
+            else if (status === statusEnum.UPLOAD_SUCCESSFUL|| status === statusEnum.UPLOAD_FAILED) {
+                if (status === statusEnum.UPLOAD_SUCCESSFUL) {
                     const visibleFileIndex = this._findFileIndex(id)
                     if (visibleFileIndex < 0) {
                         visibleFiles.push({ id, fromServer: true })
@@ -240,14 +237,19 @@ class Gallery extends Component {
 const MaybeDropzone = ({ children, content, hasVisibleFiles, uploader, ...props }) => {
     const { disabled, ...dropzoneProps } = props
 
+    let dropzoneDisabled = disabled
+    if (!dropzoneDisabled) {
+        dropzoneDisabled = !uploader.qq.supportedFeatures.fileDrop
+    }
+
     if (hasVisibleFiles) {
         content = <span/>
     }
     else {
-        content = content || getDefaultMaybeDropzoneContent({ content, disabled })
+        content = content || getDefaultMaybeDropzoneContent({ content, disabled: dropzoneDisabled })
     }
 
-    if (disabled) {
+    if (dropzoneDisabled) {
         return (
             <div className='react-fine-uploader-gallery-nodrop-container'>
                 { content }
@@ -326,11 +328,11 @@ const getDefaultMaybeDropzoneContent = ({ content, disabled }) => {
     }
 }
 
-const isFileGone = status => {
+const isFileGone = (statusToCheck, statusEnum) => {
     return [
-        'canceled',
-        'deleted',
-    ].indexOf(status) >= 0
+        statusEnum.CANCELED,
+        statusEnum.DELETED,
+    ].indexOf(statusToCheck) >= 0
 }
 
 export default Gallery
