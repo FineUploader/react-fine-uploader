@@ -7,15 +7,20 @@
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 [![Build Status](https://travis-ci.org/FineUploader/react-fine-uploader.svg?branch=master)](https://travis-ci.org/FineUploader/react-fine-uploader)
 
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/react-fine-uploader2.svg)](https://saucelabs.com/u/react-fine-uploader2)
-
-
 Makes using [Fine Uploader](http://fineuploader.com) in a React app simple. Drop-in high-level components for a turn-key UI. Use small focused components to build a more custom UI.
 
 **This is currently an unstable in-progress project. Breaking changes may occur at any time without notice until the version has reached 1.0.** Please see the ["first stable release" project](https://github.com/FineUploader/react-fine-uploader/projects/1) for 1.0 goals.
 
 
 ## Docs
+
+### Supported browsers
+
+- Chrome (desktop & mobile)
+- Firefox
+- Internet Explorer 11
+- Microsoft Edge 13+
+- Safari 9+ (desktop & mobile)
 
 ### Overview
 
