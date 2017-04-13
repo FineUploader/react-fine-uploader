@@ -25,7 +25,7 @@
     "react-addons-css-transition-group": "0.14.x || 15.x.x"
   },
   "dependencies": {
-    "fine-uploader-wrappers": "1.0.0-rc2",
+    "fine-uploader-wrappers": "1.0.0",
     "object-assign": "4.1.1"
   },
   "devDependencies": {
