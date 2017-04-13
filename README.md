@@ -9,9 +9,6 @@
 
 Makes using [Fine Uploader](http://fineuploader.com) in a React app simple. Drop-in high-level components for a turn-key UI. Use small focused components to build a more custom UI.
 
-**This is currently an unstable in-progress project. Breaking changes may occur at any time without notice until the version has reached 1.0.** Please see the ["first stable release" project](https://github.com/FineUploader/react-fine-uploader/projects/1) for 1.0 goals.
-
-
 ## Docs
 
 ### Supported browsers
@@ -61,7 +58,7 @@ More information, such as examples and API documentation, can be found in the RE
 
 ### Installing
 
-0.1.0 is the first version of react-fine-uploader published on npm. Two dependencies that you will need to install yourself: an A+/Promise spec compliant polyfill (for IE11) and React (which is a peer dependency). Simply `npm install react-fine-uploader` and see the documentation for your specific integration instructions (based on your needs).
+Two dependencies that you will need to install yourself: an A+/Promise spec compliant polyfill (for IE11) and React (which is a peer dependency). Simply `npm install react-fine-uploader` and see the documentation for your specific integration instructions (based on your needs). You will also need to install [Fine Uploader](https://github.com/FineUploader/fine-uploader) as well, which is also [available on npm](https://www.npmjs.com/package/fine-uploader).
 
 ### High-level Components
 
