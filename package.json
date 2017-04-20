@@ -22,7 +22,7 @@
   "main": "gallery/index.js",
   "peerDependencies": {
     "react": "0.14.x || 15.x.x",
-    "react-addons-css-transition-group": "0.14.x || 15.x.x"
+    "react-transition-group": "1.1.x"
   },
   "dependencies": {
     "fine-uploader-wrappers": "1.0.0",
@@ -56,9 +56,9 @@
     "karma-webpack": "2.0.3",
     "pica": "2.0.8",
     "react": "15.4.2",
-    "react-addons-css-transition-group": "15.4.2",
     "react-addons-test-utils": "15.4.2",
     "react-dom": "15.4.2",
+    "react-transition-group": "1.1.2",
     "style-loader": "0.16.0",
     "webpack": "2.3.2",
     "webpack-node-externals": "1.5.4"

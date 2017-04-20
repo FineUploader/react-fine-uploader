@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import ReactCssTransitionGroup from 'react-addons-css-transition-group'
+import ReactCssTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 
 import CancelButton from '../cancel-button'
 import DeleteButton from '../delete-button'
@@ -64,7 +64,7 @@ class Gallery extends Component {
                     const visibleFileIndex = this._findFileIndex(id)
                     if (visibleFileIndex < 0) {
                         visibleFiles.push({ id, fromServer: true })
-                    } 
+                    }
                 }
                 this._updateVisibleFileStatus(id, status)
             }
