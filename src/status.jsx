@@ -1,5 +1,6 @@
 import objectAssign from 'object-assign'
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class Status extends Component {
     static propTypes = {
