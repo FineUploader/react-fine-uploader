@@ -21,7 +21,7 @@ Makes using [Fine Uploader](http://fineuploader.com) in a React app simple. Drop
 
 ### Overview
 
-React Fine Uploader makes using Fine Uploader and all of its unique features very simple in a React-based project. The library provides useful resources that can be divided into three sections:
+React Fine Uploader makes using Fine Uploader and all of its unique features very simple in a React-based project. This library provides useful resources that can be divided into three sections:
 
 #### Individual focused components (like `<Thumbnail>` and `<ProgressBar>`).
 
@@ -30,7 +30,7 @@ These allow you to easily build a highly customizable and powerful UI for your u
 
 #### Higher-order components (like `<Gallery>`)
 
-These combine many focused components that provide style (which can be adjusted via your own stylesheet) and enhanced UI-specific features. These components are essentially "turn-key", which means that you can get a fully functional upload widget up and running in your project with a few lines of code. Keep in mind that you of course still need a server to handle the requests sent by Fine Uploader and to server up the JavaScript and CSS files.
+These combine many focused components that provide style (which can be adjusted via your own stylesheet) and enhanced UI-specific features. These components are essentially "turn-key", which means that you can get a fully functional upload widget up and running in your project with a few lines of code. Keep in mind that of course you still need a server to handle the requests sent by Fine Uploader and to server up the JavaScript and CSS files.
 
 #### Wrapper classes
 
@@ -186,7 +186,7 @@ import CancelButton from 'react-fine-uploader/cancel-button'
 import FineUploaderTraditional from 'fine-uploader-wrappers'
 import Thumbnail from 'react-fine-uploader/thumbnail'
 
-const uploader = new FineUploader({
+const uploader = new FineUploaderTraditional({
    options: {
       request: {
          endpoint: 'my/upload/endpoint'
@@ -272,7 +272,7 @@ import DeleteButton from 'react-fine-uploader/delete-button'
 import FineUploaderTraditional from 'fine-uploader-wrappers'
 import Thumbnail from 'react-fine-uploader/thumbnail'
 
-const uploader = new FineUploader({
+const uploader = new FineUploaderTraditional({
    options: {
       deleteFile: {
          enabled: true,
@@ -451,7 +451,7 @@ import React, { Component } from 'react'
 import FineUploaderTraditional from 'fine-uploader-wrappers'
 import Filename from 'react-fine-uploader/filename'
 
-const uploader = new FineUploader({
+const uploader = new FineUploaderTraditional({
    options: {
       request: {
          endpoint: 'my/upload/endpoint'
@@ -520,7 +520,7 @@ import React, { Component } from 'react'
 import FineUploaderTraditional from 'fine-uploader-wrappers'
 import Filesize from 'react-fine-uploader/filesize'
 
-const uploader = new FineUploader({
+const uploader = new FineUploaderTraditional({
    options: {
       request: {
          endpoint: 'my/upload/endpoint'
@@ -602,7 +602,7 @@ import FineUploaderTraditional from 'fine-uploader-wrappers'
 import PauseResumeButton from 'react-fine-uploader/pause-resume-button'
 import Thumbnail from 'react-fine-uploader/thumbnail'
 
-const uploader = new FineUploader({
+const uploader = new FineUploaderTraditional({
    options: {
       request: {
          endpoint: 'my/upload/endpoint'
@@ -696,7 +696,7 @@ import FineUploaderTraditional from 'fine-uploader-wrappers'
 import RetryButton from 'react-fine-uploader/retry-button'
 import Thumbnail from 'react-fine-uploader/thumbnail'
 
-const uploader = new FineUploader({
+const uploader = new FineUploaderTraditional({
    options: {
       request: {
          endpoint: 'my/upload/endpoint'
@@ -771,10 +771,10 @@ Note: This assumes you have additional components or code to allow files to actu
 import React, { Component } from 'react'
 
 import FineUploaderTraditional from 'fine-uploader-wrappers'
-import Status from 'react-fine-uploader/filesize'
+import Status from 'react-fine-uploader/status'
 import Thumbnail from 'react-fine-uploader/thumbnail'
 
-const uploader = new FineUploader({
+const uploader = new FineUploaderTraditional({
    options: {
       request: {
          endpoint: 'my/upload/endpoint'
@@ -845,7 +845,7 @@ import React, { Component } from 'react'
 import FineUploaderTraditional from 'fine-uploader-wrappers'
 import Thumbnail from 'react-fine-uploader/thumbnail'
 
-const uploader = new FineUploader({
+const uploader = new FineUploaderTraditional({
    options: {
       request: {
          endpoint: 'my/upload/endpoint'
