@@ -21,7 +21,7 @@ Makes using [Fine Uploader](http://fineuploader.com) in a React app simple. Drop
 
 ### Overview
 
-React Fine Uploader makes using Fine Uploader and all of its unique features very simple in a React-based project. Thie library provides useful resources that can be divided into three sections:
+React Fine Uploader makes using Fine Uploader and all of its unique features very simple in a React-based project. The library provides useful resources that can be divided into three sections:
 
 #### Individual focused components (like `<Thumbnail>` and `<ProgressBar>`).
 
@@ -942,4 +942,3 @@ export default class FileListener extends Component {
     }
 }
 ```
-
