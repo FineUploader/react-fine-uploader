@@ -1,5 +1,6 @@
 import qq from 'fine-uploader/lib/dnd'
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class DropzoneElement extends Component {
     static propTypes = {
