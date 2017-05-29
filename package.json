@@ -48,7 +48,7 @@
     "fine-uploader": "5.14.2",
     "jasmine": "2.5.3",
     "jasmine-core": "2.5.2",
-    "karma": "1.5.0",
+    "karma": "1.6.0",
     "karma-firefox-launcher": "1.0.1",
     "karma-jasmine": "1.1.0",
     "karma-sauce-launcher": "1.1.0",
