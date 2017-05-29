@@ -43,7 +43,7 @@
     "css-loader": "0.27.3",
     "es6-promise": "4.1.0",
     "eslint": "3.18.0",
-    "eslint-plugin-react": "6.10.3",
+    "eslint-plugin-react": "7.0.0",
     "extract-text-webpack-plugin": "2.1.0",
     "fine-uploader": "5.14.2",
     "jasmine": "2.5.3",
