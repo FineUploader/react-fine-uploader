@@ -32,7 +32,7 @@ var path = require('path'),
             base: 'SauceLabs',
             browserName: 'internet explorer',
             platform: 'Windows 8.1',
-            version: '11'
+            version: '11.0'
         },
         sl_edge: {
             base: 'SauceLabs',
