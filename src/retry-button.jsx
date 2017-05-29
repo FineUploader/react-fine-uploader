@@ -68,6 +68,7 @@ class RetryButton extends Component {
                         className={ `react-fine-uploader-retry-button ${this.props.className || ''}` }
                         disabled={ !this.state.retryable }
                         onClick={ this.state.retryable && this._onClick }
+                        type='button'
                     { ...elementProps }
                 >
                     { content }

@@ -56,6 +56,7 @@ class CancelButton extends Component {
                         className={ `react-fine-uploader-cancel-button ${this.props.className || ''}` }
                         disabled={ !this.state.cancelable }
                         onClick={ this.state.cancelable && this._onClick }
+                        type='button'
                         { ...elementProps }
                 >
                     { content }
