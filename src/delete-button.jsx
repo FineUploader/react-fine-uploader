@@ -16,12 +16,13 @@ class DeleteButton extends Component {
     constructor(props) {
         super(props)
 
-        this.state = {
-            deletable: false,
-            deleting: false
-        }
-
         const statusEnum =  props.uploader.qq.status
+        const initialStatus = props.uploader.methods.getUploads({id:props.id}).status
+
+        this.state = {
+            deletable: isDeletable(initialStatus, statusEnum),
+            deleting: initialStatus === statusEnum.DELETING
+        }
 
         this._onStatusChange = (id, oldStatus, newStatus) => {
             if (id === this.props.id && !this._unmounted) {
