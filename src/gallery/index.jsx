@@ -45,7 +45,7 @@ class Gallery extends Component {
         super(props)
 
         this.state = {
-            visibleFiles: []
+            visibleFiles: props.uploader.methods.getUploads()
         }
 
         const statusEnum = props.uploader.qq.status
