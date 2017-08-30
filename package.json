@@ -1,6 +1,6 @@
 {
   "name": "react-fine-uploader",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "license": "MIT",
   "description": "React UI components for using Fine Uploader in a React-based project.",
   "author":     {
