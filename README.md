@@ -752,6 +752,7 @@ The `<Status />` component renders the current status of a file in a format appr
 - `id` - The Fine Uploader ID of the submitted file. (required)
 
 - `text` - An object containing a map of status keys to display values. You may override one or more of these entries. Each entry with default values is listed below.
+   - `canceled` - 'Canceled'
    - `deleting` - 'Deleting...'
    - `paused` - 'Paused'
    - `queued` - 'Queued'

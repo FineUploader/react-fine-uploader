@@ -7,6 +7,8 @@ class Status extends Component {
         id: PropTypes.number.isRequired,
         className: PropTypes.string,
         text: PropTypes.shape({
+            canceled: PropTypes.string,
+            deleted: PropTypes.string,
             deleting: PropTypes.string,
             paused: PropTypes.string,
             queued: PropTypes.string,
@@ -22,6 +24,8 @@ class Status extends Component {
     static defaultProps = {
         className: '',
         text: {
+            canceled: 'Canceled',
+            deleted: 'Deleted',
             deleting: 'Deleting...',
             paused: 'Paused',
             queued: 'Queued',
