@@ -4,7 +4,7 @@ node_js:
 - '5.0'
 env:
   global:
-   - DISPLAY=:99.0
+  - DISPLAY=:99.0
   - SAUCE_USERNAME: react-fine-uploader2
   - secure: QW6G2+DfOiH01dRd8qlj/Xc58maGsj7NKge7fIOqBF2SO42RyGAzRCLyeI2A7Sj0lcytIP2X1ILLhNMVsAMa0ldTnBa3hDmonBOvgGmLxbe13EsM+2sfsqAigOiIoUwk5yUk/v4pOCFmEf3BCE9jEp5S0q197Ii8tuH99AO9vKz1wFJ21fZZf9+N8tJcXaBpR7nfeN80G0Fs+ddQktYCq+644CQveqghwx1Vbi2wztkTZKMcSdCYh8pQaieZf2PnIGi/StcOry6jBOlfl8H243vpdmHJJssztHiylomjtPjsxnB5PdwtlZZNIgy/+/cGYcE9RRNwEpOe1Z10NvukSjW/hmYEo8It3xakdYhV3jQU8GTCSxu2D8QyR/pW0JjxDyybmGhE5ElQaGMSUdJ/5+FF/aTuzmfly8eAZX1+64XOZSEwbUi+A2hDZ2HIJU+jaGwXouzUqYCvsjn+tAn2mlURdGCaooqWoCVxpnP2MBFKhRuyL2aX6MgqRkZ1GOHH5SAo/ufPd5j8tRQ7BwEcyX1zit/EiutPhkhsO3fdW2EBs5EjrNxK5x+tFATml1iawdvy2m+h8kvwQ3oA2ja8gGBuIcdYKft+iHGk7ozUxOHvzTVQ1tNlFoM05drNDGn2Ld23j8ih7jtaHb1lAprqUBNodiStBxUIqmsRMO/zwMs=
 before_script:
