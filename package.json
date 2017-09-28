@@ -1,6 +1,6 @@
 {
   "name": "react-fine-uploader",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "MIT",
   "description": "React UI components for using Fine Uploader in a React-based project.",
   "author":     {
@@ -51,7 +51,6 @@
     "karma": "1.5.0",
     "karma-firefox-launcher": "1.0.1",
     "karma-jasmine": "1.1.0",
-    "karma-sauce-launcher": "1.1.0",
     "karma-sourcemap-loader": "0.3.7",
     "karma-spec-reporter": "0.0.30",
     "karma-webpack": "2.0.3",
@@ -76,6 +75,6 @@
     "release": "npm run test && npm run build && npm run push-to-npm",
     "start": "(php -S 0.0.0.0:9090 -t src/test/manual -c src/test/manual/php.ini)",
     "start-no-s3": "php -S 0.0.0.0:9090 -t src/test/manual -c src/test/manual/php.ini",
-    "test": "npm run lint && if [ $CI ]; then karma start config/karma.conf; else karma start config/karma.dev.conf; fi"
+    "test": "npm run lint && karma start config/karma.conf"
   }
 }
