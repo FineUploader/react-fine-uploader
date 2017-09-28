@@ -1,6 +1,6 @@
 {
   "name": "react-fine-uploader",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "license": "MIT",
   "description": "React UI components for using Fine Uploader in a React-based project.",
   "author":     {
@@ -22,11 +22,11 @@
   "main": "gallery/index.js",
   "peerDependencies": {
     "react": "0.14.x || 15.x.x",
-    "react-addons-css-transition-group": "0.14.x || 15.x.x",
+    "react-transition-group": "1.x.x",
     "prop-types": "15.x.x"
   },
   "dependencies": {
-    "fine-uploader-wrappers": "1.0.0",
+    "fine-uploader-wrappers": "1.0.1",
     "object-assign": "4.1.1"
   },
   "devDependencies": {
@@ -51,15 +51,14 @@
     "karma": "1.5.0",
     "karma-firefox-launcher": "1.0.1",
     "karma-jasmine": "1.1.0",
-    "karma-sauce-launcher": "1.1.0",
     "karma-sourcemap-loader": "0.3.7",
     "karma-spec-reporter": "0.0.30",
     "karma-webpack": "2.0.3",
     "pica": "2.0.8",
     "react": "15.4.2",
-    "react-addons-css-transition-group": "15.4.2",
     "react-addons-test-utils": "15.4.2",
     "react-dom": "15.4.2",
+    "react-transition-group": "1.2.0",
     "prop-types": "15.5.8",
     "style-loader": "0.16.0",
     "webpack": "2.3.2",
@@ -76,6 +75,6 @@
     "release": "npm run test && npm run build && npm run push-to-npm",
     "start": "(php -S 0.0.0.0:9090 -t src/test/manual -c src/test/manual/php.ini)",
     "start-no-s3": "php -S 0.0.0.0:9090 -t src/test/manual -c src/test/manual/php.ini",
-    "test": "npm run lint && if [ $CI ]; then karma start config/karma.conf; else karma start config/karma.dev.conf; fi"
+    "test": "npm run lint && karma start config/karma.conf"
   }
 }

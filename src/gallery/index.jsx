@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import ReactCssTransitionGroup from 'react-addons-css-transition-group'
+import { CSSTransitionGroup as ReactCssTransitionGroup } from 'react-transition-group'
 
 import CancelButton from '../cancel-button'
 import DeleteButton from '../delete-button'
@@ -53,7 +53,7 @@ class Gallery extends Component {
         this._onStatusChange = (id, oldStatus, status) => {
             const visibleFiles = this.state.visibleFiles
 
-            if (status === statusEnum.SUBMITTING) {
+            if (status === statusEnum.SUBMITTED) {
                 visibleFiles.push({ id })
                 this.setState({ visibleFiles })
             }
