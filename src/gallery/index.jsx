@@ -53,7 +53,7 @@ class Gallery extends Component {
         this._onStatusChange = (id, oldStatus, status) => {
             const visibleFiles = this.state.visibleFiles
 
-            if (status === statusEnum.SUBMITTING) {
+            if (status === statusEnum.SUBMITTED) {
                 visibleFiles.push({ id })
                 this.setState({ visibleFiles })
             }
