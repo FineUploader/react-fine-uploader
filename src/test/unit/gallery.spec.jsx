@@ -120,4 +120,17 @@ describe('<Gallery />', () => {
             done()
         }, 100)
     })
+
+    it('renders a tile for each initial file added to uploader before construction', done => {
+        uploader.methods.addInitialFiles([sampleCannedFile, sampleCannedFile])
+
+        const GalleryComponent = TestUtils.renderIntoDocument(<Gallery uploader={ uploader } />)
+
+        setTimeout(() => {
+            const tiles = TestUtils.scryRenderedDOMComponentsWithClass(GalleryComponent, 'react-fine-uploader-gallery-file')
+
+            expect(tiles.length).toBe(2)
+            done()
+        }, 100)
+    })
 })

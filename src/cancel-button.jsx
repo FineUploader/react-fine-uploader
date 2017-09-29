@@ -16,9 +16,10 @@ class CancelButton extends Component {
     constructor(props) {
         super(props)
 
-        this.state = { cancelable: true }
-
+        const initialStatus = props.uploader.methods.getUploads({id:props.id}).status
         const statusEnum = props.uploader.qq.status
+
+        this.state = { cancelable: isCancelable(initialStatus, statusEnum) }
 
         this._onStatusChange = (id, oldStatus, newStatus) => {
             if (id === this.props.id && !this._unmounted) {
@@ -79,6 +80,7 @@ const isCancelable = (statusToCheck, statusEnum) => {
         statusEnum.QUEUED,
         statusEnum.UPLOAD_RETRYING,
         statusEnum.SUBMITTED,
+        statusEnum.SUBMITTING,
         statusEnum.UPLOADING,
         statusEnum.UPLOAD_FAILED
     ].indexOf(statusToCheck) >= 0
