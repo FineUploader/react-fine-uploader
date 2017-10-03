@@ -1,5 +1,5 @@
-<img class="nav-logo" src="https://facebook.github.io/react/img/logo.svg" width="32" height="32">
 <a href="http://fineuploader.com">
+   <img class="nav-logo" src="https://cdn.worldvectorlogo.com/logos/react.svg" width="32" height="32">
    <img src="http://fineuploader.smartimage.com/pimg/a8680d51" width="300">
 </a>
 
