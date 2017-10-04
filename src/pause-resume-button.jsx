@@ -18,6 +18,7 @@ class PauseResumeButton extends Component {
         super(props)
 
         this.state = {
+            atLeastOneChunkUploaded: false,
             pausable: false,
             resumable: false
         }
@@ -26,25 +27,24 @@ class PauseResumeButton extends Component {
 
         this._onStatusChange = (id, oldStatus, newStatus) => {
             if (id === this.props.id && !this._unmounted) {
-                const pausable = newStatus === statusEnum.UPLOADING
-                const resumable = !pausable && newStatus === statusEnum.PAUSED
+                const pausable = newStatus === statusEnum.UPLOADING && this.state.atLeastOneChunkUploaded
+                const resumable = newStatus === statusEnum.PAUSED
 
-                if (!pausable && this.state.pausable) {
-                    this.setState({ pausable, resumable })
+                if (pausable !== this.state.pausable) {
+                    this.setState({ pausable })
                 }
-                else if (resumable && !this.state.resumable) {
-                    this.setState({ pausable, resumable })
+                if (resumable !== this.state.resumable) {
+                    this.setState({ resumable })
                 }
-                else if (!resumable && this.state.resumable) {
-                    this.setState({ pausable, resumable })
-                }
-                else if (
+
+                if (
                     newStatus === statusEnum.DELETED
                     || newStatus === statusEnum.CANCELED
                     || newStatus === statusEnum.UPLOAD_SUCCESSFUL
                 ) {
-                    this._unregisterStatusChangeHandler()
-                    this._unregisterOnUploadChunkHandler()
+                    this._unregisterOnResumeHandler()
+                    this._unregisterOnStatusChangeHandler()
+                    this._unregisterOnUploadChunkSuccessHandler()
                 }
             }
         }
@@ -58,34 +58,45 @@ class PauseResumeButton extends Component {
             }
         }
 
-        this._onUploadChunk = (id, name, chunkData) => {
-            if (id === this.props.id && !this._unmounted) {
-                if (chunkData.partIndex > 0 && !this.state.pausable) {
-                    this.setState({
-                        pausable: true,
-                        resumable: false
-                    })
-                }
-                else if (chunkData.partIndex === 0 && this.state.pausable) {
-                    this.setState({
-                        pausable: false,
-                        resumable: false
-                    })
-                }
+        this._onResume = id => {
+            if (id === this.props.id
+                && !this._unmounted
+                && !this.state.atLeastOneChunkUploaded) {
+
+                this.setState({
+                    atLeastOneChunkUploaded: true,
+                    pausable: true,
+                    resumable: false
+                })
+            }
+        }
+
+        this._onUploadChunkSuccess = id => {
+            if (id === this.props.id
+                && !this._unmounted
+                && !this.state.atLeastOneChunkUploaded) {
+
+                this.setState({
+                    atLeastOneChunkUploaded: true,
+                    pausable: true,
+                    resumable: false
+                })
             }
         }
     }
 
 
     componentDidMount() {
+        this.props.uploader.on('resume', this._onResume)
         this.props.uploader.on('statusChange', this._onStatusChange)
-        this.props.uploader.on('uploadChunk', this._onUploadChunk)
+        this.props.uploader.on('uploadChunkSuccess', this._onUploadChunkSuccess)
     }
 
     componentWillUnmount() {
         this._unmounted = true
+        this._unregisterOnResumeHandler()
         this._unregisterOnStatusChangeHandler()
-        this._unregisterOnUploadChunkHandler()
+        this._unregisterOnUploadChunkSuccessHandler()
     }
 
     render() {
@@ -108,16 +119,16 @@ class PauseResumeButton extends Component {
         return null
     }
 
+    _unregisterOnResumeHandler() {
+        this.props.uploader.off('resume', this._onResume)
+    }
+
     _unregisterOnStatusChangeHandler() {
         this.props.uploader.off('statusChange', this._onStatusChange)
     }
 
-    _unregisterOnUploadChunkHandler() {
-        this.props.uploader.off('uploadChunk', this._onUploadChunk)
-    }
-
-    _unregisterStatusChangeHandler() {
-        this.props.uploader.off('statusChange', this._onStatusChange)
+    _unregisterOnUploadChunkSuccessHandler() {
+        this.props.uploader.off('uploadChunkSuccess', this._onUploadChunkSuccess)
     }
 }
 
