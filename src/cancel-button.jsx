@@ -75,14 +75,14 @@ class CancelButton extends Component {
 
 const isCancelable = (statusToCheck, statusEnum) => {
     return [
-        statusEnum.DELETE_FAILED,
-        statusEnum.PAUSED,
-        statusEnum.QUEUED,
-        statusEnum.UPLOAD_RETRYING,
-        statusEnum.SUBMITTED,
         statusEnum.SUBMITTING,
+        statusEnum.SUBMITTED,
+        statusEnum.QUEUED,
         statusEnum.UPLOADING,
-        statusEnum.UPLOAD_FAILED
+        statusEnum.UPLOAD_RETRYING,
+        statusEnum.UPLOAD_FAILED,
+        statusEnum.DELETE_FAILED,
+        statusEnum.PAUSED
     ].indexOf(statusToCheck) >= 0
 }
 
