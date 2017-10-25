@@ -3,7 +3,7 @@
   "version": "1.0.7",
   "license": "MIT",
   "description": "React UI components for using Fine Uploader in a React-based project.",
-  "author":     {
+  "author": {
     "name": "Ray Nicholus",
     "url": "http://raynicholus.com"
   },
