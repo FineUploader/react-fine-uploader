@@ -4,8 +4,7 @@ import PropTypes from 'prop-types'
 class Filename extends Component {
     static propTypes = {
         id: PropTypes.number.isRequired,
-        uploader: PropTypes.object.isRequired,
-        onClick: PropTypes.func
+        uploader: PropTypes.object.isRequired
     };
 
     constructor(props) {
@@ -16,12 +15,6 @@ class Filename extends Component {
         }
 
         this._interceptSetName()
-
-        this._onClick = () => {
-            if (this.props.onClick) {
-                this.props.onClick(this.props.id)
-            }
-        }
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -30,8 +23,7 @@ class Filename extends Component {
 
     render() {
         return (
-            <span className={ `react-fine-uploader-filename ${this.props.className || ''}` }
-                  onClick={this._onClick}>
+            <span className={ `react-fine-uploader-filename ${this.props.className || ''}` }>
                 { this.state.filename }
             </span>
         )
