@@ -363,7 +363,7 @@ A _very_ simple but completely functional and effective use of the `<Dropzone />
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import FileInput from 'react-fine-uploader/dropzone'
+import Dropzone from 'react-fine-uploader/dropzone'
 import FineUploaderTraditional from 'fine-uploader-wrappers'
 
 const uploader = new FineUploaderTraditional({
