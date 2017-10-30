@@ -272,10 +272,11 @@ const MaybeDropzone = ({ children, content, hasVisibleFiles, uploader, ...props 
 
 const FileInputComponent = ({ uploader, ...props }) => {
     const { children, ...fileInputProps } = props
+    const isSingle = uploader.options.multiple === false || props.multiple === false
     const content = children || (
         <span>
             <UploadIcon className='react-fine-uploader-gallery-file-input-upload-icon' />
-            Select Files
+            {isSingle ? getFileInputText('selectFile', FileInput.defaultProps, props) : getFileInputText('selectFiles', FileInput.defaultProps, props)}
         </span>
     )
 
@@ -289,6 +290,15 @@ const FileInputComponent = ({ uploader, ...props }) => {
             </span>
         </FileInput>
     )
+}
+
+const getFileInputText = (field, defaultProps, props) => {
+    let text = null
+
+    if (props.text) text = props.text[field]
+    if (!text) text = defaultProps.text[field]
+
+    return text
 }
 
 const getComponentProps = (componentName, allProps) => {
