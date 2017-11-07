@@ -45,7 +45,7 @@ class Gallery extends Component {
         super(props)
 
         this.state = {
-            visibleFiles: props.uploader.methods.getUploads()
+            visibleFiles: this._setInitialVisibleFiles()
         }
 
         const statusEnum = props.uploader.qq.status
@@ -198,6 +198,16 @@ class Gallery extends Component {
                 </ReactCssTransitionGroup>
             </MaybeDropzone>
         )
+    }
+
+    _setInitialVisibleFiles() {
+        const getUploads = this.props.uploader.methods.getUploads()
+        return getUploads.map( file => {
+            return { 
+                id: file.id, 
+                status: file.status 
+            }
+        })
     }
 
     _removeVisibleFile(id) {
