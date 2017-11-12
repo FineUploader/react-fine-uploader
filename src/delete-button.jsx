@@ -65,7 +65,7 @@ class DeleteButton extends Component {
                 <button aria-label='delete'
                         className={ `react-fine-uploader-delete-button ${this.props.className || ''}` }
                         disabled={ !this.state.deletable || this.state.deleting }
-                        onClick={ this.state.deletable && !this.state.deleting && this._onClick }
+                        onClick={ (this.state.deletable && !this.state.deleting) ? this._onClick : null }
                         type='button'
                         { ...elementProps }
                 >
