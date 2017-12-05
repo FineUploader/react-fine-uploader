@@ -28,13 +28,13 @@ React Fine Uploader makes using Fine Uploader and all of its unique features ver
 These allow you to easily build a highly customizable and powerful UI for your upload widget, backed by Fine Uploader's core feature set. Most of these components are unstyled (i.e. ready to be styled by you). Focused component-specific stylesheets may be provided at a later date.
 
 
-#### Higher-order components (like `<Gallery>`)
+#### Higher-level components (like `<Gallery>`)
 
 These combine many focused components that provide style (which can be adjusted via your own stylesheet) and enhanced UI-specific features. These components are essentially "turn-key", which means that you can get a fully functional upload widget up and running in your project with a few lines of code. Keep in mind that of course you still need a server to handle the requests sent by Fine Uploader and to server up the JavaScript and CSS files.
 
 #### Wrapper classes
 
-These wrap a Fine Uploader instance for use in React Fine Uploader. They provide additional features such as the ability to dynamically register multiple event/callback listeners. All individual and higher-order/focused components require you to pass a constructed wrapper class instance.
+These wrap a Fine Uploader instance for use in React Fine Uploader. They provide additional features such as the ability to dynamically register multiple event/callback listeners. All individual and high-level/focused components require you to pass a constructed wrapper class instance.
 
 More information, such as examples and API documentation, can be found in the README of the [fine-uploader-wrappers project](https://github.com/FineUploader/fine-uploader-wrappers).
 
@@ -363,7 +363,7 @@ A _very_ simple but completely functional and effective use of the `<Dropzone />
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import FileInput from 'react-fine-uploader/dropzone'
+import Dropzone from 'react-fine-uploader/dropzone'
 import FineUploaderTraditional from 'fine-uploader-wrappers'
 
 const uploader = new FineUploaderTraditional({
