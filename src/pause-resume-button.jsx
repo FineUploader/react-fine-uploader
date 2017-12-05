@@ -100,7 +100,7 @@ class PauseResumeButton extends Component {
     }
 
     render() {
-        const { onlyRenderIfEnabled, id, uploader, ...elementProps } = this.props // eslint-disable-line no-unused-vars
+        const { onlyRenderIfEnabled, id, pauseChildren, resumeChildren, uploader, ...elementProps } = this.props // eslint-disable-line no-unused-vars
 
         if (this.state.pausable || this.state.resumable || !onlyRenderIfEnabled) {
             return (
