@@ -7,7 +7,6 @@ const containerStyle = {
 
 const inputStyle = {
     bottom: 0,
-    cursor: 'pointer',
     height: '100%',
     left: 0,
     margin: 0,
