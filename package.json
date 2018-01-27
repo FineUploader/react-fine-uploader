@@ -21,9 +21,9 @@
   ],
   "main": "gallery/index.js",
   "peerDependencies": {
-    "react": "0.14.x || 15.x.x",
+    "react": "0.14.x - 16.x",
     "react-transition-group": "1.x",
-    "prop-types": "15.x.x"
+    "prop-types": "15.x"
   },
   "dependencies": {
     "fine-uploader-wrappers": "1.0.1",
