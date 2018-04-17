@@ -1,6 +1,6 @@
 {
   "name": "react-fine-uploader",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "license": "MIT",
   "description": "React UI components for using Fine Uploader in a React-based project.",
   "author":     {
@@ -21,12 +21,12 @@
   ],
   "main": "gallery/index.js",
   "peerDependencies": {
-    "react": "0.14.x || 15.x.x",
-    "react-transition-group": "1.x.x",
-    "prop-types": "15.x.x"
+    "react": "0.14.x - 16.x",
+    "react-transition-group": "1.x",
+    "prop-types": "15.x"
   },
   "dependencies": {
-    "fine-uploader-wrappers": "1.0.1",
+    "fine-uploader-wrappers": "^1.0.1",
     "object-assign": "4.1.1"
   },
   "devDependencies": {
