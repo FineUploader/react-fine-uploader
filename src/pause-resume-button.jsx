@@ -17,13 +17,14 @@ class PauseResumeButton extends Component {
     constructor(props) {
         super(props)
 
+        const initialStatus = props.uploader.methods.getUploads({id:props.id}).status
+        const statusEnum = props.uploader.qq.status
+
         this.state = {
             atLeastOneChunkUploaded: false,
-            pausable: false,
-            resumable: false
+            pausable: initialStatus === statusEnum.UPLOADING,
+            resumable: initialStatus === statusEnum.PAUSED
         }
-
-        const statusEnum = props.uploader.qq.status
 
         this._onStatusChange = (id, oldStatus, newStatus) => {
             if (id === this.props.id && !this._unmounted) {
