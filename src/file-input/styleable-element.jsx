@@ -1,9 +1,9 @@
 import React from 'react'
 
 const containerStyle = {
-  position: 'relative',
-  overflow: 'hidden',
-  direction: 'ltr',
+    position: 'relative',
+    overflow: 'hidden',
+    direction: 'ltr',
 }
 
 const inputStyle = {
@@ -13,20 +13,19 @@ const inputStyle = {
     padding: 0,
     position: 'absolute',
     right: 0,
-    top: 0,
-    height: '100%'
+    top: 0
 }
 
 const StyleableFileInput = ({ children, className, onChange, ...params }) => (
-    <div className={ `react-fine-uploader-file-input-container ${className || ''}` } 
-         style={ containerStyle }
+    <div className={`react-fine-uploader-file-input-container ${className || ''}`}
+        style={containerStyle}
     >
-        { children }
-        <input { ...params }
-               className='react-fine-uploader-file-input'
-               onChange={ onChange }
-               style={ inputStyle }
-               type='file'
+        {children}
+        <input {...params}
+            className='react-fine-uploader-file-input'
+            onChange={onChange}
+            style={inputStyle}
+            type='file'
         />
     </div>
 )
