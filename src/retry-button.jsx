@@ -67,7 +67,7 @@ class RetryButton extends Component {
                 <button aria-label='retry'
                         className={ `react-fine-uploader-retry-button ${this.props.className || ''}` }
                         disabled={ !this.state.retryable }
-                        onClick={ this.state.retryable && this._onClick }
+                        onClick={ this.state.retryable? this._onClick: undefined }
                         type='button'
                     { ...elementProps }
                 >

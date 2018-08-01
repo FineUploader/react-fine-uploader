@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "license": "MIT",
   "description": "React UI components for using Fine Uploader in a React-based project.",
-  "author":     {
+  "author": {
     "name": "Ray Nicholus",
     "url": "http://raynicholus.com"
   },
@@ -55,9 +55,8 @@
     "karma-spec-reporter": "0.0.30",
     "karma-webpack": "2.0.3",
     "pica": "2.0.8",
-    "react": "15.4.2",
-    "react-addons-test-utils": "15.4.2",
-    "react-dom": "15.4.2",
+    "react": "16.4.1",
+    "react-dom": "16.4.1",
     "react-transition-group": "1.2.0",
     "prop-types": "15.5.8",
     "style-loader": "0.16.0",
