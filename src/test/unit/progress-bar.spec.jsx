@@ -1,6 +1,6 @@
 import qq from 'fine-uploader/lib/core/all'
 import React from 'react'
-import TestUtils from 'react-addons-test-utils'
+import TestUtils from 'react-dom/test-utils'
 
 import FineUploaderTraditional from 'fine-uploader-wrappers'
 import ProgressBar from 'src/progress-bar'

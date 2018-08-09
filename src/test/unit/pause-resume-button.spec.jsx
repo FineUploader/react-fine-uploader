@@ -1,5 +1,5 @@
 import React from 'react'
-import TestUtils from 'react-addons-test-utils'
+import TestUtils from 'react-dom/test-utils'
 
 import FineUploaderTraditional from 'fine-uploader-wrappers'
 import PauseResumeButton from 'src/pause-resume-button'
