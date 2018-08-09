@@ -126,10 +126,10 @@
     opacity: 1;
     transition: opacity 500ms ease-in;
 }
-.react-fine-uploader-gallery-files-leave {
+.react-fine-uploader-gallery-files-exit {
     opacity: 1;
 }
-.react-fine-uploader-gallery-files-leave.react-fine-uploader-gallery-files-leave-active {
+.react-fine-uploader-gallery-files-exit.react-fine-uploader-gallery-files-exit-active {
     opacity: 0.01;
     transition: opacity 300ms ease-in;
 }
